@@ -28,10 +28,12 @@ namespace Jincom.Agent
         };
         public AgentState CurrentState;
 
-        //Agent Functions//
-        public virtual void MoveAgent()
+        public abstract void AgentUpdate();
+
+        public virtual void MoveAgent(float direction)
         {
-            Debug.Log("Agent Moves");
+            Debug.Log("Agent Moves " + direction);
+            transform.Translate(Vector3.right * direction);
         }
 
         public virtual void FallAgent()

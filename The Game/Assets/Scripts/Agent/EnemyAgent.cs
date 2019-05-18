@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace Jincom.Agent
 {
-    public class PlayerAgent : AgentBase
+    public class EnemyAgent : AgentBase
     {
         public void Update()
         {
@@ -13,7 +13,7 @@ namespace Jincom.Agent
 
         public override void AgentUpdate()
         {
-            MoveAgent(Input.GetAxis("Horizontal"));
+            MoveAgent(Mathf.PingPong(Time.unscaledTime, 2f) - 1f);
         }
     }
 }
