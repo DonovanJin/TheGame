@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2fe78fbb7f77e294d8f7dc5e0d46bbee, type: 3}
   m_Name: FireGun
   m_EditorClassIdentifier: 
-  WeaponName: fdfd
-  Range: 1111.444
-  Damage: 10
+  WeaponName: 
+  Range: 200
+  Damage: 50
   Element: 1
