@@ -1,4 +1,6 @@
 ﻿using UnityEngine;
+using System.Collections.Generic;
+using System.Collections;
 
 namespace Jincom.Agent
 {
@@ -26,6 +28,7 @@ namespace Jincom.Agent
             LineOfSight();
             FacingRightDirection();
             DetectPlayer();
+            AttackPlayer();
         }
 
         private void DistanceToPlayer()
@@ -100,6 +103,25 @@ namespace Jincom.Agent
             {
                 AwareOfPlayer = false;
             }
+        }
+
+        private void AttackPlayer()
+        {
+            if ((AwareOfPlayer))
+            {
+                if (CanShoot)
+                {
+                    CanShoot = false;
+                    Debug.Log("Shooting at player.");
+                    StartCoroutine(ResetCanShoot());
+                }
+            }
+        }
+
+        IEnumerator ResetCanShoot()
+        {
+            yield return new WaitForSeconds(0.25f);
+            CanShoot = true;
         }
     }
 }
