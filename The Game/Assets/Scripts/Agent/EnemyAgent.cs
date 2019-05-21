@@ -13,7 +13,7 @@ namespace Jincom.Agent
 
         public override void AgentUpdate()
         {
-            MoveAgent(Mathf.PingPong(Time.unscaledTime, 2f) - 1f);
+            MoveAgent(Mathf.PingPong(Time.unscaledTime, 4f) - 2f);
         }
     }
 }

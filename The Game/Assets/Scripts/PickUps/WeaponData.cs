@@ -12,7 +12,5 @@ namespace Jincom.PickUps
         public float Range = 0f;
         public int Damage = 0;
         public GameConstants.Elements Element = GameConstants.Elements.Normal;
-        
-
     }
 }
