@@ -334,8 +334,9 @@ MonoBehaviour:
   CurrentDistanceToPlayer: 0
   MinDistanceToPlayer: 5
   CloseEnough: 0
-  LineOfSight: 0
+  SeePlayer: 0
   CorrectDirection: 0
+  AwareOfPlayer: 0
 --- !u!65 &923913394
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -679,7 +680,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: 7e7acd9a0cad3a54391584d994b61f6d, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0

@@ -10,6 +10,7 @@ namespace Jincom.Agent
         public bool CloseEnough = false;
         public bool SeePlayer = false;
         public bool CorrectDirection = false;
+        public bool AwareOfPlayer = false;
 
         private RaycastHit RayHit;
 
@@ -23,9 +24,11 @@ namespace Jincom.Agent
             //MoveAgent(Mathf.PingPong(Time.unscaledTime, 4f) - 2f);
             DistanceToPlayer();
             LineOfSight();
+            FacingRightDirection();
+            DetectPlayer();
         }
 
-        public void DistanceToPlayer()
+        private void DistanceToPlayer()
         {
             CurrentDistanceToPlayer = Vector3.Distance(transform.position, GameObject.FindGameObjectWithTag("Player").transform.position);
 
@@ -39,24 +42,63 @@ namespace Jincom.Agent
             }
         }
 
-        public void LineOfSight()
+        private void LineOfSight()
         {
-            //if (Physics.Raycast(transform.position, (GameObject.FindGameObjectWithTag("Player").transform.position - transform.position), out hit, maxRange))
-            //{
-            //    if (hit.transform == player)
-            //    {
-            //        // In Range and i can see you!
-            //    }
-            //}
             if (CloseEnough)
             {
                 if (Physics.Raycast(transform.position, (GameObject.FindGameObjectWithTag("Player").transform.position - transform.position), out RayHit, MinDistanceToPlayer))
                 {
                     if (RayHit.collider.tag == "Player")
                     {
-                        Debug.Log("I see you.");
+                        SeePlayer = true;
+                    }
+                    else
+                    {
+                        SeePlayer = false;
                     }
                 }
+            }
+            else
+            {
+                SeePlayer = false;
+            }
+        }
+
+        private void FacingRightDirection()
+        {
+            if (GameObject.FindGameObjectWithTag("Player").transform.position.x < transform.position.x)
+            {
+                if (FacingLeftOrRight == AgentFacingDirection.Left)
+                {
+                    CorrectDirection = true;
+                }
+                else
+                {
+                    CorrectDirection = false;
+                }
+            }
+            else if (GameObject.FindGameObjectWithTag("Player").transform.position.x > transform.position.x)
+            {
+                if (FacingLeftOrRight == AgentFacingDirection.Right)
+                {
+                    CorrectDirection = true;
+                }
+                else
+                {
+                    CorrectDirection = false;
+                }
+            }
+        }
+
+        private void DetectPlayer()
+        {
+            if(CloseEnough && SeePlayer && CorrectDirection)
+            {
+                AwareOfPlayer = true;
+            }
+            else
+            {
+                AwareOfPlayer = false;
             }
         }
     }
