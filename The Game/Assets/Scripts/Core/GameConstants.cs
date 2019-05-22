@@ -11,7 +11,8 @@ namespace Jincom.Core
             Fire,
             Ice,
             Acid,
-            Shock
+            Shock,
+            Psionic
         };
     }
 }

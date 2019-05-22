@@ -8,9 +8,12 @@ namespace Jincom.Agent
     {
         [Header("Player Agent Properties")]
         public int JumpCount;
+        public int JumpLimit;
         public float OriginalMoveSpeed;
         public float Momentum = 0.5f;
         public float MomentumRate = 0.2f;
+
+        //  ===     ===     ===     ===
 
         private void Start()
         {
@@ -23,19 +26,18 @@ namespace Jincom.Agent
             AgentUpdate();
         }
 
-        public override void AgentUpdate()
-        {
-            OtherUpdates();
-            PlayerMovement();
-            PlayerJump();
-        }
+        //  ===     ===     ===     ===
 
-        private void OtherUpdates()
+        public override void AgentUpdate()
         {
             AgentStayUpright();
             StateOfAgent();
             PlayerAttack();
+            PlayerMovement();
+            PlayerJump();
         }
+
+        //  ===     ===     ===     ===
 
         private void PlayerMovement()
         {
@@ -53,14 +55,16 @@ namespace Jincom.Agent
             }
 
             //Adjust speed based on momentum (if applicable)
-            if (Physics.Raycast(transform.position, -Vector3.up, GetComponent<Collider>().bounds.extents.y + 0.1f))
-            {
-                MoveSpeed = OriginalMoveSpeed;
-            }
-            else
-            {
-                MoveSpeed = OriginalMoveSpeed * Momentum;
-            }
+            //if (Physics.Raycast(transform.position, -Vector3.up, GetComponent<Collider>().bounds.extents.y + 0.1f))
+            //{
+            //    MoveSpeed = OriginalMoveSpeed;
+            //}
+            //else
+            //{
+            //    MoveSpeed = OriginalMoveSpeed * Momentum;
+            //}
+
+            MoveSpeed = OriginalMoveSpeed * Momentum;
 
             //Movement
             if (Input.GetAxis("Horizontal") != 0)
@@ -68,6 +72,8 @@ namespace Jincom.Agent
                 MoveAgent(Input.GetAxis("Horizontal"));
             }
         }
+
+        //  ===     ===     ===     ===
 
         private void PlayerJump()
         {
@@ -88,7 +94,7 @@ namespace Jincom.Agent
                         JumpCount++;
                     }
                 }
-                else if (JumpCount == 1)
+                else if (JumpCount < JumpLimit)
                 {
                     if (Rb.velocity.y <= 0f)
                     {
@@ -98,6 +104,8 @@ namespace Jincom.Agent
                 }
             }
         }
+
+        //  ===     ===     ===     ===
 
         private void PlayerAttack()
         {
@@ -116,6 +124,8 @@ namespace Jincom.Agent
                 AgentAttack(false);
             }
         }
+
+        //  ===     ===     ===     ===
 
         IEnumerator ResetCanShoot()
         {            

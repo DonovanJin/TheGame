@@ -323,6 +323,8 @@ MonoBehaviour:
   MaxHealth: 0
   CurrentArmour: 0
   MaxArmour: 0
+  CurrentShield: 0
+  MaxShield: 0
   CurrentElement: 0
   MoveSpeed: 0.02
   JumpHeight: 0
@@ -531,6 +533,8 @@ MonoBehaviour:
   MaxHealth: 100
   CurrentArmour: 0
   MaxArmour: 0
+  CurrentShield: 0
+  MaxShield: 0
   CurrentElement: 0
   MoveSpeed: 0.1
   JumpHeight: 600
@@ -540,6 +544,7 @@ MonoBehaviour:
   CurrentState: 0
   FacingLeftOrRight: 0
   JumpCount: 0
+  JumpLimit: 2
   OriginalMoveSpeed: 0
   Momentum: 0.5
   MomentumRate: 0.2

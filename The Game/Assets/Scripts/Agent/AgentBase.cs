@@ -5,16 +5,20 @@ using System.Collections.Generic;
 namespace Jincom.Agent
 {
     public abstract class AgentBase : MonoBehaviour
-    {       
-        [Header("Base Agent Properties")]
-        public int CurrentHealth;
+    {
+        //How to read health without changing it (read only)
         //public int CurrentHealth
         //{
         //    get { return _currentHealth; }
         //}
+
+        [Header("Base Agent Properties")]
+        public int CurrentHealth;        
         public int MaxHealth;
         public int CurrentArmour;
         public int MaxArmour;
+        public int CurrentShield;
+        public int MaxShield;
         public GameConstants.Elements CurrentElement;
         public float MoveSpeed;
         public float JumpHeight;
@@ -48,8 +52,6 @@ namespace Jincom.Agent
 
         public virtual void StateOfAgent()
         {
-            //Logic to decide which state the agent is in
-
             //Grounded
             if (Physics.Raycast(transform.position, -Vector3.up, GetComponent<Collider>().bounds.extents.y + 0.1f))
             {
@@ -105,15 +107,7 @@ namespace Jincom.Agent
         {
             //Rb.velocity = new Vector3(0f, NewJumpJeight, 0f);
             Rb.AddForce(Vector3.up * NewJumpJeight, ForceMode.Impulse);
-        }
-
-        public virtual void AgentShoot()
-        {
-            if (CanShoot)
-            {
-                Debug.Log("Agent Shoots");
-            }
-        }
+        }        
 
         public virtual void AgentThrow()
         {
@@ -165,6 +159,14 @@ namespace Jincom.Agent
             else
             {
                 Attacking = false;
+            }
+        }
+
+        public virtual void AgentShoot()
+        {
+            if (CanShoot)
+            {
+                Debug.Log("Agent Shoots");
             }
         }
     }
