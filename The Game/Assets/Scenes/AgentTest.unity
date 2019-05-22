@@ -188,7 +188,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 421901606}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.61, z: -7.25}
+  m_LocalPosition: {x: 0, y: 0.5, z: -7}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -280,8 +280,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 922720505}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: -1.61, z: 0}
-  m_LocalScale: {x: 3, y: 1, z: 0.3}
+  m_LocalPosition: {x: 0, y: -1.6, z: 0}
+  m_LocalScale: {x: 10, y: 1, z: 0.3}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 4
@@ -325,16 +325,17 @@ MonoBehaviour:
   MaxArmour: 0
   CurrentShield: 0
   MaxShield: 0
-  CurrentElement: 0
+  CurrentElement: 1
+  Weapon: {fileID: 11400000, guid: cc6e4e89a57ca33438c1ce179169d1ff, type: 2}
   MoveSpeed: 0.02
   JumpHeight: 0
   Attacking: 0
   CanShoot: 1
   Rb: {fileID: 0}
   CurrentState: 0
-  FacingLeftOrRight: 0
+  FacingLeftOrRight: 1
   CurrentDistanceToPlayer: 0
-  MinDistanceToPlayer: 5
+  MinDistanceToPlayer: 15
   CloseEnough: 0
   SeePlayer: 0
   CorrectDirection: 0
@@ -405,7 +406,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 923913392}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 2.36, y: -0.94, z: 0}
+  m_LocalPosition: {x: 2, y: -1, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -420,7 +421,7 @@ Rigidbody:
   m_GameObject: {fileID: 923913392}
   serializedVersion: 2
   m_Mass: 100
-  m_Drag: 0
+  m_Drag: 0.5
   m_AngularDrag: 0.05
   m_UseGravity: 1
   m_IsKinematic: 0
@@ -535,9 +536,10 @@ MonoBehaviour:
   MaxArmour: 0
   CurrentShield: 0
   MaxShield: 0
-  CurrentElement: 0
+  CurrentElement: 2
+  Weapon: {fileID: 11400000, guid: d7d2080c436a6dc4d85f2420a02c1fc0, type: 2}
   MoveSpeed: 0.1
-  JumpHeight: 600
+  JumpHeight: 650
   Attacking: 0
   CanShoot: 1
   Rb: {fileID: 0}
@@ -614,7 +616,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1657512705}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -1.17, y: -0.17, z: 0}
+  m_LocalPosition: {x: -2, y: -1, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -629,7 +631,7 @@ Rigidbody:
   m_GameObject: {fileID: 1657512705}
   serializedVersion: 2
   m_Mass: 100
-  m_Drag: 0
+  m_Drag: 0.5
   m_AngularDrag: 0.05
   m_UseGravity: 1
   m_IsKinematic: 0
@@ -721,7 +723,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1691446895}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.21052754, y: -0.72, z: 0}
+  m_LocalPosition: {x: 0, y: -0.73, z: 0}
   m_LocalScale: {x: 1, y: 1.75, z: 3}
   m_Children: []
   m_Father: {fileID: 0}

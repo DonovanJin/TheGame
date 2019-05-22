@@ -1,4 +1,5 @@
 ﻿using Jincom.Core;
+using Jincom.PickUps;
 using UnityEngine;
 using System.Collections.Generic;
 
@@ -20,12 +21,15 @@ namespace Jincom.Agent
         public int CurrentShield;
         public int MaxShield;
         public GameConstants.Elements CurrentElement;
+        public WeaponData Weapon;
         public float MoveSpeed;
         public float JumpHeight;
         public bool Attacking = false;
         public bool CanShoot = true;
         public Rigidbody Rb;
 
+        //NOTE: Attacking is a State that informs the animation. CanShoot and AgentShoot() is the act itself.
+        
         public enum AgentState
         {
             Walk,
@@ -41,7 +45,7 @@ namespace Jincom.Agent
             Left,
             Right
         };
-        public AgentFacingDirection FacingLeftOrRight;               
+        public AgentFacingDirection FacingLeftOrRight;
 
         public abstract void AgentUpdate();
 
@@ -154,7 +158,6 @@ namespace Jincom.Agent
             if (YesNo)
             {
                 Attacking = true;
-                AgentShoot();
             }
             else
             {
@@ -163,11 +166,8 @@ namespace Jincom.Agent
         }
 
         public virtual void AgentShoot()
-        {
-            if (CanShoot)
-            {
-                Debug.Log("Agent Shoots");
-            }
+        {            
+            Debug.Log(name + " is Shooting");            
         }
     }
 }

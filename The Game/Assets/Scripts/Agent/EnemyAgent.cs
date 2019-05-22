@@ -12,9 +12,18 @@ namespace Jincom.Agent
         public bool CloseEnough = false;
         public bool SeePlayer = false;
         public bool CorrectDirection = false;
-        public bool AwareOfPlayer = false;
+        public bool AwareOfPlayer = false;        
+        //public float AttackRange;
 
         private RaycastHit RayHit;
+
+        //private void Start()
+        //{
+        //    //if (AttackRange == 0)
+        //    //{
+        //    //    AttackRange = (MinDistanceToPlayer * 0.5f);
+        //    //}
+        //}
 
         public void Update()
         {
@@ -24,11 +33,13 @@ namespace Jincom.Agent
         public override void AgentUpdate()
         {
             //MoveAgent(Mathf.PingPong(Time.unscaledTime, 4f) - 2f);
+            AgentStayUpright();
             DistanceToPlayer();
             LineOfSight();
             FacingRightDirection();
             DetectPlayer();
             AttackPlayer();
+            MoveTowardsPlayer();
         }
 
         private void DistanceToPlayer()
@@ -109,12 +120,25 @@ namespace Jincom.Agent
         {
             if ((AwareOfPlayer))
             {
-                if (CanShoot)
+                if (CurrentDistanceToPlayer <= Weapon.Range)
                 {
-                    CanShoot = false;
-                    Debug.Log("Shooting at player.");
-                    StartCoroutine(ResetCanShoot());
+                    AgentAttack(true);
+                    if (CanShoot)
+                    {
+                        CanShoot = false;
+                        //Debug.Log("Shooting at player.");
+                        AgentShoot();
+                        StartCoroutine(ResetCanShoot());
+                    }
                 }
+                else
+                {
+                    AgentAttack(false);
+                }
+            }
+            else
+            {
+                AgentAttack(false);
             }
         }
 
@@ -122,6 +146,25 @@ namespace Jincom.Agent
         {
             yield return new WaitForSeconds(0.25f);
             CanShoot = true;
+        }
+
+        private void MoveTowardsPlayer()
+        {
+            if (AwareOfPlayer)
+            {
+                if (CurrentDistanceToPlayer > Weapon.Range)
+                {
+                    //Debug.Log("Moving towards Player");
+                    if (GameObject.FindGameObjectWithTag("Player").transform.position.x < transform.position.x)
+                    {
+                        MoveAgent(-1f);
+                    }
+                    else
+                    {
+                        MoveAgent(1f);
+                    }
+                }
+            }
         }
     }
 }

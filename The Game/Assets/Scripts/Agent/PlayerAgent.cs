@@ -13,8 +13,6 @@ namespace Jincom.Agent
         public float Momentum = 0.5f;
         public float MomentumRate = 0.2f;
 
-        //  ===     ===     ===     ===
-
         private void Start()
         {
             OriginalMoveSpeed = MoveSpeed;
@@ -26,8 +24,6 @@ namespace Jincom.Agent
             AgentUpdate();
         }
 
-        //  ===     ===     ===     ===
-
         public override void AgentUpdate()
         {
             AgentStayUpright();
@@ -36,8 +32,6 @@ namespace Jincom.Agent
             PlayerMovement();
             PlayerJump();
         }
-
-        //  ===     ===     ===     ===
 
         private void PlayerMovement()
         {
@@ -73,8 +67,6 @@ namespace Jincom.Agent
             }
         }
 
-        //  ===     ===     ===     ===
-
         private void PlayerJump()
         {
             //Grounded
@@ -105,8 +97,6 @@ namespace Jincom.Agent
             }
         }
 
-        //  ===     ===     ===     ===
-
         private void PlayerAttack()
         {
             if (Input.GetButton("Fire1"))
@@ -116,6 +106,7 @@ namespace Jincom.Agent
                 if (CanShoot)
                 {
                     CanShoot = false;
+                    AgentShoot();
                     StartCoroutine(ResetCanShoot());
                 }
             }
@@ -124,8 +115,6 @@ namespace Jincom.Agent
                 AgentAttack(false);
             }
         }
-
-        //  ===     ===     ===     ===
 
         IEnumerator ResetCanShoot()
         {            
