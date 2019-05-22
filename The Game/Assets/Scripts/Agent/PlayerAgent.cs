@@ -82,7 +82,7 @@ namespace Jincom.Agent
                 {
                     if (Physics.Raycast(transform.position, -Vector3.up, GetComponent<Collider>().bounds.extents.y + 0.1f))
                     {
-                        JumpAgent(JumpHeight);
+                        JumpAgent(JumpHeight + ((JumpHeight * Momentum - (JumpHeight * 0.5f)) * 0.5f));
                         JumpCount++;
                     }
                 }

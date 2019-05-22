@@ -25,6 +25,15 @@ namespace Jincom.Agent
         //    //}
         //}
 
+        public enum TypeOfAttck
+        {
+            ShootOrMelee,
+            GrabPlayerFromDistance,
+            GrabPlayerUpClose
+        };
+
+        public TypeOfAttck AttackType;
+
         public void Update()
         {
             AgentUpdate();            
@@ -127,7 +136,20 @@ namespace Jincom.Agent
                     {
                         CanShoot = false;
                         //Debug.Log("Shooting at player.");
-                        AgentShoot();
+
+                        if (AttackType == TypeOfAttck.ShootOrMelee)
+                        {
+                            AgentShoot();
+                        }
+                        else if (AttackType == TypeOfAttck.GrabPlayerUpClose)
+                        {
+                            Debug.Log("Grabbing Player at close range");
+                        }
+                        else
+                        {
+                            Debug.Log("Grabbing Player from afar");
+                        }
+
                         StartCoroutine(ResetCanShoot());
                     }
                 }
