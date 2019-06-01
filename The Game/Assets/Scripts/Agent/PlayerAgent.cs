@@ -31,6 +31,8 @@ namespace Jincom.Agent
             PlayerAttack();
             PlayerMovement();
             PlayerJump();
+            AgentDie();
+            PhysicRaycast();
         }
 
         private void PlayerMovement()
@@ -47,16 +49,6 @@ namespace Jincom.Agent
                     Momentum += MomentumRate * Time.deltaTime;
                 }
             }
-
-            //Adjust speed based on momentum (if applicable)
-            //if (Physics.Raycast(transform.position, -Vector3.up, GetComponent<Collider>().bounds.extents.y + 0.1f))
-            //{
-            //    MoveSpeed = OriginalMoveSpeed;
-            //}
-            //else
-            //{
-            //    MoveSpeed = OriginalMoveSpeed * Momentum;
-            //}
 
             MoveSpeed = OriginalMoveSpeed * Momentum;
 
@@ -107,7 +99,6 @@ namespace Jincom.Agent
                 {
                     CanShoot = false;
                     AgentShoot();
-                    StartCoroutine(ResetCanShoot());
                 }
             }
             else if (Input.GetButtonUp("Fire1"))
@@ -116,10 +107,12 @@ namespace Jincom.Agent
             }
         }
 
-        IEnumerator ResetCanShoot()
-        {            
-            yield return new WaitForSeconds(0.25f);
-            CanShoot = true;
+        private void PhysicRaycast()
+        {
+            //if (!Physics.Raycast(transform.position, -Vector3.right, GetComponent<Collider>().bounds.extents.x - 1f))
+            //{
+            //    Debug.Log("Blocked on right side.");
+            //}
         }
-    }
+    }    
 }

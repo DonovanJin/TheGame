@@ -2,6 +2,7 @@
 using Jincom.PickUps;
 using UnityEngine;
 using System.Collections.Generic;
+using System.Collections;
 
 namespace Jincom.Agent
 {
@@ -14,7 +15,7 @@ namespace Jincom.Agent
         //}
 
         [Header("Base Agent Properties")]
-        public int CurrentHealth;        
+        public int CurrentHealth;
         public int MaxHealth;
         public int CurrentArmour;
         public int MaxArmour;
@@ -26,15 +27,17 @@ namespace Jincom.Agent
         public float JumpHeight;
         public bool Attacking = false;
         public bool CanShoot = true;
+        public float TimeBetweenShots;
+        public bool Dying = false;
         public Rigidbody Rb;
 
         //NOTE: Attacking is a State that informs the animation. CanShoot and AgentShoot() is the act itself.
-        
+
         public enum AgentState
         {
             Walk,
             Idle,
-            Die,            
+            Die,
             Fall,
             Jump
         };
@@ -48,7 +51,7 @@ namespace Jincom.Agent
         public AgentFacingDirection FacingLeftOrRight;
 
         public abstract void AgentUpdate();
-
+        
         private void Start()
         {
             Rb = GetComponent<Rigidbody>();
@@ -75,7 +78,7 @@ namespace Jincom.Agent
                 {
                     CurrentState = AgentState.Fall;
                 }
-                else 
+                else
                 {
                     CurrentState = AgentState.Jump;
                 }
@@ -90,8 +93,8 @@ namespace Jincom.Agent
 
         public virtual void MoveAgent(float direction)
         {
-            transform.Translate((Vector3.right * direction) * MoveSpeed);    
-            
+            transform.Translate((Vector3.right * direction) * MoveSpeed);
+
             if (direction < 0)
             {
                 FacingLeftOrRight = AgentFacingDirection.Left;
@@ -111,7 +114,7 @@ namespace Jincom.Agent
         {
             //Rb.velocity = new Vector3(0f, NewJumpJeight, 0f);
             Rb.AddForce(Vector3.up * NewJumpJeight, ForceMode.Impulse);
-        }        
+        }
 
         public virtual void AgentThrow()
         {
@@ -126,11 +129,6 @@ namespace Jincom.Agent
         public virtual void AgentClimb()
         {
             Debug.Log("Agent Climbs");
-        }
-
-        public virtual void AgentDie()
-        {
-            Debug.Log("Agent Dies");
         }
 
         public virtual void AgentSpawn()
@@ -166,8 +164,34 @@ namespace Jincom.Agent
         }
 
         public virtual void AgentShoot()
-        {            
-            Debug.Log(name + " is Shooting");            
+        {
+            Debug.Log(name + " is Shooting");
+
+            StartCoroutine(ResetCanShoot());
         }
-    }
+
+        IEnumerator ResetCanShoot()
+        {
+            yield return new WaitForSeconds(TimeBetweenShots);
+            CanShoot = true;
+        }
+
+        public virtual void AgentDie()
+        {
+            if (CurrentHealth <= 0f)
+            {
+                if (!Dying)
+                {
+                    Dying = true;
+                    StartCoroutine(Die());
+                }
+            }            
+        }    
+        
+        IEnumerator Die()
+        {
+            yield return new WaitForSeconds(1f);
+            Debug.Log("I am...dead...blergh!");
+        }
+    }    
 }

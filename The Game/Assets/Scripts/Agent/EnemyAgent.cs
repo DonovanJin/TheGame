@@ -34,6 +34,18 @@ namespace Jincom.Agent
 
         public TypeOfAttck AttackType;
 
+        public enum WeightClass
+        {
+            VeryEasyMinion,
+            EasyMinion,
+            MediumMinion,
+            HardMinion,
+            EasyBoss,
+            MediumBoss,
+            HardBoss
+        };
+        public WeightClass EnemyWeightClass;
+
         public void Update()
         {
             AgentUpdate();            
@@ -49,6 +61,7 @@ namespace Jincom.Agent
             DetectPlayer();
             AttackPlayer();
             MoveTowardsPlayer();
+            AgentDie();
         }
 
         private void DistanceToPlayer()
@@ -149,8 +162,6 @@ namespace Jincom.Agent
                         {
                             Debug.Log("Grabbing Player from afar");
                         }
-
-                        StartCoroutine(ResetCanShoot());
                     }
                 }
                 else
@@ -162,12 +173,6 @@ namespace Jincom.Agent
             {
                 AgentAttack(false);
             }
-        }
-
-        IEnumerator ResetCanShoot()
-        {
-            yield return new WaitForSeconds(0.25f);
-            CanShoot = true;
         }
 
         private void MoveTowardsPlayer()
