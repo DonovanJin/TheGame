@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using Jincom.Core;
+using Jincom.Agent;
 
 namespace Jincom.PickUps
 {
@@ -9,6 +10,11 @@ namespace Jincom.PickUps
     {
         public WeaponData Weapon;
 
+        public override void Collect(PlayerAgent player)
+        {
+            base.Collect(player);
+            player.AddWeapon(Weapon);
+        }
     }
 }
 

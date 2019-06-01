@@ -16,3 +16,4 @@ MonoBehaviour:
   Range: 200
   Damage: 50
   Element: 1
+  MaxiumumCapacity: 100

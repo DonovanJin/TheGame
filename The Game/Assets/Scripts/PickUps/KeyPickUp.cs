@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using Jincom.Core;
+using Jincom.Agent;
 
 namespace Jincom.PickUps
 {
