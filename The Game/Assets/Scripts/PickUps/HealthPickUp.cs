@@ -9,6 +9,12 @@ namespace Jincom.PickUps
         public int MinHealth = 100;
         public int MaxHealth = 500;
 
+        public override void Spawn()
+        {
+            base.Spawn();
+            
+        }
+
         public override void Collect()
         {
             base.Collect();

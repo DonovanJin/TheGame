@@ -8,7 +8,7 @@ namespace Jincom.PickUps
     {
         public virtual void Spawn()
         {
-
+            Debug.Log("spawned " +this.name);
         }
 
         public virtual void Collect()
