@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Jincom.Agent;
 
 namespace Jincom.PickUps
 {
@@ -9,10 +10,19 @@ namespace Jincom.PickUps
         public int MinHealth = 100;
         public int MaxHealth = 500;
 
-        public override void Collect()
+        public override void Spawn()
         {
-            base.Collect();
+            base.Spawn();
+            
+        }
+
+        public override void Collect(PlayerAgent player)
+        {
+            base.Collect(player);
             int HealthtoCollect = Random.Range(MinHealth, MaxHealth);
+
+            player.AddHealth(HealthtoCollect);
+
         }
     }
 }

@@ -1,22 +1,17 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
+using Jincom.PickUps;
 using UnityEngine;
 
 namespace Jincom.Agent
 {
     public class PlayerAgent : AgentBase
     {
-        [Header("Player Agent Properties")]
-        public int JumpCount;
-        public float OriginalMoveSpeed;
-        public float Momentum = 0.5f;
-        public float MomentumRate = 0.2f;
-
-        private void Start()
-        {
-            OriginalMoveSpeed = MoveSpeed;
-            Rb = GetComponent<Rigidbody>();
-        }
+        //Transfer to dictionary
+        public WeaponData CurrentWeapon;
+        public Dictionary<WeaponData, int> Weapons = new Dictionary<WeaponData, int>();
+  
 
         public void Update()
         {
@@ -25,43 +20,28 @@ namespace Jincom.Agent
 
         public override void AgentUpdate()
         {
-            OtherUpdates();
             PlayerMovement();
             PlayerJump();
         }
 
-        private void OtherUpdates()
+        internal void AddAmmo(WeaponData weapon, int ammotoCollect)
         {
-            AgentStayUpright();
-            StateOfAgent();
-            PlayerAttack();
+            int maxToAdd = weapon.MaxiumumCapacity - Weapons[weapon];
+
+            int collectAmount = Mathf.Clamp(ammotoCollect, 0, maxToAdd);
+
+            Weapons[weapon] += collectAmount;
+
+            Debug.Log(Weapons[weapon]);
+        }
+
+        internal void AddWeapon(WeaponData weapon)
+        {
+            Weapons.Add(weapon, weapon.MaxiumumCapacity);
         }
 
         private void PlayerMovement()
         {
-            //Calculate momentum
-            if (CurrentState == AgentState.Idle)
-            {
-                Momentum = 0.5f;
-            }
-            else if (CurrentState == AgentState.Walk)
-            {
-                if (Momentum < 1)
-                {
-                    Momentum += MomentumRate * Time.deltaTime;
-                }
-            }
-
-            //Adjust speed based on momentum (if applicable)
-            if (Physics.Raycast(transform.position, -Vector3.up, GetComponent<Collider>().bounds.extents.y + 0.1f))
-            {
-                MoveSpeed = OriginalMoveSpeed;
-            }
-            else
-            {
-                MoveSpeed = OriginalMoveSpeed * Momentum;
-            }
-
             //Movement
             if (Input.GetAxis("Horizontal") != 0)
             {
@@ -69,58 +49,24 @@ namespace Jincom.Agent
             }
         }
 
+        internal void AddHealth(int healthtoCollect)
+        {
+            int maxToAdd = MaxHealth - CurrentHealth;
+
+            int collectAmount = Mathf.Clamp(healthtoCollect, 0, maxToAdd);
+
+            CurrentHealth += collectAmount;
+        }
+
         private void PlayerJump()
         {
-            //Grounded
-            if (Physics.Raycast(transform.position, -Vector3.up, GetComponent<Collider>().bounds.extents.y + 0.1f))
-            {
-                JumpCount = 0;
-            }
 
-            //Jump and Multi Jump
-            if (Input.GetButtonDown("Jump"))
-            {
-                if (JumpCount == 0)
-                {
-                    if (Physics.Raycast(transform.position, -Vector3.up, GetComponent<Collider>().bounds.extents.y + 0.1f))
-                    {
-                        JumpAgent(JumpHeight);
-                        JumpCount++;
-                    }
-                }
-                else if (JumpCount == 1)
-                {
-                    if (Rb.velocity.y <= 0f)
-                    {
-                        JumpAgent(JumpHeight);
-                        JumpCount++;
-                    }
-                }
-            }
         }
 
         private void PlayerAttack()
         {
-            if (Input.GetButton("Fire1"))
-            {
-                AgentAttack(true);
 
-                if (CanShoot)
-                {
-                    CanShoot = false;
-                    StartCoroutine(ResetCanShoot());
-                }
-            }
-            else if (Input.GetButtonUp("Fire1"))
-            {
-                AgentAttack(false);
-            }
         }
 
-        IEnumerator ResetCanShoot()
-        {            
-            yield return new WaitForSeconds(0.25f);
-            CanShoot = true;
-        }
     }
 }

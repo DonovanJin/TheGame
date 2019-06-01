@@ -5,7 +5,7 @@ using System.Collections.Generic;
 namespace Jincom.Agent
 {
     public abstract class AgentBase : MonoBehaviour
-    {       
+    {
         [Header("Base Agent Properties")]
         public int CurrentHealth;
         //public int CurrentHealth
@@ -18,82 +18,22 @@ namespace Jincom.Agent
         public GameConstants.Elements CurrentElement;
         public float MoveSpeed;
         public float JumpHeight;
-        public bool Attacking = false;
-        public bool CanShoot = true;
-        public Rigidbody Rb;
 
         public enum AgentState
         {
             Walk,
             Idle,
-            Die,            
+            Die,
             Fall,
             Jump
         };
         public AgentState CurrentState;
 
-        public enum AgentFacingDirection
-        {
-            Left,
-            Right
-        };
-        public AgentFacingDirection FacingLeftOrRight;               
-
         public abstract void AgentUpdate();
-
-        private void Start()
-        {
-            Rb = GetComponent<Rigidbody>();
-        }
-
-        public virtual void StateOfAgent()
-        {
-            //Logic to decide which state the agent is in
-
-            //Grounded
-            if (Physics.Raycast(transform.position, -Vector3.up, GetComponent<Collider>().bounds.extents.y + 0.1f))
-            {
-                if (Input.GetAxis("Horizontal") != 0)
-                {
-                    CurrentState = AgentState.Walk;
-                }
-                else
-                {
-                    CurrentState = AgentState.Idle;
-                }
-            }
-            //Not Grounded
-            else
-            {
-                if (Rb.velocity.y < 0)
-                {
-                    CurrentState = AgentState.Fall;
-                }
-                else 
-                {
-                    CurrentState = AgentState.Jump;
-                }
-            }
-        }
-
-        public virtual void AgentStayUpright()
-        {
-            this.gameObject.transform.position = new Vector3(this.gameObject.transform.position.x, this.gameObject.transform.position.y, 0);
-            this.gameObject.transform.eulerAngles = new Vector3(0, 0, 0);
-        }
 
         public virtual void MoveAgent(float direction)
         {
-            transform.Translate((Vector3.right * direction) * MoveSpeed);    
-            
-            if (direction < 0)
-            {
-                FacingLeftOrRight = AgentFacingDirection.Left;
-            }
-            else if (direction > 0)
-            {
-                FacingLeftOrRight = AgentFacingDirection.Right;
-            }
+            transform.Translate((Vector3.right * direction) * MoveSpeed);
         }
 
         public virtual void FallAgent()
@@ -101,18 +41,14 @@ namespace Jincom.Agent
             Debug.Log("Agent Falls");
         }
 
-        public virtual void JumpAgent(float NewJumpJeight)
+        public virtual void AgentJump()
         {
-            //Rb.velocity = new Vector3(0f, NewJumpJeight, 0f);
-            Rb.AddForce(Vector3.up * NewJumpJeight, ForceMode.Impulse);
+
         }
 
         public virtual void AgentShoot()
         {
-            if (CanShoot)
-            {
-                Debug.Log("Agent Shoots");
-            }
+            Debug.Log("Agent Shoots");
         }
 
         public virtual void AgentThrow()
@@ -153,19 +89,6 @@ namespace Jincom.Agent
         public virtual void AgentResume()
         {
             Debug.Log("Agent Resumes Game");
-        }
-
-        public virtual void AgentAttack(bool YesNo)
-        {
-            if (YesNo)
-            {
-                Attacking = true;
-                AgentShoot();
-            }
-            else
-            {
-                Attacking = false;
-            }
         }
     }
 }
