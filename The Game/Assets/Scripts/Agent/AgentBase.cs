@@ -7,15 +7,6 @@ namespace Jincom.Agent
     public abstract class AgentBase : MonoBehaviour
     {
         [Header("Base Agent Properties")]
-        public int CurrentHealth;
-        //public int CurrentHealth
-        //{
-        //    get { return _currentHealth; }
-        //}
-        public int MaxHealth;
-        public int CurrentArmour;
-        public int MaxArmour;
-        public GameConstants.Elements CurrentElement;
         public float MoveSpeed;
         public float JumpHeight;
 
@@ -31,62 +22,34 @@ namespace Jincom.Agent
 
         public abstract void AgentUpdate();
 
-        public virtual void MoveAgent(float direction)
+        public virtual void Move(float direction)
         {
             transform.Translate((Vector3.right * direction) * MoveSpeed);
         }
 
-        public virtual void FallAgent()
+        public virtual void Fall()
         {
             Debug.Log("Agent Falls");
         }
 
-        public virtual void AgentJump()
+        public virtual void Jump()
         {
 
         }
 
-        public virtual void AgentShoot()
-        {
-            Debug.Log("Agent Shoots");
-        }
 
-        public virtual void AgentThrow()
-        {
-            Debug.Log("Agent Throws");
-        }
 
-        public virtual void AgentMelee()
-        {
-            Debug.Log("Agent Uses Melee");
-        }
-
-        public virtual void AgentClimb()
-        {
-            Debug.Log("Agent Climbs");
-        }
-
-        public virtual void AgentDie()
-        {
-            Debug.Log("Agent Dies");
-        }
-
-        public virtual void AgentSpawn()
+        public virtual void Spawn()
         {
             Debug.Log("Agent Spawns");
         }
 
-        public virtual void AgentPickup()
-        {
-            Debug.Log("Agent Picks Up Something");
-        }
-
-        public virtual void AgentPause()
+        public virtual void Pause()
         {
             Debug.Log("Agent Pauses Game");
         }
 
-        public virtual void AgentResume()
+        public virtual void Resume()
         {
             Debug.Log("Agent Resumes Game");
         }

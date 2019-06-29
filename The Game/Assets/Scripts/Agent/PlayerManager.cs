@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -6,16 +7,17 @@ namespace Jincom.Agent
 {
     public class PlayerManager : MonoBehaviour
     {
-        // Start is called before the first frame update
-        void Start()
+        private Player _playerData;
+        public PlayerAgent PlayerPrefab;
+        public PlayerAgent CurrentPlayerAgent;
+        public PlayerCheckpoint[] PlayerCheckpoints;
+
+        internal void Init(Player playerData)
         {
-
-        }
-
-        // Update is called once per frame
-        void Update()
-        {
-
+            _playerData = playerData;
+            //Get checkpoint 1
+            //instantiate player prefab there
+            CurrentPlayerAgent.Init(_playerData);
         }
     }
 }

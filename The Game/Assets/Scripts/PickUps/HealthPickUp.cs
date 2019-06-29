@@ -21,7 +21,7 @@ namespace Jincom.PickUps
             base.Collect(player);
             int HealthtoCollect = Random.Range(MinHealth, MaxHealth);
 
-            player.AddHealth(HealthtoCollect);
+            player.PlayerData.AddHealth(HealthtoCollect);
 
         }
     }

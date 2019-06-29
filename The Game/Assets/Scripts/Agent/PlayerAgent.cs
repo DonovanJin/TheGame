@@ -8,10 +8,15 @@ namespace Jincom.Agent
 {
     public class PlayerAgent : AgentBase
     {
-        //Transfer to dictionary
-        public WeaponData CurrentWeapon;
-        public Dictionary<WeaponData, int> Weapons = new Dictionary<WeaponData, int>();
-  
+        private Player _playerData;
+
+        public Player PlayerData
+        {
+            get
+            {
+                return _playerData;
+            }
+        }
 
         public void Update()
         {
@@ -21,23 +26,6 @@ namespace Jincom.Agent
         public override void AgentUpdate()
         {
             PlayerMovement();
-            PlayerJump();
-        }
-
-        internal void AddAmmo(WeaponData weapon, int ammotoCollect)
-        {
-            int maxToAdd = weapon.MaxiumumCapacity - Weapons[weapon];
-
-            int collectAmount = Mathf.Clamp(ammotoCollect, 0, maxToAdd);
-
-            Weapons[weapon] += collectAmount;
-
-            Debug.Log(Weapons[weapon]);
-        }
-
-        internal void AddWeapon(WeaponData weapon)
-        {
-            Weapons.Add(weapon, weapon.MaxiumumCapacity);
         }
 
         private void PlayerMovement()
@@ -45,27 +33,23 @@ namespace Jincom.Agent
             //Movement
             if (Input.GetAxis("Horizontal") != 0)
             {
-                MoveAgent(Input.GetAxis("Horizontal"));
+                Move(Input.GetAxis("Horizontal"));
             }
         }
 
-        internal void AddHealth(int healthtoCollect)
+        internal void Init(Player playerData)
         {
-            int maxToAdd = MaxHealth - CurrentHealth;
-
-            int collectAmount = Mathf.Clamp(healthtoCollect, 0, maxToAdd);
-
-            CurrentHealth += collectAmount;
+            _playerData = playerData;
         }
 
-        private void PlayerJump()
+        private void Shoot()
         {
 
         }
 
-        private void PlayerAttack()
+        public void Climb()
         {
-
+            Debug.Log("Agent Climbs");
         }
 
     }

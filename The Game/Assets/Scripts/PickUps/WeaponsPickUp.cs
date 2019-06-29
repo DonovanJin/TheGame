@@ -13,7 +13,7 @@ namespace Jincom.PickUps
         public override void Collect(PlayerAgent player)
         {
             base.Collect(player);
-            player.AddWeapon(Weapon);
+            player.PlayerData.AddWeapon(Weapon);
         }
     }
 }

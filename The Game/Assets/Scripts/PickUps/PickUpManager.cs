@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using Jincom.Agent;
+using System;
 
 namespace Jincom.PickUps
 {
@@ -23,6 +24,11 @@ namespace Jincom.PickUps
                     PickUps.Add(pickup);
                 }
             }
+        }
+
+        internal void Init(PlayerAgent currentPlayerAgent)
+        {
+            Player = currentPlayerAgent;
         }
 
         public void Update()

@@ -18,7 +18,7 @@ namespace Jincom.PickUps
         {
             base.Collect(player);
             int AmmotoCollect = Random.Range(MinAmmo, MaxAmmo);
-            player.AddAmmo(Weapon, AmmotoCollect);
+            player.PlayerData.AddAmmo(Weapon, AmmotoCollect);
         }
     }
 }

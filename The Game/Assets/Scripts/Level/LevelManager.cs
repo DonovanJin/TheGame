@@ -16,5 +16,12 @@ namespace Jincom.Level
 
         [SerializeField]
         private PickUpManager _pickUpManager;
+
+        public void Init(Player playerData)
+        {
+            _playerManager.Init(playerData);
+            _enemyManager.Init(_playerManager.CurrentPlayerAgent);
+            _pickUpManager.Init(_playerManager.CurrentPlayerAgent);
+        }
     }
 }

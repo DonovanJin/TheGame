@@ -1,14 +1,11 @@
-﻿using System;
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 namespace Jincom.Agent
 {
-    public class EnemyManager : MonoBehaviour
+    public class PlayerCheckpoint : MonoBehaviour
     {
-        public PlayerAgent Player;
-
         // Start is called before the first frame update
         void Start()
         {
@@ -19,11 +16,6 @@ namespace Jincom.Agent
         void Update()
         {
 
-        }
-
-        internal void Init(PlayerAgent currentPlayerAgent)
-        {
-            Player = currentPlayerAgent;
         }
     }
 }
