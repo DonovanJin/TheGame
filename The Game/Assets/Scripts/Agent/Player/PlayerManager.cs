@@ -11,12 +11,18 @@ namespace Jincom.Agent
         public PlayerAgent PlayerPrefab;
         public PlayerAgent CurrentPlayerAgent;
         public PlayerCheckpoint[] PlayerCheckpoints;
+        public PlayerCheckpoint LastCheckpoint; //The last checkpoint the player walked passed. Updates every time a player the walks passed a new one
 
+        /// <summary>
+        /// Use this to initialize the Player Manager
+        /// </summary>
+        /// <param name="playerData"> Pass through player data from Game Manager</param>
         internal void Init(Player playerData)
         {
             _playerData = playerData;
-            //Get checkpoint 1
-            //instantiate player prefab there
+            CurrentPlayerAgent = Instantiate(PlayerPrefab, this.transform);
+            LastCheckpoint = PlayerCheckpoints[0];
+            CurrentPlayerAgent.transform.position = LastCheckpoint.transform.position;
             CurrentPlayerAgent.Init(_playerData);
         }
 

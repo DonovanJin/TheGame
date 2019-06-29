@@ -8,13 +8,22 @@ namespace Jincom.Agent
 {
     public class Player
     {
-        public int CurrentHealth;
-        public int MaxHealth;
+        public int CurrentHealth; 
+        public int MaxHealth = 100;
         public int CurrentArmour;
-        public int MaxArmour;
+        public int MaxArmour = 100;
         public GameConstants.Elements CurrentElement;
         public WeaponData CurrentWeapon;
         public Dictionary<WeaponData, int> Weapons = new Dictionary<WeaponData, int>();
+        public List<GameConstants.Elements> Suits = new List<GameConstants.Elements>();
+
+        public Player()
+        {
+            CurrentHealth = MaxHealth;
+            CurrentArmour = MaxArmour;
+            Suits.Add(GameConstants.Elements.Normal);
+
+        }
 
         public void AddHealth(int healthtoCollect)
         {

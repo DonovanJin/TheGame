@@ -16,13 +16,15 @@ namespace Jincom.Level
 
     public class LevelSpawner : MonoBehaviour
     {
-        public Level[] GameLevels;
+        [SerializeField]
+        private Level[] _gameLevels;
 
         public LevelManager CurrentLevel;
 
         internal void SpawnLevel(int levelIndex, Player playerData)
         {
-            throw new NotImplementedException();
+            CurrentLevel = Instantiate(_gameLevels[levelIndex].Prefab, this.transform);
+            CurrentLevel.Init(playerData);
         }
 
         public void UpdateSpawner()

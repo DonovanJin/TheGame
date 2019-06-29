@@ -22,12 +22,18 @@ namespace Jincom.Core
         void Update()
         {
             UImanager.UpdateManager();
+            Levelspawner.UpdateSpawner();
         }
 
         private void Init()
         {
+            Debug.Assert(UImanager != null, "No UI Manager Found");
+            Debug.Assert(Levelspawner != null, "No Level Spawner Found");
+
             PlayerData = new Player();
             UImanager.Init(PlayerData);
+            Levelspawner.SpawnLevel(0, PlayerData);
+            
         }
     }
 }

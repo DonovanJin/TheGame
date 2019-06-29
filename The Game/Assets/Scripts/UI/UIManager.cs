@@ -10,7 +10,7 @@ namespace Jincom.UI
     {
         internal void Init(Player playerData)
         {
-            throw new NotImplementedException();
+
         }
 
         public void UpdateManager()

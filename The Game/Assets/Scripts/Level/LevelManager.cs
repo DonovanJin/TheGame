@@ -20,6 +20,8 @@ namespace Jincom.Level
 
         public void Init(Player playerData)
         {
+            Debug.Assert(_playerManager != null, "No Player Manager Found");
+            
             _playerManager.Init(playerData);
             _enemyManager.Init(_playerManager.CurrentPlayerAgent);
             _pickUpManager.Init(_playerManager.CurrentPlayerAgent);

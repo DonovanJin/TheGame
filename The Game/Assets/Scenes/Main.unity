@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.37311953, g: 0.38074, b: 0.35872698, a: 1}
+  m_IndirectSpecularColor: {r: 0.37311953, g: 0.38074014, b: 0.3587274, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -147,7 +147,7 @@ Camera:
   m_GameObject: {fileID: 1461613882}
   m_Enabled: 1
   serializedVersion: 2
-  m_ClearFlags: 1
+  m_ClearFlags: 2
   m_BackGroundColor: {r: 0.19215687, g: 0.3019608, b: 0.4745098, a: 0}
   m_projectionMatrixMode: 1
   m_SensorSize: {x: 36, y: 24}
@@ -194,6 +194,18 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1629674313 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 3223302224157319113, guid: c26ee689dd3bc4dbeba5def995c2cc4f,
+    type: 3}
+  m_PrefabInstance: {fileID: 4767084301441812334}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c66062a4bca964e07a384fea68214d13, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1769972582
 GameObject:
   m_ObjectHideFlags: 0
@@ -223,8 +235,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7b3adc933412342698096cee5757099a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  UImanager: {fileID: 0}
-  Levelspawner: {fileID: 0}
+  UImanager: {fileID: 1629674313}
+  Levelspawner: {fileID: 1166760406018548282}
 --- !u!4 &1769972584
 Transform:
   m_ObjectHideFlags: 0
@@ -241,29 +253,18 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &1166760406018548281 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 1166760406018548281, guid: b1d61bf966c384a78a12112066571195,
+--- !u!114 &1166760406018548282 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1166760406018548282, guid: b1d61bf966c384a78a12112066571195,
     type: 3}
   m_PrefabInstance: {fileID: 7124796986025563891}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &1166760406018548282
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1166760406018548281}
+  m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 528c28975987f4f9fa0b7e6fe82dc11d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  GameLevels:
-  - LevelName: TestLevel
-    Prefab: {fileID: 8575376470803228040, guid: cea3dabe298f547e8af131692bcb7b81,
-      type: 3}
-  CurrentLevel: {fileID: 0}
 --- !u!4 &4568395856615834064 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4568395856615834064, guid: b1d61bf966c384a78a12112066571195,
