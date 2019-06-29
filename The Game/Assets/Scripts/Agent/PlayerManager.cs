@@ -19,5 +19,10 @@ namespace Jincom.Agent
             //instantiate player prefab there
             CurrentPlayerAgent.Init(_playerData);
         }
+
+        internal void UpdateManager()
+        {
+            
+        }
     }
 }

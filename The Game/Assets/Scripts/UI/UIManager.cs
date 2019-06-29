@@ -12,5 +12,10 @@ namespace Jincom.UI
         {
             throw new NotImplementedException();
         }
+
+        public void UpdateManager()
+        {
+
+        }
     }
 }

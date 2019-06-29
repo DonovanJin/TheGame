@@ -13,11 +13,13 @@ namespace Jincom.PickUps
         public List<PickUpBase> PickUps = new List<PickUpBase>();
         public List<PickUpBase> CollectedPickups = new List<PickUpBase>();
 
-        public void Start()
+        internal void Init(PlayerAgent currentPlayerAgent)
         {
+            Player = currentPlayerAgent;
+
             for (int i = 0; i < Spawners.Length; i++)
             {
-               PickUpBase pickup = Spawners[i].Init();
+                PickUpBase pickup = Spawners[i].Init();
 
                 if (pickup != null)
                 {
@@ -26,12 +28,7 @@ namespace Jincom.PickUps
             }
         }
 
-        internal void Init(PlayerAgent currentPlayerAgent)
-        {
-            Player = currentPlayerAgent;
-        }
-
-        public void Update()
+        internal void UpdateManager()
         {
             //Check to see if player can collect any pickup
             for (int i = 0; i < PickUps.Count; i++)
@@ -53,7 +50,6 @@ namespace Jincom.PickUps
                 //Clear list
                 CollectedPickups.Clear();
             }
-
         }
 
         private void PlayerCollectPickup(PlayerAgent player, PickUpBase pickup)

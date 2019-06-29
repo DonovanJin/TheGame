@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using Jincom.PickUps;
 using Jincom.Agent;
+using System;
 
 namespace Jincom.Level
 {
@@ -22,6 +23,13 @@ namespace Jincom.Level
             _playerManager.Init(playerData);
             _enemyManager.Init(_playerManager.CurrentPlayerAgent);
             _pickUpManager.Init(_playerManager.CurrentPlayerAgent);
+        }
+
+        internal void UpdateManager()
+        {
+            _playerManager.UpdateManager();
+            _enemyManager.UpdateManager();
+            _pickUpManager.UpdateManager();
         }
     }
 }

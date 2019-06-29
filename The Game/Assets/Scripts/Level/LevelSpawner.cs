@@ -24,5 +24,13 @@ namespace Jincom.Level
         {
             throw new NotImplementedException();
         }
+
+        public void UpdateSpawner()
+        {
+            if (CurrentLevel != null)
+            {
+                CurrentLevel.UpdateManager();
+            }
+        }
     }
 }

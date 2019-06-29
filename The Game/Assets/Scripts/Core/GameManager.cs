@@ -21,7 +21,7 @@ namespace Jincom.Core
         // Update is called once per frame
         void Update()
         {
-
+            UImanager.UpdateManager();
         }
 
         private void Init()
