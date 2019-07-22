@@ -7,11 +7,20 @@ namespace Jincom.Agent
 {
     public class EnemyAgent : AgentBase
     {
+        private float _initialHeight;
+        private bool _isGrounded;
+        private Rigidbody _rb;        
         public int CurrentHealth;
         public int MaxHealth;
         public int CurrentArmour;
         public int MaxArmour;
         public GameConstants.Elements CurrentElement;
+
+        private void Start()
+        {
+            _initialHeight = GetComponent<Collider>().bounds.extents.y;
+            _rb = GetComponent<Rigidbody>();
+        }
 
         public void Update()
         {
@@ -20,7 +29,7 @@ namespace Jincom.Agent
 
         public override void AgentUpdate()
         {
-            Move(Mathf.PingPong(Time.unscaledTime, 4f) - 2f);
+            //Move(Mathf.PingPong(Time.unscaledTime, 4f) - 2f);            
         }
 
         public virtual void Shoot()
@@ -37,8 +46,6 @@ namespace Jincom.Agent
         {
             Debug.Log("Agent Uses Melee");
         }
-
-
 
         public virtual void Die()
         {
