@@ -10,6 +10,13 @@ namespace Jincom.Agent
         public float MoveSpeed;
         public float JumpHeight;
         public float CurrentSpeed;
+        public RaycastHit RayHit;
+        public float InitialHeight;
+        public bool IsGrounded;
+        public Rigidbody RB;
+
+        public float DistanceFromGround;
+
 
         public enum AgentState
         {
@@ -30,6 +37,17 @@ namespace Jincom.Agent
 
         public abstract void AgentUpdate();
 
+        private void Start()
+        {
+            InitialHeight = GetComponent<Collider>().bounds.extents.y;
+            RB = this.GetComponent<Rigidbody>();
+
+            if (RB != null)
+            {
+                RB.constraints = RigidbodyConstraints.FreezeRotation | RigidbodyConstraints.FreezePositionZ;
+            }
+        }
+
         public virtual void Move(float direction)
         {
             transform.Translate((Vector3.right * direction) * MoveSpeed);
@@ -41,20 +59,16 @@ namespace Jincom.Agent
             Debug.Log("Agent Falls");
         }
 
-        public virtual void Jump(float NewJummpHeight)
+        public virtual void Jump(float NewJumpHeight)
         {
-            // Hermann
-            Rigidbody RB = this.GetComponent<Rigidbody>();
-
             if (RB != null)
             {
-                RB.AddForce(new Vector3(0, NewJummpHeight, 0), ForceMode.Impulse);
+                RB.AddForce(new Vector3(0, NewJumpHeight, 0), ForceMode.Impulse);
             }
             else
             {
                 Debug.Log("Agent requires a Rigidbody to jump");
-            }
-            //
+            }            
         }
 
         public virtual void Spawn()
@@ -71,45 +85,54 @@ namespace Jincom.Agent
         {
             Debug.Log("Agent Resumes Game");
         }
+      
 
-        //Hermann        
-
-        public virtual void AnimationState(bool Grounded, Rigidbody RB)
+        public virtual void AnimationState()
         {
-            //Prevents agents from tumbling over and keeps them at the correct depth
-            transform.position = new Vector3(transform.position.x, transform.position.y, 0f);
-            transform.rotation = new Quaternion(0f, 0f, 0f, 0f);
+            IsGrounded = Physics.Raycast(transform.position, -Vector3.up, InitialHeight + 0.1f);
 
-            //Animation State
-            if ((Grounded) && (Input.GetAxis("Horizontal") == 0))
+            if (RB != null)
             {
-                CurrentState = AgentState.Idle;
-            }
-            else if ((Grounded) && (Input.GetAxis("Horizontal") != 0))
-            {
-                CurrentState = AgentState.Walk;
-            }
-            else if ((!Grounded) && (RB.velocity.y < 0f))
-            {
-                CurrentState = AgentState.Fall;
-            }
-            else if ((!Grounded) && (RB.velocity.y > 0f))
-            {
-                CurrentState = AgentState.Jump;
-            }
+                if (Physics.Raycast(transform.position, transform.TransformDirection(Vector3.down), out RayHit, Mathf.Infinity))
+                {
+                    Debug.DrawRay(transform.position, transform.TransformDirection(Vector3.down) * RayHit.distance, Color.green);
+                    DistanceFromGround = (RayHit.distance - InitialHeight);
+                }
 
-            //Facing direction
-            if (CurrentSpeed < 0f)
-            {
-                //Debug.Log("Left?");
-                facing = FacingDirection.Left;
+                //Main Animation States:
+                //Idle
+                if ((IsGrounded) && (CurrentSpeed == 0))
+                {
+                    CurrentState = AgentState.Idle;
+                }
+                //Walking/Runninng
+                else if ((IsGrounded) && (CurrentSpeed != 0))
+                {
+                    CurrentState = AgentState.Walk;
+                }
+                //Falling
+                else if ((!IsGrounded) && (RB.velocity.y < 0f))
+                {
+                    CurrentState = AgentState.Fall;
+                }
+                //Jumping
+                else if ((!IsGrounded) && (RB.velocity.y > 0f))
+                {
+                    CurrentState = AgentState.Jump;
+                }
+
+                //Facing direction
+                if (CurrentSpeed < 0f)
+                {
+                    //Debug.Log("Left?");
+                    facing = FacingDirection.Left;
+                }
+                else if (CurrentSpeed > 0f)
+                {
+                    //Debug.Log("Right?");
+                    facing = FacingDirection.Right;
+                }
             }
-            else if (CurrentSpeed > 0f)
-            {
-                //Debug.Log("Right?");
-                facing = FacingDirection.Right;
-            }
-        }
-        //
+        }        
     }
 }
