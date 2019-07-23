@@ -7,16 +7,26 @@ namespace Jincom.Agent
     public abstract class AgentBase : MonoBehaviour
     {
         [Header("Base Agent Properties")]
+        public GameConstants.Elements CurrentElement;
+        public int CurrentHealth;
+        public int MaxHealth;
+        public int CurrentArmour;
+        public int MaxArmour;        
         public float MoveSpeed;
         public float JumpHeight;
         public float CurrentSpeed;
-        public RaycastHit RayHit;
-        public float InitialHeight;
-        public bool IsGrounded;
+        public RaycastHit RayHit;               
         public Rigidbody RB;
+        public bool IsGrounded;
+        public float Acceleration = 0f;
+        public bool CanShoot;
+        public float TimeBetweenEachShotInSeconds;
+
+        private float _oldHorPos = 0f;
+        private float _newHorPos = 0f;                
+        private float _initialHeight;
 
         public float DistanceFromGround;
-
 
         public enum AgentState
         {
@@ -39,13 +49,16 @@ namespace Jincom.Agent
 
         private void Start()
         {
-            InitialHeight = GetComponent<Collider>().bounds.extents.y;
+            _initialHeight = GetComponent<Collider>().bounds.extents.y;
             RB = this.GetComponent<Rigidbody>();
 
             if (RB != null)
             {
-                RB.constraints = RigidbodyConstraints.FreezeRotation | RigidbodyConstraints.FreezePositionZ;
+                RB.constraints = RigidbodyConstraints.FreezeRotation | RigidbodyConstraints.FreezePositionZ;                
             }
+
+            _oldHorPos = transform.position.x;
+            _newHorPos = transform.position.x;
         }
 
         public virtual void Move(float direction)
@@ -89,50 +102,64 @@ namespace Jincom.Agent
 
         public virtual void AnimationState()
         {
-            IsGrounded = Physics.Raycast(transform.position, -Vector3.up, InitialHeight + 0.1f);
+            _newHorPos = transform.position.x;
 
-            if (RB != null)
+            if (_oldHorPos != _newHorPos)
             {
+                Acceleration = _newHorPos - _oldHorPos;
+                _oldHorPos = _newHorPos;
+            }
+            else
+            {
+                Acceleration = 0f;
+            }
+
+            IsGrounded = Physics.Raycast(transform.position, -Vector3.up, _initialHeight + 0.1f);
+
+            
                 if (Physics.Raycast(transform.position, transform.TransformDirection(Vector3.down), out RayHit, Mathf.Infinity))
                 {
                     Debug.DrawRay(transform.position, transform.TransformDirection(Vector3.down) * RayHit.distance, Color.green);
-                    DistanceFromGround = (RayHit.distance - InitialHeight);
+                    DistanceFromGround = (RayHit.distance - _initialHeight);
                 }
 
-                //Main Animation States:
+            //Main Animation States:
+
+            if (IsGrounded)
+            {
                 //Idle
-                if ((IsGrounded) && (CurrentSpeed == 0))
+                if (Acceleration == 0)
                 {
                     CurrentState = AgentState.Idle;
                 }
                 //Walking/Runninng
-                else if ((IsGrounded) && (CurrentSpeed != 0))
+                else 
                 {
                     CurrentState = AgentState.Walk;
                 }
-                //Falling
-                else if ((!IsGrounded) && (RB.velocity.y < 0f))
-                {
-                    CurrentState = AgentState.Fall;
-                }
-                //Jumping
-                else if ((!IsGrounded) && (RB.velocity.y > 0f))
-                {
-                    CurrentState = AgentState.Jump;
-                }
-
-                //Facing direction
-                if (CurrentSpeed < 0f)
-                {
-                    //Debug.Log("Left?");
-                    facing = FacingDirection.Left;
-                }
-                else if (CurrentSpeed > 0f)
-                {
-                    //Debug.Log("Right?");
-                    facing = FacingDirection.Right;
-                }
             }
-        }        
+
+            else
+            {
+                if (RB != null)
+                {
+                    //Falling
+                    if (RB.velocity.y < 0f)
+                    {
+                        CurrentState = AgentState.Fall;
+                    }
+                    //Jumping
+                    else if (RB.velocity.y > 0f)
+                    {
+                        CurrentState = AgentState.Jump;
+                    }
+                }
+            }             
+        } 
+        
+        public virtual void AgentShoot()
+        {
+            Debug.Log(name + " is shooting. Pew pew!");
+        }
     }
 }

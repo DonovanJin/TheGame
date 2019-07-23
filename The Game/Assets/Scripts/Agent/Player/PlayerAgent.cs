@@ -27,6 +27,7 @@ namespace Jincom.Agent
         public override void AgentUpdate()
         {
             PlayerMovement();
+            PlayerShoot();
             AnimationState();
         }
 
@@ -62,21 +63,47 @@ namespace Jincom.Agent
                     }
                 }
             }
+
+            //Facing direction
+            if (Acceleration < 0f)
+            {
+                //Debug.Log("Left?");
+                facing = FacingDirection.Left;
+            }
+            else if (Acceleration > 0f)
+            {
+                //Debug.Log("Right?");
+                facing = FacingDirection.Right;
+            }
         }
 
         internal void Init(Player playerData)
         {
             _playerData = playerData;
-        }
-
-        private void Shoot()
-        {
-            Debug.Log("Agent Shoots. Pew pew!");
-        }
+        }        
 
         private void Climb()
         {
             Debug.Log("Agent Climbs");
+        }
+
+        private void PlayerShoot()
+        {
+            if (Input.GetButton("Fire1"))
+            {
+                if (CanShoot)
+                {
+                    AgentShoot();
+                    CanShoot = false;
+                    StartCoroutine(ResetCanShoot());
+                }
+            }
+        }
+
+        IEnumerator ResetCanShoot()
+        {            
+            yield return new WaitForSeconds(TimeBetweenEachShotInSeconds);
+            CanShoot = true;
         }
     }
 }

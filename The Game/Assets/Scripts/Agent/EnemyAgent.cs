@@ -6,26 +6,23 @@ using Jincom.Core;
 namespace Jincom.Agent
 {
     public class EnemyAgent : AgentBase
-    {       
-        public int CurrentHealth;
-        public int MaxHealth;
-        public int CurrentArmour;
-        public int MaxArmour;
-        public GameConstants.Elements CurrentElement;
+    {     
         public Transform PlayerTransform;
         public float SpotDistance;
         public bool SpottedPlayer;
-        public float HorizontalDifference;
+        private float _horizontalDifference;
 
         public void Update()
         {
             AgentUpdate();
             SpotThePlayer();
+            EnemyShoot();
         }
 
         public override void AgentUpdate()
         {
-            //Move(Mathf.PingPong(Time.unscaledTime, 4f) - 2f);            
+            //Move(Mathf.PingPong(Time.unscaledTime, 4f) - 2f);  
+            AnimationState();
         }
 
         public virtual void SpotThePlayer()
@@ -35,23 +32,30 @@ namespace Jincom.Agent
                 PlayerTransform = GameObject.FindGameObjectWithTag("Player").gameObject.GetComponent<Transform>();
             }
 
-            HorizontalDifference = transform.position.x - PlayerTransform.position.x;
+            if (PlayerTransform)
+            { 
+            _horizontalDifference = transform.position.x - PlayerTransform.position.x;
 
-            if (Physics.Raycast(transform.position, PlayerTransform.position - transform.position, out RayHit))
-            {
-                if (RayHit.transform == PlayerTransform)
+                if (Physics.Raycast(transform.position, PlayerTransform.position - transform.position, out RayHit))
                 {
-                    Debug.DrawLine(transform.position, PlayerTransform.position, Color.red);
-                    if(Vector3.Distance(transform.position, PlayerTransform.position) < SpotDistance)
+                    if (RayHit.transform == PlayerTransform)
                     {
-                        //SpottedPlayer = true;
-                        if ((HorizontalDifference > 0) && (facing == FacingDirection.Left))
+                        Debug.DrawLine(transform.position, PlayerTransform.position, Color.red);
+                        if (Vector3.Distance(transform.position, PlayerTransform.position) < SpotDistance)
                         {
-                            SpottedPlayer = true;
-                        }
-                        else if ((HorizontalDifference < 0) && (facing == FacingDirection.Right))
-                        {
-                            SpottedPlayer = true;
+                            //SpottedPlayer = true;
+                            if ((_horizontalDifference > 0) && (facing == FacingDirection.Left))
+                            {
+                                SpottedPlayer = true;
+                            }
+                            else if ((_horizontalDifference < 0) && (facing == FacingDirection.Right))
+                            {
+                                SpottedPlayer = true;
+                            }
+                            else
+                            {
+                                SpottedPlayer = false;
+                            }
                         }
                         else
                         {
@@ -63,16 +67,7 @@ namespace Jincom.Agent
                         SpottedPlayer = false;
                     }
                 }
-                else
-                {
-                    SpottedPlayer = false;
-                }
             }
-        }
-
-        public virtual void Shoot()
-        {
-            Debug.Log("Agent Shoots");
         }
 
         public virtual void Throw()
@@ -88,6 +83,25 @@ namespace Jincom.Agent
         public virtual void Die()
         {
             Debug.Log("Agent Dies");
+        }
+
+        private void EnemyShoot()
+        {
+            if (SpottedPlayer)
+            {
+                if (CanShoot)
+                {
+                    AgentShoot();
+                    CanShoot = false;
+                    StartCoroutine(ResetCanShoot());
+                }
+            }
+        }
+
+        IEnumerator ResetCanShoot()
+        {
+            yield return new WaitForSeconds(TimeBetweenEachShotInSeconds);
+            CanShoot = true;
         }
     }
 }
