@@ -123,6 +123,7 @@ GameObject:
   - component: {fileID: 421901609}
   - component: {fileID: 421901608}
   - component: {fileID: 421901607}
+  - component: {fileID: 421901610}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -188,12 +189,27 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 421901606}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.61, z: -7.25}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalPosition: {x: 0, y: 0.61, z: -8.2}
+  m_LocalScale: {x: 1, y: 1, z: 0.78673}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &421901610
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 421901606}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4cb7c3c6cd3ebaa4287deff43e8831fc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  cameraMode: 0
+  TargetTransform: {fileID: 0}
+  FollowDistance: 8
 --- !u!1 &922720505
 GameObject:
   m_ObjectHideFlags: 0
@@ -281,7 +297,7 @@ Transform:
   m_GameObject: {fileID: 922720505}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: -1.61, z: 0}
-  m_LocalScale: {x: 3.0256, y: 1, z: 0.3986}
+  m_LocalScale: {x: 39.798744, y: 1, z: 0.3986}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 4
@@ -624,7 +640,7 @@ MonoBehaviour:
   MaxHealth: 0
   CurrentArmour: 0
   MaxArmour: 0
-  MoveSpeed: 0.1
+  MoveSpeed: 0.075
   JumpHeight: 650
   CurrentSpeed: 0
   RB: {fileID: 0}
@@ -635,6 +651,7 @@ MonoBehaviour:
   DistanceFromGround: 0
   CurrentState: 0
   facing: 0
+  Momentum: -0
 --- !u!65 &1657512707
 BoxCollider:
   m_ObjectHideFlags: 0

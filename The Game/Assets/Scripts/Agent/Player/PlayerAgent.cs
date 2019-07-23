@@ -11,6 +11,9 @@ namespace Jincom.Agent
         private Player _playerData;
         private bool _doubleJumped;
 
+        [Range(-1f, 1f)]
+        public float Momentum;
+
         public Player PlayerData
         {
             get
@@ -26,17 +29,78 @@ namespace Jincom.Agent
 
         public override void AgentUpdate()
         {
+            CalculateMomentum();
             PlayerMovement();
             PlayerShoot();
             AnimationState();
         }
 
-        private void PlayerMovement()
+        private void CalculateMomentum()
         {
+            //if (IsGrounded)
+            //{
+            //    if (Input.GetAxis("Horizontal") < 0)
+            //    {
+            //        if ((Momentum > -1f) && (Momentum <= 0f))
+            //        {
+            //            Momentum -= 0.01f;
+            //        }
+            //        else if (Momentum > 0f)
+            //        {
+            //            Momentum = -0.01f;
+            //        }
+            //    }
+            //    else if (Input.GetAxis("Horizontal") > 0)
+            //    {
+            //        if ((Momentum < 1f) && (Momentum >= 0f))
+            //        {
+            //            Momentum += 0.01f;
+            //        }
+            //        else if (Momentum < 0f)
+            //        {
+            //            Momentum = 0.01f;
+            //        }
+            //    }
+            //    else
+            //    {
+            //        Momentum = 0f;
+            //    }
+            //}
 
+            if (Input.GetAxis("Horizontal") < 0)
+            {
+                if ((Momentum > -1f) && (Momentum <= 0f))
+                {
+                    Momentum -= 0.01f;
+                }
+                else if (Momentum > 0f)
+                {
+                    Momentum = -0.01f;
+                }
+            }
+            else if (Input.GetAxis("Horizontal") > 0)
+            {
+                if ((Momentum < 1f) && (Momentum >= 0f))
+                {
+                    Momentum += 0.01f;
+                }
+                else if (Momentum < 0f)
+                {
+                    Momentum = 0.01f;
+                }
+            }
+            else
+            {
+                Momentum = 0f;
+            }
+        }
+
+        private void PlayerMovement()
+        {      
             if (Input.GetAxis("Horizontal") != 0)
             {
-                Move(Input.GetAxis("Horizontal"));
+                Move((Input.GetAxis("Horizontal")) * ((Mathf.Abs(Momentum)) +1) );
+                //Move(Input.GetAxis("Horizontal"));                
             }
 
             if (IsGrounded)
@@ -48,17 +112,20 @@ namespace Jincom.Agent
             {
                 if (IsGrounded)
                 {
-                    Jump(JumpHeight);
+                    Jump((JumpHeight + (150f * (Mathf.Abs(Momentum)))));
                 }
                 else
                 {
-                    if(RB.velocity.y > 0f)
+                    if (RB != null)
                     {
-                        if (!_doubleJumped)
+                        if (RB.velocity.y > 0f)
                         {
-                            RB.velocity = new Vector3(RB.velocity.x, 0f, RB.velocity.z);
-                            Jump(JumpHeight * 0.75f);
-                            _doubleJumped = true;
+                            if (!_doubleJumped)
+                            {
+                                RB.velocity = new Vector3(RB.velocity.x, 0f, RB.velocity.z);
+                                Jump(JumpHeight * 0.75f);
+                                _doubleJumped = true;
+                            }
                         }
                     }
                 }
