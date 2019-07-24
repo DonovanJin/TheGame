@@ -3,15 +3,21 @@ using System.Collections;
 using System.Collections.Generic;
 using Jincom.PickUps;
 using UnityEngine;
+using Jincom.CameraLogic;
 
 namespace Jincom.Agent
 {
     public class PlayerAgent : AgentBase
     {        
+        public GameObject Cursor;
+
         private Player _playerData;
         private bool _doubleJumped;
         [Range(-1f, 1f)]
         private float _momentum;
+        public Vector3 MouseCoords;
+        public Vector3 MousePos;
+        public float MouseSensitivity = 0.1f;
 
         //  =   =   =   =   =   =   =   =   =   =   =   =
 
@@ -39,6 +45,7 @@ namespace Jincom.Agent
             PlayerShoot();
             AnimationState();
             Fall();
+            UpdateCrossHairTarget();
         }
 
         //  =   =   =   =   =   =   =   =   =   =   =   =
@@ -147,6 +154,7 @@ namespace Jincom.Agent
                 {
                     AgentShoot();
                     CanShoot = false;
+                    Debug.DrawLine(GameObject.FindGameObjectWithTag("Player").transform.position, Cursor.transform.position, Color.red);
                     StartCoroutine(ResetCanShoot());
                 }
             }
@@ -158,6 +166,25 @@ namespace Jincom.Agent
         {            
             yield return new WaitForSeconds(TimeBetweenEachShotInSeconds);
             CanShoot = true;
+        }
+
+        //  =   =   =   =   =   =   =   =   =   =   =   =
+
+        private void UpdateCrossHairTarget()
+        {
+            if (GameObject.FindGameObjectWithTag("MainCamera").GetComponent<CameraManager>().cameraMode == CameraManager.CameraMode.NormalGameplay)
+            {
+                if (Cursor != null)
+                {
+                    MouseCoords = Camera.main.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y, 5f));
+                    MousePos = Input.mousePosition;
+                    Cursor.transform.position = Vector2.Lerp(Cursor.transform.position, MouseCoords, MouseSensitivity);
+                }
+                else
+                {
+                    Cursor = GameObject.Find("Cursor");
+                }
+            }
         }
     }
 }

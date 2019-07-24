@@ -27,7 +27,7 @@ namespace Jincom.Agent
         protected Rigidbody RB;
         protected bool IsGrounded;
         protected float Acceleration = 0f;
-        protected bool CanShoot;
+        protected bool CanShoot = true;
 
         private float _oldHorPos = 0f;
         private float _newHorPos = 0f;
@@ -50,7 +50,7 @@ namespace Jincom.Agent
             Left,
             Right
         };
-        protected FacingDirection Facing;
+        public FacingDirection Facing;
 
         //  =   =   =   =   =   =   =   =   =   =   =   =
 

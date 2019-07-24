@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace Jincom.Camera
+namespace Jincom.CameraLogic
 {
     public class CameraManager : MonoBehaviour
     {    
