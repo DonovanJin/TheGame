@@ -10,7 +10,10 @@ namespace Jincom.Agent
         public Transform PlayerTransform;
         public float SpotDistance;
         public bool SpottedPlayer;
+
         private float _horizontalDifference;
+
+        //  =   =   =   =   =   =   =   =   =   =   =   =
 
         public void Update()
         {
@@ -19,11 +22,15 @@ namespace Jincom.Agent
             EnemyShoot();
         }
 
+        //  =   =   =   =   =   =   =   =   =   =   =   =
+
         public override void AgentUpdate()
         {
             //Move(Mathf.PingPong(Time.unscaledTime, 4f) - 2f);  
             AnimationState();
         }
+
+        //  =   =   =   =   =   =   =   =   =   =   =   =
 
         public virtual void SpotThePlayer()
         {
@@ -44,11 +51,11 @@ namespace Jincom.Agent
                         if (Vector3.Distance(transform.position, PlayerTransform.position) < SpotDistance)
                         {
                             //SpottedPlayer = true;
-                            if ((_horizontalDifference > 0) && (facing == FacingDirection.Left))
+                            if ((_horizontalDifference > 0) && (Facing == FacingDirection.Left))
                             {
                                 SpottedPlayer = true;
                             }
-                            else if ((_horizontalDifference < 0) && (facing == FacingDirection.Right))
+                            else if ((_horizontalDifference < 0) && (Facing == FacingDirection.Right))
                             {
                                 SpottedPlayer = true;
                             }
@@ -70,20 +77,28 @@ namespace Jincom.Agent
             }
         }
 
+        //  =   =   =   =   =   =   =   =   =   =   =   =
+
         public virtual void Throw()
         {
             Debug.Log("Agent Throws");
         }
+
+        //  =   =   =   =   =   =   =   =   =   =   =   =
 
         public virtual void Melee()
         {
             Debug.Log("Agent Uses Melee");
         }
 
+        //  =   =   =   =   =   =   =   =   =   =   =   =
+
         public virtual void Die()
         {
             Debug.Log("Agent Dies");
         }
+
+        //  =   =   =   =   =   =   =   =   =   =   =   =
 
         private void EnemyShoot()
         {
@@ -97,6 +112,8 @@ namespace Jincom.Agent
                 }
             }
         }
+
+        //  =   =   =   =   =   =   =   =   =   =   =   =
 
         IEnumerator ResetCanShoot()
         {

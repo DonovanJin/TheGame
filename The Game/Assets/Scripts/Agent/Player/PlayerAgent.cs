@@ -7,12 +7,13 @@ using UnityEngine;
 namespace Jincom.Agent
 {
     public class PlayerAgent : AgentBase
-    {
+    {        
         private Player _playerData;
         private bool _doubleJumped;
-
         [Range(-1f, 1f)]
-        public float Momentum;
+        private float _momentum;
+
+        //  =   =   =   =   =   =   =   =   =   =   =   =
 
         public Player PlayerData
         {
@@ -22,10 +23,14 @@ namespace Jincom.Agent
             }
         }
 
+        //  =   =   =   =   =   =   =   =   =   =   =   =
+
         public void Update()
         {
             AgentUpdate();
         }
+
+        //  =   =   =   =   =   =   =   =   =   =   =   =
 
         public override void AgentUpdate()
         {
@@ -35,72 +40,45 @@ namespace Jincom.Agent
             AnimationState();
         }
 
+        //  =   =   =   =   =   =   =   =   =   =   =   =
+
         private void CalculateMomentum()
         {
-            //if (IsGrounded)
-            //{
-            //    if (Input.GetAxis("Horizontal") < 0)
-            //    {
-            //        if ((Momentum > -1f) && (Momentum <= 0f))
-            //        {
-            //            Momentum -= 0.01f;
-            //        }
-            //        else if (Momentum > 0f)
-            //        {
-            //            Momentum = -0.01f;
-            //        }
-            //    }
-            //    else if (Input.GetAxis("Horizontal") > 0)
-            //    {
-            //        if ((Momentum < 1f) && (Momentum >= 0f))
-            //        {
-            //            Momentum += 0.01f;
-            //        }
-            //        else if (Momentum < 0f)
-            //        {
-            //            Momentum = 0.01f;
-            //        }
-            //    }
-            //    else
-            //    {
-            //        Momentum = 0f;
-            //    }
-            //}
-
             if (Input.GetAxis("Horizontal") < 0)
             {
-                if ((Momentum > -1f) && (Momentum <= 0f))
+                if ((_momentum > -1f) && (_momentum <= 0f))
                 {
-                    Momentum -= 0.01f;
+                    _momentum -= 0.01f;
                 }
-                else if (Momentum > 0f)
+                else if (_momentum > 0f)
                 {
-                    Momentum = -0.01f;
+                    _momentum = -0.01f;
                 }
             }
             else if (Input.GetAxis("Horizontal") > 0)
             {
-                if ((Momentum < 1f) && (Momentum >= 0f))
+                if ((_momentum < 1f) && (_momentum >= 0f))
                 {
-                    Momentum += 0.01f;
+                    _momentum += 0.01f;
                 }
-                else if (Momentum < 0f)
+                else if (_momentum < 0f)
                 {
-                    Momentum = 0.01f;
+                    _momentum = 0.01f;
                 }
             }
             else
             {
-                Momentum = 0f;
+                _momentum = 0f;
             }
         }
+
+        //  =   =   =   =   =   =   =   =   =   =   =   =
 
         private void PlayerMovement()
         {      
             if (Input.GetAxis("Horizontal") != 0)
             {
-                Move((Input.GetAxis("Horizontal")) * ((Mathf.Abs(Momentum)) +1) );
-                //Move(Input.GetAxis("Horizontal"));                
+                Move((Input.GetAxis("Horizontal")) * ((Mathf.Abs(_momentum)) +1) );               
             }
 
             if (IsGrounded)
@@ -112,7 +90,7 @@ namespace Jincom.Agent
             {
                 if (IsGrounded)
                 {
-                    Jump((JumpHeight + (150f * (Mathf.Abs(Momentum)))));
+                    Jump((JumpHeight + (150f * (Mathf.Abs(_momentum)))));
                 }
                 else
                 {
@@ -135,24 +113,30 @@ namespace Jincom.Agent
             if (Acceleration < 0f)
             {
                 //Debug.Log("Left?");
-                facing = FacingDirection.Left;
+                Facing = FacingDirection.Left;
             }
             else if (Acceleration > 0f)
             {
                 //Debug.Log("Right?");
-                facing = FacingDirection.Right;
+                Facing = FacingDirection.Right;
             }
         }
+
+        //  =   =   =   =   =   =   =   =   =   =   =   =
 
         internal void Init(Player playerData)
         {
             _playerData = playerData;
-        }        
+        }
+
+        //  =   =   =   =   =   =   =   =   =   =   =   =
 
         private void Climb()
         {
             Debug.Log("Agent Climbs");
         }
+
+        //  =   =   =   =   =   =   =   =   =   =   =   =
 
         private void PlayerShoot()
         {
@@ -166,6 +150,8 @@ namespace Jincom.Agent
                 }
             }
         }
+
+        //  =   =   =   =   =   =   =   =   =   =   =   =
 
         IEnumerator ResetCanShoot()
         {            

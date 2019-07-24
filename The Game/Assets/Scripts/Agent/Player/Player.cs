@@ -22,7 +22,6 @@ namespace Jincom.Agent
             CurrentHealth = MaxHealth;
             CurrentArmour = MaxArmour;
             Suits.Add(GameConstants.Elements.Normal);
-
         }
 
         public void AddHealth(int healthtoCollect)

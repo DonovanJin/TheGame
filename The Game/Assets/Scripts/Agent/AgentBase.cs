@@ -14,38 +14,43 @@ namespace Jincom.Agent
         public int MaxArmour;        
         public float MoveSpeed;
         public float JumpHeight;
-        public float CurrentSpeed;
-        public RaycastHit RayHit;               
-        public Rigidbody RB;
-        public bool IsGrounded;
-        public float Acceleration = 0f;
-        public bool CanShoot;
+        public float CurrentSpeed;        
         public float TimeBetweenEachShotInSeconds;
+        public float TimeFalling;
+
+        protected RaycastHit RayHit;
+        protected Rigidbody RB;
+        protected bool IsGrounded;
+        protected float Acceleration = 0f;
+        protected bool CanShoot;
+        protected float DistanceFromGround;
 
         private float _oldHorPos = 0f;
         private float _newHorPos = 0f;                
-        private float _initialHeight;
-
-        public float DistanceFromGround;
+        private float _initialHeight;        
 
         public enum AgentState
         {
             Walk,
             Idle,
-            Die,
+            Dead,
             Fall,
             Jump
         };
-        public AgentState CurrentState;
+        public AgentState _currentState;
 
         public enum FacingDirection
         {
             Left,
             Right
         };
-        public FacingDirection facing;
+        protected FacingDirection Facing;
+
+        //  =   =   =   =   =   =   =   =   =   =   =   =
 
         public abstract void AgentUpdate();
+
+        //  =   =   =   =   =   =   =   =   =   =   =   =
 
         private void Start()
         {
@@ -61,44 +66,74 @@ namespace Jincom.Agent
             _newHorPos = transform.position.x;
         }
 
+        //  =   =   =   =   =   =   =   =   =   =   =   =
+
+        /// <summary>
+        /// Move agents allong the world x axis.
+        /// </summary>
+        /// <param name="direction"> Pass through a float value ranging from -1 to 1 </param>
         public virtual void Move(float direction)
         {
-            transform.Translate((Vector3.right * direction) * MoveSpeed);
-            CurrentSpeed = direction;
+            if (_currentState != AgentState.Dead)
+            {
+                transform.Translate((Vector3.right * direction) * MoveSpeed);
+                CurrentSpeed = direction;
+            }
         }
+
+        //  =   =   =   =   =   =   =   =   =   =   =   =
 
         public virtual void Fall()
         {
-            Debug.Log("Agent Falls");
+            if (_currentState == AgentState.Fall)
+            {
+
+            }
         }
 
+        //  =   =   =   =   =   =   =   =   =   =   =   =
+
+        /// <summary>
+        /// Propell agent into the air.
+        /// </summary>
+        /// <param name="NewJumpHeight"> Pass a float value </param>
         public virtual void Jump(float NewJumpHeight)
         {
-            if (RB != null)
+            if (_currentState != AgentState.Dead)
             {
-                RB.AddForce(new Vector3(0, NewJumpHeight, 0), ForceMode.Impulse);
+                if (RB != null)
+                {
+                    RB.AddForce(new Vector3(0, NewJumpHeight, 0), ForceMode.Impulse);
+                }
+                else
+                {
+                    Debug.Log("Agent requires a Rigidbody to jump");
+                }
             }
-            else
-            {
-                Debug.Log("Agent requires a Rigidbody to jump");
-            }            
         }
+
+        //  =   =   =   =   =   =   =   =   =   =   =   =
 
         public virtual void Spawn()
         {
             Debug.Log("Agent Spawns");
         }
 
+        //  =   =   =   =   =   =   =   =   =   =   =   =
+
         public virtual void Pause()
         {
             Debug.Log("Agent Pauses Game");
         }
 
+        //  =   =   =   =   =   =   =   =   =   =   =   =
+
         public virtual void Resume()
         {
             Debug.Log("Agent Resumes Game");
         }
-      
+
+        //  =   =   =   =   =   =   =   =   =   =   =   =
 
         public virtual void AnimationState()
         {
@@ -125,38 +160,48 @@ namespace Jincom.Agent
 
             //Main Animation States:
 
-            if (IsGrounded)
+            //Still Alive
+            if (CurrentHealth > 0f)
             {
-                //Idle
-                if (Acceleration == 0)
+                if (IsGrounded)
                 {
-                    CurrentState = AgentState.Idle;
+                    //Idle
+                    if (Acceleration == 0)
+                    {
+                        _currentState = AgentState.Idle;
+                    }
+                    //Walking/Runninng
+                    else
+                    {
+                        _currentState = AgentState.Walk;
+                    }
                 }
-                //Walking/Runninng
-                else 
+
+                else
                 {
-                    CurrentState = AgentState.Walk;
+                    if (RB != null)
+                    {
+                        //Falling
+                        if (RB.velocity.y < 0f)
+                        {
+                            _currentState = AgentState.Fall;
+                        }
+                        //Jumping
+                        else if (RB.velocity.y > 0f)
+                        {
+                            _currentState = AgentState.Jump;
+                        }
+                    }
                 }
             }
-
             else
             {
-                if (RB != null)
-                {
-                    //Falling
-                    if (RB.velocity.y < 0f)
-                    {
-                        CurrentState = AgentState.Fall;
-                    }
-                    //Jumping
-                    else if (RB.velocity.y > 0f)
-                    {
-                        CurrentState = AgentState.Jump;
-                    }
-                }
-            }             
-        } 
-        
+                _currentState = AgentState.Dead;
+            }
+        }
+
+        //  =   =   =   =   =   =   =   =   =   =   =   =
+
         public virtual void AgentShoot()
         {
             Debug.Log(name + " is shooting. Pew pew!");

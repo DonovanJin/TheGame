@@ -26,6 +26,8 @@ namespace Jincom.Agent
             CurrentPlayerAgent.Init(_playerData);
         }
 
+        //  =   =   =   =   =   =   =   =   =   =   =   =
+
         internal void UpdateManager()
         {
             

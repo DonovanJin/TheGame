@@ -317,7 +317,7 @@ GameObject:
   - component: {fileID: 923913393}
   - component: {fileID: 923913398}
   m_Layer: 0
-  m_Name: Enemy_Demo
+  m_Name: Enemy_Demo (1)
   m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -336,21 +336,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   CurrentElement: 0
-  CurrentHealth: 0
-  MaxHealth: 0
+  CurrentHealth: 50
+  MaxHealth: 50
   CurrentArmour: 0
   MaxArmour: 0
   MoveSpeed: 0.02
   JumpHeight: 0
   CurrentSpeed: 0
-  RB: {fileID: 0}
-  IsGrounded: 0
-  Acceleration: 0
-  CanShoot: 1
   TimeBetweenEachShotInSeconds: 0.5
-  DistanceFromGround: 0
-  CurrentState: 0
-  facing: 1
+  _currentState: 0
   PlayerTransform: {fileID: 0}
   SpotDistance: 20
   SpottedPlayer: 0
@@ -636,22 +630,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   CurrentElement: 0
-  CurrentHealth: 0
-  MaxHealth: 0
+  CurrentHealth: 100
+  MaxHealth: 100
   CurrentArmour: 0
   MaxArmour: 0
   MoveSpeed: 0.075
   JumpHeight: 650
   CurrentSpeed: 0
-  RB: {fileID: 0}
-  IsGrounded: 0
-  Acceleration: 0
-  CanShoot: 1
   TimeBetweenEachShotInSeconds: 0.25
-  DistanceFromGround: 0
-  CurrentState: 0
-  facing: 0
-  Momentum: -0
+  _currentState: 0
 --- !u!65 &1657512707
 BoxCollider:
   m_ObjectHideFlags: 0
