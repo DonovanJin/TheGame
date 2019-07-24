@@ -38,6 +38,7 @@ namespace Jincom.Agent
             PlayerMovement();
             PlayerShoot();
             AnimationState();
+            Fall();
         }
 
         //  =   =   =   =   =   =   =   =   =   =   =   =

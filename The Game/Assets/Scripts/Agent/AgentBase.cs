@@ -17,16 +17,22 @@ namespace Jincom.Agent
         public float CurrentSpeed;        
         public float TimeBetweenEachShotInSeconds;
         public float TimeFalling;
+        public bool HitFloor;
+
+        //Temp
+        public float CaptureTime;
+        //
 
         protected RaycastHit RayHit;
         protected Rigidbody RB;
         protected bool IsGrounded;
         protected float Acceleration = 0f;
         protected bool CanShoot;
-        protected float DistanceFromGround;
 
         private float _oldHorPos = 0f;
-        private float _newHorPos = 0f;                
+        private float _newHorPos = 0f;
+        private float _oldVertPos = 0f;
+        private float _newVertPos = 0f;
         private float _initialHeight;        
 
         public enum AgentState
@@ -64,6 +70,9 @@ namespace Jincom.Agent
 
             _oldHorPos = transform.position.x;
             _newHorPos = transform.position.x;
+
+            _oldVertPos = transform.position.y;
+            _newVertPos = transform.position.y;
         }
 
         //  =   =   =   =   =   =   =   =   =   =   =   =
@@ -74,7 +83,7 @@ namespace Jincom.Agent
         /// <param name="direction"> Pass through a float value ranging from -1 to 1 </param>
         public virtual void Move(float direction)
         {
-            if (_currentState != AgentState.Dead)
+            if (CurrentHealth > 0f)
             {
                 transform.Translate((Vector3.right * direction) * MoveSpeed);
                 CurrentSpeed = direction;
@@ -85,10 +94,35 @@ namespace Jincom.Agent
 
         public virtual void Fall()
         {
-            if (_currentState == AgentState.Fall)
-            {
+            _newVertPos = transform.position.y;
 
+            if (_oldVertPos > _newVertPos)
+            {    
+                if (!IsGrounded)
+                {
+                    TimeFalling += Time.deltaTime;
+                    HitFloor = false;
+                }                
             }
+            else if (_oldVertPos == _newVertPos)
+            {
+                if (IsGrounded)
+                {
+                    if (!HitFloor)
+                    {
+                        CaptureTime = TimeFalling;
+                        TimeFalling = 0f;
+                        HitFloor = true;
+
+                        if (CaptureTime > 1f)
+                        {
+                            Debug.Log("Fall Damage modifier: " + (CaptureTime - 1f));
+                        }
+                    }
+                }
+            }
+
+            _oldVertPos = _newVertPos;
         }
 
         //  =   =   =   =   =   =   =   =   =   =   =   =
@@ -99,7 +133,7 @@ namespace Jincom.Agent
         /// <param name="NewJumpHeight"> Pass a float value </param>
         public virtual void Jump(float NewJumpHeight)
         {
-            if (_currentState != AgentState.Dead)
+            if (CurrentHealth > 0f)
             {
                 if (RB != null)
                 {
@@ -137,6 +171,7 @@ namespace Jincom.Agent
 
         public virtual void AnimationState()
         {
+            // Calculates if agent is currently travelling left/right or standing still
             _newHorPos = transform.position.x;
 
             if (_oldHorPos != _newHorPos)
@@ -148,19 +183,23 @@ namespace Jincom.Agent
             {
                 Acceleration = 0f;
             }
+            //            
+             
+            // Visually show if there is no floor under an agent
+            if (Physics.Raycast(transform.position, transform.TransformDirection(Vector3.down), out RayHit, Mathf.Infinity))
+            {
+                Debug.DrawRay(transform.position, transform.TransformDirection(Vector3.down) * RayHit.distance, Color.green);
+            }
+            else
+            {
+                Debug.DrawRay(transform.position, transform.TransformDirection(Vector3.down) * Mathf.Infinity, Color.red);
+            }
+            //
 
             IsGrounded = Physics.Raycast(transform.position, -Vector3.up, _initialHeight + 0.1f);
 
-            
-                if (Physics.Raycast(transform.position, transform.TransformDirection(Vector3.down), out RayHit, Mathf.Infinity))
-                {
-                    Debug.DrawRay(transform.position, transform.TransformDirection(Vector3.down) * RayHit.distance, Color.green);
-                    DistanceFromGround = (RayHit.distance - _initialHeight);
-                }
-
-            //Main Animation States:
-
-            //Still Alive
+            // Main Animation States:
+            // Still Alive
             if (CurrentHealth > 0f)
             {
                 if (IsGrounded)
@@ -198,6 +237,7 @@ namespace Jincom.Agent
             {
                 _currentState = AgentState.Dead;
             }
+            //
         }
 
         //  =   =   =   =   =   =   =   =   =   =   =   =
