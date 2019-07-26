@@ -347,6 +347,7 @@ MonoBehaviour:
   TimeFalling: 0
   HitFloor: 0
   CaptureTime: 0
+  _initialWidth: 0
   _currentState: 0
   Facing: 1
   PlayerTransform: {fileID: 0}
@@ -918,12 +919,18 @@ MonoBehaviour:
   TimeFalling: 0
   HitFloor: 0
   CaptureTime: 0
+  _initialWidth: 0
   _currentState: 0
   Facing: 0
+  CurrentWeapon: {fileID: 11400000, guid: cc6e4e89a57ca33438c1ce179169d1ff, type: 2}
+  UnlockedWeapons:
+  - {fileID: 11400000, guid: cc6e4e89a57ca33438c1ce179169d1ff, type: 2}
   Cursor: {fileID: 0}
   MouseCoords: {x: 0, y: 0, z: 0}
   MousePos: {x: 0, y: 0, z: 0}
   MouseSensitivity: 1
+  HorDistToWallRight: 999
+  HorDistToWallLeft: 999
 --- !u!65 &1657512707
 BoxCollider:
   m_ObjectHideFlags: 0

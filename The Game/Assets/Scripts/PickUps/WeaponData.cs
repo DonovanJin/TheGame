@@ -12,7 +12,8 @@ namespace Jincom.PickUps
         public float Range = 0f;
         public int Damage = 0;
         public GameConstants.Elements Element = GameConstants.Elements.Normal;
-        public int MaxiumumCapacity = 0;
+        public int CurrentCapacity = 0;
+        public int MaxiumumCapacity = 0;        
         public Sprite Icon;
     }
 }

@@ -8,16 +8,20 @@ using Jincom.CameraLogic;
 namespace Jincom.Agent
 {
     public class PlayerAgent : AgentBase
-    {        
+    {
+        public WeaponData CurrentWeapon;
+        public List<WeaponData> UnlockedWeapons;
         public GameObject Cursor;
+        public Vector3 MouseCoords;
+        public Vector3 MousePos;
+        public float MouseSensitivity = 0.1f;
+        public float HorDistToWallRight = 999f;
+        public float HorDistToWallLeft = 999f;
 
         private Player _playerData;
         private bool _doubleJumped;
         [Range(-1f, 1f)]
-        private float _momentum;
-        public Vector3 MouseCoords;
-        public Vector3 MousePos;
-        public float MouseSensitivity = 0.1f;
+        private float _momentum;        
 
         //  =   =   =   =   =   =   =   =   =   =   =   =
 
@@ -52,6 +56,26 @@ namespace Jincom.Agent
 
         private void CalculateMomentum()
         {
+            if (Physics.Raycast(transform.position, transform.TransformDirection(Vector3.right), out RayHit, Mathf.Infinity))
+            {
+                Debug.DrawRay(transform.position, transform.TransformDirection(Vector3.right) * RayHit.distance, Color.green);
+                HorDistToWallRight = RayHit.distance;
+            }
+            else
+            {
+                HorDistToWallRight = 999f;
+            }
+
+            if (Physics.Raycast(transform.position, transform.TransformDirection(Vector3.left), out RayHit, Mathf.Infinity))
+            {
+                Debug.DrawRay(transform.position, transform.TransformDirection(Vector3.left) * RayHit.distance, Color.green);
+                HorDistToWallLeft = RayHit.distance;
+            }
+            else
+            {
+                HorDistToWallLeft = 999f;
+            }
+
             if (Input.GetAxis("Horizontal") < 0)
             {
                 if ((_momentum > -1f) && (_momentum <= 0f))
@@ -83,10 +107,20 @@ namespace Jincom.Agent
         //  =   =   =   =   =   =   =   =   =   =   =   =
 
         private void PlayerMovement()
-        {      
-            if (Input.GetAxis("Horizontal") != 0)
+        {
+            if (Input.GetAxis("Horizontal") > 0)
             {
-                Move((Input.GetAxis("Horizontal")) * ((Mathf.Abs(_momentum)) +1) );               
+                if (HorDistToWallRight > _initialWidth)
+                {
+                    Move((Input.GetAxis("Horizontal")) * ((Mathf.Abs(_momentum)) + 1));
+                }
+            }
+            else if (Input.GetAxis("Horizontal") < 0)
+            {
+                if (HorDistToWallLeft > _initialWidth)
+                {
+                    Move((Input.GetAxis("Horizontal")) * ((Mathf.Abs(_momentum)) + 1));
+                }
             }
 
             if (IsGrounded)
@@ -152,10 +186,16 @@ namespace Jincom.Agent
             {
                 if (CanShoot)
                 {
-                    AgentShoot();
-                    CanShoot = false;
-                    Debug.DrawLine(GameObject.FindGameObjectWithTag("Player").transform.position, Cursor.transform.position, Color.red);
-                    StartCoroutine(ResetCanShoot());
+                    if (CurrentWeapon.CurrentCapacity > 0)
+                    {
+                        CurrentWeapon.CurrentCapacity--;
+                        print(CurrentWeapon.CurrentCapacity);
+
+                        AgentShoot();
+                        CanShoot = false;
+                        Debug.DrawLine(GameObject.FindGameObjectWithTag("Player").transform.position, Cursor.transform.position, Color.red);
+                        StartCoroutine(ResetCanShoot());
+                    }
                 }
             }
         }
@@ -184,6 +224,16 @@ namespace Jincom.Agent
                 {
                     Cursor = GameObject.Find("Cursor");
                 }
+            }
+        }
+
+        //  =   =   =   =   =   =   =   =   =   =   =   =
+
+        private void AddWeapon(WeaponData NewWeapon)
+        {
+            if (!UnlockedWeapons.Contains(NewWeapon))
+            {
+                UnlockedWeapons.Add(NewWeapon);
             }
         }
     }

@@ -33,7 +33,8 @@ namespace Jincom.Agent
         private float _newHorPos = 0f;
         private float _oldVertPos = 0f;
         private float _newVertPos = 0f;
-        private float _initialHeight;        
+        private float _initialHeight;
+        public float _initialWidth;
 
         public enum AgentState
         {
@@ -61,6 +62,8 @@ namespace Jincom.Agent
         private void Start()
         {
             _initialHeight = GetComponent<Collider>().bounds.extents.y;
+            _initialWidth = GetComponent<Collider>().bounds.extents.x;
+
             RB = this.GetComponent<Rigidbody>();
 
             if (RB != null)
