@@ -15,9 +15,9 @@ namespace Jincom.Agent
         public Vector3 MouseCoords;
         public Vector3 MousePos;
         public float MouseSensitivity = 0.1f;
-        public float HorDistToWallRight = 999f;
-        public float HorDistToWallLeft = 999f;
 
+        private float HorDistToWallRight = 999f;
+        private float HorDistToWallLeft = 999f;
         private Player _playerData;
         private bool _doubleJumped;
         [Range(-1f, 1f)]
@@ -189,7 +189,7 @@ namespace Jincom.Agent
                     if (CurrentWeapon.CurrentCapacity > 0)
                     {
                         CurrentWeapon.CurrentCapacity--;
-                        print(CurrentWeapon.CurrentCapacity);
+                        //print(CurrentWeapon.CurrentCapacity);
 
                         AgentShoot();
                         CanShoot = false;
@@ -218,7 +218,8 @@ namespace Jincom.Agent
                 {
                     MouseCoords = Camera.main.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y, 5f));
                     MousePos = Input.mousePosition;
-                    Cursor.transform.position = Vector2.Lerp(Cursor.transform.position, MouseCoords, MouseSensitivity);
+                    //Cursor.transform.position = Vector2.Lerp(Cursor.transform.position, MouseCoords, MouseSensitivity);
+                    Cursor.transform.position = new Vector3(MouseCoords.x, MouseCoords.y, 0f);
                 }
                 else
                 {

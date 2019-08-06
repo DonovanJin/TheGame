@@ -18,6 +18,7 @@ namespace Jincom.Agent
         public float TimeBetweenEachShotInSeconds;
         public float TimeFalling;
         public bool HitFloor;
+        public bool CanShoot = true;
 
         //Temp
         public float CaptureTime;
@@ -27,14 +28,13 @@ namespace Jincom.Agent
         protected Rigidbody RB;
         protected bool IsGrounded;
         protected float Acceleration = 0f;
-        protected bool CanShoot = true;
+        protected float _initialWidth;
 
         private float _oldHorPos = 0f;
         private float _newHorPos = 0f;
         private float _oldVertPos = 0f;
         private float _newVertPos = 0f;
-        private float _initialHeight;
-        public float _initialWidth;
+        private float _initialHeight;        
 
         public enum AgentState
         {
