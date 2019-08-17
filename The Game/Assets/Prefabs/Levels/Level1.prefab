@@ -235,7 +235,6 @@ GameObject:
   - component: {fileID: 3286977268902383536}
   - component: {fileID: 968684963150005210}
   - component: {fileID: 4003537004541831871}
-  - component: {fileID: 3315192202450527479}
   m_Layer: 0
   m_Name: Cylinder
   m_TagString: Untagged
@@ -302,20 +301,6 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
---- !u!136 &3315192202450527479
-CapsuleCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6853472121905106206}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  m_Radius: 0.5000001
-  m_Height: 2
-  m_Direction: 1
-  m_Center: {x: 0.000000059604645, y: 0, z: -0.00000008940697}
 --- !u!1 &7571552074693129783
 GameObject:
   m_ObjectHideFlags: 0
@@ -570,6 +555,12 @@ PrefabInstance:
       propertyPath: m_Name
       value: PickupSpawner3
       objectReference: {fileID: 0}
+    - target: {fileID: 6483428988236444207, guid: 78b09369b64b519409fc1d3afe98db0b,
+        type: 3}
+      propertyPath: PickUpPrefab
+      value: 
+      objectReference: {fileID: 104555997, guid: 55ed103fc01dbb94298f7ac2cbde370d,
+        type: 3}
     - target: {fileID: 6483428988236444206, guid: 78b09369b64b519409fc1d3afe98db0b,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -625,12 +616,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 6483428988236444207, guid: 78b09369b64b519409fc1d3afe98db0b,
-        type: 3}
-      propertyPath: PickUpPrefab
-      value: 
-      objectReference: {fileID: 104555997, guid: 55ed103fc01dbb94298f7ac2cbde370d,
-        type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 78b09369b64b519409fc1d3afe98db0b, type: 3}
 --- !u!4 &6393250782359849667 stripped
@@ -663,6 +648,12 @@ PrefabInstance:
       propertyPath: m_Name
       value: PickupSpawner2
       objectReference: {fileID: 0}
+    - target: {fileID: 6483428988236444207, guid: 78b09369b64b519409fc1d3afe98db0b,
+        type: 3}
+      propertyPath: PickUpPrefab
+      value: 
+      objectReference: {fileID: 2193184858278067715, guid: f77fe6c7304847d4894cf7039f5781df,
+        type: 3}
     - target: {fileID: 6483428988236444206, guid: 78b09369b64b519409fc1d3afe98db0b,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -718,12 +709,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 6483428988236444207, guid: 78b09369b64b519409fc1d3afe98db0b,
-        type: 3}
-      propertyPath: PickUpPrefab
-      value: 
-      objectReference: {fileID: 2193184858278067715, guid: f77fe6c7304847d4894cf7039f5781df,
-        type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 78b09369b64b519409fc1d3afe98db0b, type: 3}
 --- !u!4 &5609225397808673529 stripped
@@ -756,6 +741,12 @@ PrefabInstance:
       propertyPath: m_Name
       value: PickupSpawner1
       objectReference: {fileID: 0}
+    - target: {fileID: 6483428988236444207, guid: 78b09369b64b519409fc1d3afe98db0b,
+        type: 3}
+      propertyPath: PickUpPrefab
+      value: 
+      objectReference: {fileID: 7737662946912409550, guid: 10bd3560bd646db48a125fc9d38921fb,
+        type: 3}
     - target: {fileID: 6483428988236444206, guid: 78b09369b64b519409fc1d3afe98db0b,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -811,12 +802,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 6483428988236444207, guid: 78b09369b64b519409fc1d3afe98db0b,
-        type: 3}
-      propertyPath: PickUpPrefab
-      value: 
-      objectReference: {fileID: 7737662946912409550, guid: 10bd3560bd646db48a125fc9d38921fb,
-        type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 78b09369b64b519409fc1d3afe98db0b, type: 3}
 --- !u!4 &5162125853693706894 stripped
@@ -849,6 +834,12 @@ PrefabInstance:
       propertyPath: m_Name
       value: PickupSpawner4
       objectReference: {fileID: 0}
+    - target: {fileID: 6483428988236444207, guid: 78b09369b64b519409fc1d3afe98db0b,
+        type: 3}
+      propertyPath: PickUpPrefab
+      value: 
+      objectReference: {fileID: 6679239696458320125, guid: 01056b5f3a743aa429283622cfb93642,
+        type: 3}
     - target: {fileID: 6483428988236444206, guid: 78b09369b64b519409fc1d3afe98db0b,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -904,12 +895,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 6483428988236444207, guid: 78b09369b64b519409fc1d3afe98db0b,
-        type: 3}
-      propertyPath: PickUpPrefab
-      value: 
-      objectReference: {fileID: 6679239696458320125, guid: 01056b5f3a743aa429283622cfb93642,
-        type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 78b09369b64b519409fc1d3afe98db0b, type: 3}
 --- !u!114 &2622619889156378116 stripped

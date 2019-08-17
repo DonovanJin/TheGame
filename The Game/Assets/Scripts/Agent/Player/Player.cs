@@ -14,7 +14,7 @@ namespace Jincom.Agent
         public int MaxArmour = 100;
         public GameConstants.Elements CurrentElement;
         public WeaponData CurrentWeapon;
-        public Dictionary<WeaponData, int> Weapons = new Dictionary<WeaponData, int>();
+        public Dictionary<WeaponData, int> Ammo = new Dictionary<WeaponData, int>();
         public List<GameConstants.Elements> Suits = new List<GameConstants.Elements>();
 
         public Player()
@@ -35,18 +35,39 @@ namespace Jincom.Agent
 
         public void AddAmmo(WeaponData weapon, int ammotoCollect)
         {
-            int maxToAdd = weapon.MaxiumumCapacity - Weapons[weapon];
+            int maxToAdd = weapon.MaxiumumCapacity - Ammo[weapon];
 
             int collectAmount = Mathf.Clamp(ammotoCollect, 0, maxToAdd);
 
-            Weapons[weapon] += collectAmount;
+            Ammo[weapon] += collectAmount;
 
-            Debug.Log(Weapons[weapon]);
+            Debug.Log(Ammo[weapon]);
         }
 
         public void AddWeapon(WeaponData weapon)
         {
-            Weapons.Add(weapon, weapon.MaxiumumCapacity);
+            Ammo.Add(weapon, weapon.MaxiumumCapacity);
         }
+
+        public bool CurrentGunHasAmmo()
+        {
+            if (HasCurrentWeapon())
+            {
+                return Ammo[CurrentWeapon] > 0;
+            }
+
+            return false;
+        }
+
+        public void FireCurrentWeapon()
+        {
+            Ammo[CurrentWeapon]--;
+        }
+
+        private bool HasCurrentWeapon()
+        {
+            return CurrentWeapon != null;
+        }
+
     }
 }

@@ -30,7 +30,7 @@ namespace Jincom.Agent
 
         internal void UpdateManager()
         {
-            
+            CurrentPlayerAgent.AgentUpdate();
         }
     }
 }

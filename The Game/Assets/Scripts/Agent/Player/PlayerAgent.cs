@@ -1,4 +1,5 @@
-﻿using System;
+﻿//#define TESTING
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using Jincom.PickUps;
@@ -9,19 +10,17 @@ namespace Jincom.Agent
 {
     public class PlayerAgent : AgentBase
     {
-        public WeaponData CurrentWeapon;
-        public List<WeaponData> UnlockedWeapons;
-        public GameObject Cursor;
         public Vector3 MouseCoords;
         public Vector3 MousePos;
-        public float MouseSensitivity = 0.1f;
-
+        //public float MouseSensitivity = 0.1f;
+        public bool MouseVisible = true;
+        //public bool RegularJump = false;
         private float HorDistToWallRight = 999f;
         private float HorDistToWallLeft = 999f;
         private Player _playerData;
         private bool _doubleJumped;
         [Range(-1f, 1f)]
-        private float _momentum;        
+        private float _momentum;
 
         //  =   =   =   =   =   =   =   =   =   =   =   =
 
@@ -34,11 +33,14 @@ namespace Jincom.Agent
         }
 
         //  =   =   =   =   =   =   =   =   =   =   =   =
+#if TESTING
 
         public void Update()
         {
             AgentUpdate();
         }
+#endif
+
 
         //  =   =   =   =   =   =   =   =   =   =   =   =
 
@@ -49,7 +51,6 @@ namespace Jincom.Agent
             PlayerShoot();
             AnimationState();
             Fall();
-            UpdateCrossHairTarget();
         }
 
         //  =   =   =   =   =   =   =   =   =   =   =   =
@@ -128,11 +129,26 @@ namespace Jincom.Agent
                 _doubleJumped = false;
             }
 
+            //if (!MovingUpOrDown)
+            //{
+            //    RegularJump = false;
+            //}
+
             if (Input.GetButtonDown("Jump"))
             {
+
+                //if ((IsGrounded) || (!MovingUpOrDown))
+                //{
+                //    if (!RegularJump)
+                //    {                        
+                //        Jump((JumpHeight + (150f * (Mathf.Abs(_momentum)))));
+                //        RegularJump = true;
+                //    }
+                //}
                 if (IsGrounded)
                 {
                     Jump((JumpHeight + (150f * (Mathf.Abs(_momentum)))));
+                    //RegularJump = true;
                 }
                 else
                 {
@@ -152,12 +168,12 @@ namespace Jincom.Agent
             }
 
             //Facing direction
-            if (Acceleration < 0f)
+            if (HorAcceleration < 0f)
             {
                 //Debug.Log("Left?");
                 Facing = FacingDirection.Left;
             }
-            else if (Acceleration > 0f)
+            else if (HorAcceleration > 0f)
             {
                 //Debug.Log("Right?");
                 Facing = FacingDirection.Right;
@@ -184,58 +200,43 @@ namespace Jincom.Agent
         {
             if (Input.GetButton("Fire1"))
             {
-                if (CanShoot)
+                if (CanPlayerShoot(_playerData.CurrentWeapon))
                 {
-                    if (CurrentWeapon.CurrentCapacity > 0)
-                    {
-                        CurrentWeapon.CurrentCapacity--;
-                        //print(CurrentWeapon.CurrentCapacity);
+                    _playerData.FireCurrentWeapon();
+                    //print(CurrentWeapon.CurrentCapacity);
 
-                        AgentShoot();
-                        CanShoot = false;
-                        Debug.DrawLine(GameObject.FindGameObjectWithTag("Player").transform.position, Cursor.transform.position, Color.red);
-                        StartCoroutine(ResetCanShoot());
-                    }
+                    AgentShoot();
+
+                    //Spawn bullert
+                    Debug.DrawLine(transform.position, Camera.main.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y, 5f)), Color.red);
+
                 }
             }
         }
 
         //  =   =   =   =   =   =   =   =   =   =   =   =
+        private float _timeLastShot = 0;
 
-        IEnumerator ResetCanShoot()
-        {            
-            yield return new WaitForSeconds(TimeBetweenEachShotInSeconds);
-            CanShoot = true;
-        }
-
-        //  =   =   =   =   =   =   =   =   =   =   =   =
-
-        private void UpdateCrossHairTarget()
+        private bool CanPlayerShoot(WeaponData weaponData)
         {
-            if (GameObject.FindGameObjectWithTag("MainCamera").GetComponent<CameraManager>().cameraMode == CameraManager.CameraMode.NormalGameplay)
+            if (!_playerData.CurrentGunHasAmmo())
             {
-                if (Cursor != null)
-                {
-                    MouseCoords = Camera.main.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y, 5f));
-                    MousePos = Input.mousePosition;
-                    //Cursor.transform.position = Vector2.Lerp(Cursor.transform.position, MouseCoords, MouseSensitivity);
-                    Cursor.transform.position = new Vector3(MouseCoords.x, MouseCoords.y, 0f);
-                }
-                else
-                {
-                    Cursor = GameObject.Find("Cursor");
-                }
+                return false;
             }
+
+            if (Time.unscaledTime > (_timeLastShot + weaponData.WaitTimeBetweenShots()))
+            {
+                _timeLastShot = Time.unscaledTime;
+                return true;
+            }
+
+            return false;
         }
 
         //  =   =   =   =   =   =   =   =   =   =   =   =
 
-        private void AddWeapon(WeaponData NewWeapon)
-        {
-            if (!UnlockedWeapons.Contains(NewWeapon))
-            {
-                UnlockedWeapons.Add(NewWeapon);
-            }
-        }
+ 
+
+        //  =   =   =   =   =   =   =   =   =   =   =   =
     }
 }

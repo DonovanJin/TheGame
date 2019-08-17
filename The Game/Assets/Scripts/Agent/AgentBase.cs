@@ -18,6 +18,7 @@ namespace Jincom.Agent
         public float TimeBetweenEachShotInSeconds;
         public float TimeFalling;
         public bool HitFloor;
+        //public bool MovingUpOrDown = false;
         public bool CanShoot = true;
 
         //Temp
@@ -27,13 +28,14 @@ namespace Jincom.Agent
         protected RaycastHit RayHit;
         protected Rigidbody RB;
         protected bool IsGrounded;
-        protected float Acceleration = 0f;
+        protected float HorAcceleration = 0f;
+        //public float VertAcceleration = 0f;
         protected float _initialWidth;
 
-        private float _oldHorPos = 0f;
-        private float _newHorPos = 0f;
-        private float _oldVertPos = 0f;
-        private float _newVertPos = 0f;
+        protected float _oldHorPos = 0f;
+        protected float _newHorPos = 0f;
+        protected float _oldVertPos = 0f;
+        protected float _newVertPos = 0f;
         private float _initialHeight;        
 
         public enum AgentState
@@ -76,6 +78,9 @@ namespace Jincom.Agent
 
             _oldVertPos = transform.position.y;
             _newVertPos = transform.position.y;
+
+            //This should be in another script
+            Cursor.visible = false;
         }
 
         //  =   =   =   =   =   =   =   =   =   =   =   =
@@ -99,8 +104,17 @@ namespace Jincom.Agent
         {
             _newVertPos = transform.position.y;
 
+            //if (_newVertPos != _oldVertPos)
+            //{
+            //    MovingUpOrDown = true;
+            //}
+            //else
+            //{
+            //    MovingUpOrDown = false;
+            //}
+
             if (_oldVertPos > _newVertPos)
-            {    
+            {                
                 if (!IsGrounded)
                 {
                     TimeFalling += Time.deltaTime;
@@ -108,7 +122,7 @@ namespace Jincom.Agent
                 }                
             }
             else if (_oldVertPos == _newVertPos)
-            {
+            {                
                 if (IsGrounded)
                 {
                     if (!HitFloor)
@@ -179,28 +193,19 @@ namespace Jincom.Agent
 
             if (_oldHorPos != _newHorPos)
             {
-                Acceleration = _newHorPos - _oldHorPos;
+                HorAcceleration = _newHorPos - _oldHorPos;
                 _oldHorPos = _newHorPos;
             }
             else
             {
-                Acceleration = 0f;
+                HorAcceleration = 0f;
             }
-            //            
-             
-            // Visually show if there is no floor under an agent
-            if (Physics.Raycast(transform.position, transform.TransformDirection(Vector3.down), out RayHit, Mathf.Infinity))
-            {
-                Debug.DrawRay(transform.position, transform.TransformDirection(Vector3.down) * RayHit.distance, Color.green);
-            }
-            else
-            {
-                Debug.DrawRay(transform.position, transform.TransformDirection(Vector3.down) * Mathf.Infinity, Color.red);
-            }
-            //
+            // 
+
+            
 
             IsGrounded = Physics.Raycast(transform.position, -Vector3.up, _initialHeight + 0.1f);
-
+            
             // Main Animation States:
             // Still Alive
             if (CurrentHealth > 0f)
@@ -208,7 +213,7 @@ namespace Jincom.Agent
                 if (IsGrounded)
                 {
                     //Idle
-                    if (Acceleration == 0)
+                    if (HorAcceleration == 0)
                     {
                         _currentState = AgentState.Idle;
                     }

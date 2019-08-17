@@ -32,12 +32,18 @@ namespace Jincom.CameraLogic
 
         //  =   =   =   =   =   =   =   =   =   =   =   =
 
+            //Remove
         private void AcquireTarget()
         {
             if (cameraMode == CameraMode.NormalGameplay)
             {
                 TargetTransform = GameObject.FindGameObjectWithTag("Player").gameObject.GetComponent<Transform>();
             }
+        }
+
+        public void AssignTarget(Agent.AgentBase agent)
+        {
+            TargetTransform = agent.transform;
         }
 
         //  =   =   =   =   =   =   =   =   =   =   =   =
