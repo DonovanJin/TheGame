@@ -16,6 +16,7 @@ namespace Jincom.CameraLogic
         public CameraMode cameraMode;
         public Transform TargetTransform;
         public float FollowDistance;
+        public float CameraHeightRelativeToPlayer = 1f;
         public float AdjustCameraUpDown, AdjustCameraLeftRight;
 
         //  =   =   =   =   =   =   =   =   =   =   =   =
@@ -56,7 +57,7 @@ namespace Jincom.CameraLogic
             {
                 //I know I should be able to acquire the player's transform through the managers, but I'm not sure how
                 TargetTransform = GameObject.FindGameObjectWithTag("Player").gameObject.GetComponent<Transform>();
-                AdjustCameraUpDown = 2f;
+                AdjustCameraUpDown = CameraHeightRelativeToPlayer;
             }
         }
 

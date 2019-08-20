@@ -15,7 +15,7 @@ namespace Jincom.Agent
         public int MaxHealth = 100;
         public int CurrentArmour;
         public int MaxArmour = 100;
-        public float JumpHeight = 650f;
+        public float JumpHeight = 375f;
         public GameConstants.Elements CurrentElement;
         public WeaponData CurrentWeapon;
         public Dictionary<WeaponData, int> Ammo = new Dictionary<WeaponData, int>();
