@@ -8,10 +8,14 @@ namespace Jincom.Agent
 {
     public class Player
     {
+        //HERMANN - Jeff, I know the properrties of the player can directly be changed via script, but is there a way to access the properties via the inspector?
+        // For example, how can I change the player's health or give him a different weapon during testing? The 'Player' script isn't mono behaviour.
+
         public int CurrentHealth; 
         public int MaxHealth = 100;
         public int CurrentArmour;
         public int MaxArmour = 100;
+        public float JumpHeight = 650f;
         public GameConstants.Elements CurrentElement;
         public WeaponData CurrentWeapon;
         public Dictionary<WeaponData, int> Ammo = new Dictionary<WeaponData, int>();
@@ -68,6 +72,5 @@ namespace Jincom.Agent
         {
             return CurrentWeapon != null;
         }
-
     }
 }

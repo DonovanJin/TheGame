@@ -10,8 +10,16 @@ namespace Jincom.Agent
         public Transform PlayerTransform;
         public float SpotDistance;
         public bool SpottedPlayer;
+        private RaycastHit RayHit;
 
         private float _horizontalDifference;
+
+        public enum FacingDirection
+        {
+            Left,
+            Right
+        };
+        public FacingDirection Facing;
 
         //  =   =   =   =   =   =   =   =   =   =   =   =
 
@@ -27,7 +35,7 @@ namespace Jincom.Agent
         public override void AgentUpdate()
         {
             //Move(Mathf.PingPong(Time.unscaledTime, 4f) - 2f);  
-            AnimationState();
+            //AnimationState();
         }
 
         //  =   =   =   =   =   =   =   =   =   =   =   =
@@ -108,17 +116,18 @@ namespace Jincom.Agent
                 {
                     AgentShoot();
                     CanShoot = false;
-                    StartCoroutine(ResetCanShoot());
+                    //StartCoroutine(ResetCanShoot());
                 }
             }
         }
 
         //  =   =   =   =   =   =   =   =   =   =   =   =
 
-        IEnumerator ResetCanShoot()
-        {
-            yield return new WaitForSeconds(TimeBetweenEachShotInSeconds);
-            CanShoot = true;
-        }
+        //replace with better reset
+        //IEnumerator ResetCanShoot()
+        //{
+        //    yield return new WaitForSeconds(TimeBetweenEachShotInSeconds);
+        //    CanShoot = true;
+        //}
     }
 }
