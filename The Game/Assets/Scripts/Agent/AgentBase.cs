@@ -11,18 +11,7 @@ namespace Jincom.Agent
         public float MoveSpeed;
         public bool CanShoot = true;
                 
-        protected Rigidbody RB;               
-
-        //public enum AgentState
-        //{
-        //    Walk,
-        //    Idle,
-        //    Dead,
-        //    Fall,
-        //    Jump
-        //};
-        //public AgentState _currentState;
-               
+        protected Rigidbody RB;                
 
         //  =   =   =   =   =   =   =   =   =   =   =   =
 
@@ -42,49 +31,6 @@ namespace Jincom.Agent
             transform.Translate((Vector3.right * direction) * MoveSpeed);
             transform.Translate((Vector3.up * direction2) * MoveSpeed);
         }
-
-        //  =   =   =   =   =   =   =   =   =   =   =   =
-
-        //public virtual void Fall()
-        //{
-        //    _newVertPos = transform.position.y;
-
-        //    //Player is descending
-        //    if (_oldVertPos > _newVertPos)
-        //    {           
-        //        //Player is NOT on the ground
-        //        if (!Physics.Raycast(transform.position, -Vector3.up, GetComponent<Collider>().bounds.extents.y + 0.1f))
-        //        {
-        //            TimeFalling += Time.deltaTime;
-        //            HitFloor = false;
-        //        }                
-        //    }
-        //    //Player is NOT descending
-        //    else if (_oldVertPos == _newVertPos)
-        //    {
-        //        //Player is on the ground
-        //        if (Physics.Raycast(transform.position, -Vector3.up, GetComponent<Collider>().bounds.extents.y + 0.1f))
-        //        {
-        //            if (!HitFloor)
-        //            {                      
-        //                HitFloor = true;
-
-        //                if ((TimeFalling > 1f) && (TimeFalling < 3f))
-        //                {
-        //                    Debug.Log("Fall Damage modifier: " + (TimeFalling - 1f));
-        //                }
-        //                else if (TimeFalling > 3f)
-        //                {
-        //                    Debug.Log("Player dies from falling too far.");
-        //                }
-
-        //                TimeFalling = 0f;
-        //            }
-        //        }
-        //    }
-
-        //    _oldVertPos = _newVertPos;
-        //}
 
         //  =   =   =   =   =   =   =   =   =   =   =   =
                 
@@ -122,50 +68,7 @@ namespace Jincom.Agent
         }
 
         //  =   =   =   =   =   =   =   =   =   =   =   =
-
-        //public virtual void AnimationState()
-        //{            
-        //    if (CurrentHealth > 0f)
-        //    {
-        //        if (Physics.Raycast(transform.position, -Vector3.up, GetComponent<Collider>().bounds.extents.y + 0.1f))
-        //        {
-        //            //Idle
-        //            if (Input.GetAxis("Horizontal") == 0)
-        //            {
-        //                _currentState = AgentState.Idle;
-        //            }
-        //            //Walking/Runninng
-        //            else
-        //            {
-        //                _currentState = AgentState.Walk;
-        //            }
-        //        }
-
-        //        else
-        //        {
-        //            if (RB != null)
-        //            {
-        //                //Falling
-        //                if (RB.velocity.y < 0f)
-        //                {
-        //                    _currentState = AgentState.Fall;
-        //                }
-        //                //Jumping
-        //                else if (RB.velocity.y > 0f)
-        //                {
-        //                    _currentState = AgentState.Jump;
-        //                }
-        //            }
-        //        }
-        //    }
-        //    else
-        //    {
-        //        _currentState = AgentState.Dead;
-        //    }           
-        //}
-
-        //  =   =   =   =   =   =   =   =   =   =   =   =
-
+        
         public virtual void AgentShoot()
         {
             Debug.Log(name + " is shooting. Pew pew!");
