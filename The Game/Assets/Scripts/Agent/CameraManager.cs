@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Jincom.Agent;
 
 namespace Jincom.CameraLogic
 {
@@ -8,15 +9,18 @@ namespace Jincom.CameraLogic
     {    
         public enum CameraMode
         {
-            NormalGameplay,
+            FollowPlayer,
+            FollowSomethingElse,
             Cinematic
         };
         public CameraMode cameraMode;
         public Transform TargetTransform;
         public float FollowDistance;
+        public float AdjustCameraUpDown, AdjustCameraLeftRight;
 
         //  =   =   =   =   =   =   =   =   =   =   =   =
 
+        //Have another Manager update Camera Logic
         private void Update()
         {
             UpdateCameraLogic();
@@ -26,47 +30,51 @@ namespace Jincom.CameraLogic
 
         private void UpdateCameraLogic()
         {
-            AcquireTarget();
-            FollowTarget();            
+            ChooseWhatToFollow();
         }
 
         //  =   =   =   =   =   =   =   =   =   =   =   =
 
-            //Remove
-        private void AcquireTarget()
+        
+        private void ChooseWhatToFollow()
         {
-            if (cameraMode == CameraMode.NormalGameplay)
+            if (cameraMode == CameraMode.FollowPlayer)
             {
-                TargetTransform = GameObject.FindGameObjectWithTag("Player").gameObject.GetComponent<Transform>();
+                AcquirePlayerLocation();
+                FollowTarget();
+            }
+            else if (cameraMode == CameraMode.FollowSomethingElse)
+            {
+                FollowTarget();
             }
         }
 
-        public void AssignTarget(Agent.AgentBase agent)
+            //Remove
+        private void AcquirePlayerLocation()
         {
-            TargetTransform = agent.transform;
+            if ((TargetTransform == null) || (TargetTransform.tag != "Player"))
+            {
+                //I know I should be able to acquire the player's transform through the managers, but I'm not sure how
+                TargetTransform = GameObject.FindGameObjectWithTag("Player").gameObject.GetComponent<Transform>();
+                AdjustCameraUpDown = 2f;
+            }
+        }
+
+        //Follow a new target in 'Normal Gameplay Mode'
+        //public void AssignNewTarget(Agent.AgentBase agent)
+        public void AssignNewTarget(Transform newTarget)
+        {
+            //TargetTransform = agent.transform;
+            TargetTransform = newTarget;
         }
 
         //  =   =   =   =   =   =   =   =   =   =   =   =
 
         private void FollowTarget()
         {
-            if (cameraMode == CameraMode.NormalGameplay)
+            if (TargetTransform != null)
             {
-                transform.position = new Vector3(TargetTransform.position.x, TargetTransform.position.y, (-FollowDistance));
-            }
-        }
-
-        //  =   =   =   =   =   =   =   =   =   =   =   =
-
-        /// <summary>
-        /// Allow camera to follow a specific target if not in normal gameplay mode
-        /// </summary>
-        /// <param name="NewTarget"> Pass the Transform component of new camera target </param>
-        private void AssignNewTarget(Transform NewTarget)
-        {
-            if (cameraMode != CameraMode.NormalGameplay)
-            {
-                TargetTransform = NewTarget;
+                transform.position = new Vector3(TargetTransform.position.x + AdjustCameraLeftRight, TargetTransform.position.y + AdjustCameraUpDown, (-FollowDistance));
             }
         }
     }

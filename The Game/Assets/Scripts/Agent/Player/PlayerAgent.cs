@@ -38,7 +38,7 @@ namespace Jincom.Agent
             Fall,
             Jump
         };
-        public AgentState _currentState;
+        public AgentState _currentStateOfAgent;
 #if TESTING
         public float PlayerJumpHeight;
 #endif
@@ -85,27 +85,30 @@ namespace Jincom.Agent
 
         private void PlayerInput()
         {
-            if (Input.anyKey)
+            if (_currentStateOfAgent != AgentState.Dead)
             {
-                if (Input.GetAxis("Horizontal") != 0)
+                if (Input.anyKey)
                 {
-                    FacingLeftOrRight();
-
-                    if (CanGoForward())
+                    if (Input.GetAxis("Horizontal") != 0)
                     {
-                        CalculateMomentum();
-                        PlayerMovesForward();
+                        FacingLeftOrRight();
+
+                        if (CanGoForward())
+                        {
+                            CalculateMomentum();
+                            PlayerMovesForward();
+                        }
                     }
-                }
 
-                if (Input.GetButtonDown("Jump"))
-                {
-                    PlayerJumps();
-                }
+                    if (Input.GetButtonDown("Jump"))
+                    {
+                        PlayerJumps();
+                    }
 
-                if (Input.GetButton("Fire1"))
-                {
-                    PlayerShoot();
+                    if (Input.GetButton("Fire1"))
+                    {
+                        PlayerShoot();
+                    }
                 }
             }
         }
@@ -320,12 +323,12 @@ namespace Jincom.Agent
                     //Idle
                     if (Input.GetAxis("Horizontal") == 0)
                     {
-                        _currentState = AgentState.Idle;
+                        _currentStateOfAgent = AgentState.Idle;
                     }
                     //Walking/Runninng
                     else
                     {
-                        _currentState = AgentState.Walk;
+                        _currentStateOfAgent = AgentState.Walk;
                     }
                 }
 
@@ -336,19 +339,19 @@ namespace Jincom.Agent
                         //Falling
                         if (RB.velocity.y < 0f)
                         {
-                            _currentState = AgentState.Fall;
+                            _currentStateOfAgent = AgentState.Fall;
                         }
                         //Jumping
                         else if (RB.velocity.y > 0f)
                         {
-                            _currentState = AgentState.Jump;
+                            _currentStateOfAgent = AgentState.Jump;
                         }
                     }
                 }
             }
             else
             {
-                _currentState = AgentState.Dead;
+                _currentStateOfAgent = AgentState.Dead;
             }
         }
 
@@ -366,40 +369,39 @@ namespace Jincom.Agent
         {
             _newVertPos = transform.position.y;
 
-            //Player is descending
-            if (_oldVertPos > _newVertPos)
+            //Player is NOT on the ground
+            if (!Physics.Raycast(transform.position, -Vector3.up, GetComponent<Collider>().bounds.extents.y + 0.1f))
             {
-                //Player is NOT on the ground
-                if (!Physics.Raycast(transform.position, -Vector3.up, GetComponent<Collider>().bounds.extents.y + 0.1f))
+                //Player is descending
+                if (_oldVertPos > _newVertPos)
                 {
                     _timeFalling += Time.deltaTime;
-                    _hitFloor = false;
-                }
-            }
-            //Player is NOT descending
-            else if (_oldVertPos == _newVertPos)
-            {
-                //Player is on the ground
-                if (Physics.Raycast(transform.position, -Vector3.up, GetComponent<Collider>().bounds.extents.y + 0.1f))
-                {
-                    if (!_hitFloor)
+                    if (_hitFloor)
                     {
-                        _hitFloor = true;
-
-                        if ((_timeFalling > 1f) && (_timeFalling < 3f))
-                        {
-                            Debug.Log("Fall Damage modifier: " + (_timeFalling - 1f));
-                        }
-                        else if (_timeFalling > 3f)
-                        {
-                            Debug.Log("Player dies from falling too far.");
-                        }
-
-                        _timeFalling = 0f;
+                        _hitFloor = false;
                     }
                 }
             }
+            //Player is on the ground
+            else
+            {
+                //Player is NOT descending
+                if (!_hitFloor)                
+                {
+                    if ((_timeFalling > 1f) && (_timeFalling < 3f))
+                    {
+                        Debug.Log("Fall Damage modifier: " + (_timeFalling - 1f));
+                    }
+                    else if (_timeFalling > 3f)
+                    {
+                        Debug.Log("Player dies from falling too far.");
+                    }
 
+                    _hitFloor = true;
+
+                    _timeFalling = 0f;
+                }
+            }
             _oldVertPos = _newVertPos;
         }
     }
