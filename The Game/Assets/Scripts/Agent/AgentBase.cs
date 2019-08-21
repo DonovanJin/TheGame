@@ -7,88 +7,71 @@ namespace Jincom.Agent
     public abstract class AgentBase : MonoBehaviour
     {
         [Header("Base Agent Properties")]
-        public int CurrentHealth;
-        //public int CurrentHealth
-        //{
-        //    get { return _currentHealth; }
-        //}
-        public int MaxHealth;
-        public int CurrentArmour;
-        public int MaxArmour;
-        public GameConstants.Elements CurrentElement;
+        public GameConstants.Elements CurrentElement;     
         public float MoveSpeed;
-        public float JumpHeight;
+        public bool CanShoot = true;
+                
+        protected Rigidbody RB;                
 
-        public enum AgentState
-        {
-            Walk,
-            Idle,
-            Die,
-            Fall,
-            Jump
-        };
-        public AgentState CurrentState;
+        //  =   =   =   =   =   =   =   =   =   =   =   =
 
         public abstract void AgentUpdate();
 
-        public virtual void MoveAgent(float direction)
+        //  =   =   =   =   =   =   =   =   =   =   =   =
+
+        private void Start()
+        {
+            
+        }
+
+        //  =   =   =   =   =   =   =   =   =   =   =   =
+
+        public virtual void Move(float direction, float direction2)
         {
             transform.Translate((Vector3.right * direction) * MoveSpeed);
+            transform.Translate((Vector3.up * direction2) * MoveSpeed);
         }
 
-        public virtual void FallAgent()
+        //  =   =   =   =   =   =   =   =   =   =   =   =
+                
+        public virtual void Jump(float NewJumpHeight)
         {
-            Debug.Log("Agent Falls");
+            if (RB != null)
+            {
+                RB.AddForce(new Vector3(0, NewJumpHeight, 0), ForceMode.Impulse);
+            }
+            else
+            {
+                Debug.Log("Agent requires a Rigidbody to jump");
+            }
         }
 
-        public virtual void AgentJump()
-        {
+        //  =   =   =   =   =   =   =   =   =   =   =   =
 
-        }
-
-        public virtual void AgentShoot()
-        {
-            Debug.Log("Agent Shoots");
-        }
-
-        public virtual void AgentThrow()
-        {
-            Debug.Log("Agent Throws");
-        }
-
-        public virtual void AgentMelee()
-        {
-            Debug.Log("Agent Uses Melee");
-        }
-
-        public virtual void AgentClimb()
-        {
-            Debug.Log("Agent Climbs");
-        }
-
-        public virtual void AgentDie()
-        {
-            Debug.Log("Agent Dies");
-        }
-
-        public virtual void AgentSpawn()
+        public virtual void Spawn()
         {
             Debug.Log("Agent Spawns");
         }
 
-        public virtual void AgentPickup()
-        {
-            Debug.Log("Agent Picks Up Something");
-        }
+        //  =   =   =   =   =   =   =   =   =   =   =   =
 
-        public virtual void AgentPause()
+        public virtual void Pause()
         {
             Debug.Log("Agent Pauses Game");
         }
 
-        public virtual void AgentResume()
+        //  =   =   =   =   =   =   =   =   =   =   =   =
+
+        public virtual void Resume()
         {
             Debug.Log("Agent Resumes Game");
+        }
+
+        //  =   =   =   =   =   =   =   =   =   =   =   =
+        
+        public virtual void AgentShoot()
+        {
+            Debug.Log(name + " is shooting. Pew pew!");
         }
     }
 }

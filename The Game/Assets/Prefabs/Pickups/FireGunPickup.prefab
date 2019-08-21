@@ -11,7 +11,6 @@ GameObject:
   - component: {fileID: 5344878457835478856}
   - component: {fileID: 8355260202720192365}
   - component: {fileID: 5299901849859825473}
-  - component: {fileID: 7785988462859535010}
   - component: {fileID: 7737662946912409550}
   m_Layer: 0
   m_Name: FireGunPickup
@@ -79,19 +78,6 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
---- !u!65 &7785988462859535010
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 719889981880415405}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &7737662946912409550
 MonoBehaviour:
   m_ObjectHideFlags: 0

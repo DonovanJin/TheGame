@@ -13,6 +13,12 @@ namespace Jincom.PickUps
         public int Damage = 0;
         public GameConstants.Elements Element = GameConstants.Elements.Normal;
         public int MaxiumumCapacity = 0;
+        public int FireRateInSeconds = 1;
         public Sprite Icon;
+
+        public float WaitTimeBetweenShots()
+        {
+            return 1f / FireRateInSeconds;
+        }
     }
 }
