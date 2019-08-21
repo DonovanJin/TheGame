@@ -29,16 +29,8 @@ namespace Jincom.Agent
 
         private float _oldVertPos = 0f;
         private float _newVertPos = 0f;
-
-        public enum AgentState
-        {
-            Walk,
-            Idle,
-            Dead,
-            Fall,
-            Jump
-        };
-        public AgentState _currentStateOfAgent;
+        
+        public string StateOfThisAgent;
 #if TESTING
         public float PlayerJumpHeight;
 #endif
@@ -56,8 +48,6 @@ namespace Jincom.Agent
 
         private void Start()
         {
-            //_playerData.JumpHeight = PlayerJumpHeight;
-
             RB = this.GetComponent<Rigidbody>();
 
             if (RB != null)
@@ -73,19 +63,21 @@ namespace Jincom.Agent
         {
 #if TESTING
             UpdateJumpHeight();
-#endif
+#endif            
             ResetDoubleJump();
-            PlayerInput();    
+            PlayerInput(); 
             
             AnimationState();
             Fall();
+
+            WhatStateIsAgentIn();
         }
 
         //  =   =   =   =   =   =   =   =   =   =   =   =
 
         private void PlayerInput()
         {
-            if (_currentStateOfAgent != AgentState.Dead)
+            if (_playerData._currentStateOfAgent != Player.AgentState.Dead)
             {
                 if (Input.anyKey)
                 {
@@ -275,7 +267,6 @@ namespace Jincom.Agent
         {
             if (_playerData.CurrentGunHasAmmo())
             {
-                //Total time is larger than the sum of the last time the gun was shot and the time between each shot
                 //total time > (time stamp when gun was last shot + time between each shot)
                 if (Time.unscaledTime > (_timeLastShot + weaponData.WaitTimeBetweenShots()))
                 {
@@ -307,8 +298,6 @@ namespace Jincom.Agent
                 _playerData.FireCurrentWeapon();
 
                 AgentShoot();
-
-                //Debug.DrawLine(transform.position, Camera.main.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y, 5f)), Color.red);
             }
         }
 
@@ -323,12 +312,12 @@ namespace Jincom.Agent
                     //Idle
                     if (Input.GetAxis("Horizontal") == 0)
                     {
-                        _currentStateOfAgent = AgentState.Idle;
+                        _playerData._currentStateOfAgent = Player.AgentState.Idle;
                     }
                     //Walking/Runninng
                     else
                     {
-                        _currentStateOfAgent = AgentState.Walk;
+                        _playerData._currentStateOfAgent = Player.AgentState.Walk;
                     }
                 }
 
@@ -339,19 +328,19 @@ namespace Jincom.Agent
                         //Falling
                         if (RB.velocity.y < 0f)
                         {
-                            _currentStateOfAgent = AgentState.Fall;
+                            _playerData._currentStateOfAgent = Player.AgentState.Fall;
                         }
                         //Jumping
                         else if (RB.velocity.y > 0f)
                         {
-                            _currentStateOfAgent = AgentState.Jump;
+                            _playerData._currentStateOfAgent = Player.AgentState.Jump;
                         }
                     }
                 }
             }
             else
             {
-                _currentStateOfAgent = AgentState.Dead;
+                _playerData._currentStateOfAgent = Player.AgentState.Dead;
             }
         }
 
@@ -403,6 +392,11 @@ namespace Jincom.Agent
                 }
             }
             _oldVertPos = _newVertPos;
+        }
+
+        private void WhatStateIsAgentIn()
+        {
+            StateOfThisAgent = _playerData._currentStateOfAgent.ToString();
         }
     }
 }
