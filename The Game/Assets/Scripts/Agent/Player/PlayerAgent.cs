@@ -247,7 +247,7 @@ namespace Jincom.Agent
                         if (!_doubleJumped)
                         {
                             RB.velocity = new Vector3(RB.velocity.x, 0f, RB.velocity.z);
-                            Jump(_playerData.JumpHeight * 0.75f);
+                            Jump(_playerData.JumpHeight);
                             _doubleJumped = true;
                         }
                     }
