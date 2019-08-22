@@ -21,7 +21,8 @@ public class Cursor_UI_3DSpace : MonoBehaviour
 
     private void Start()
     {
-        DistanceBetweenTargetAndCamera = Vector3.Distance(transform.position, Camera.main.gameObject.transform.position);
+        //DistanceBetweenTargetAndCamera = Vector3.Distance(transform.position, Camera.main.gameObject.transform.position);
+        DistanceBetweenTargetAndCamera = Mathf.Abs(transform.position.z - Camera.main.gameObject.transform.position.z);
     }
 
     void Update()
@@ -33,6 +34,7 @@ public class Cursor_UI_3DSpace : MonoBehaviour
 
         CanvasCursorPosition = new Vector3(Screen.width * point.x, Screen.height * point.y, 0f);
         WorldSpaceTargetPosition = Camera.main.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y, DistanceBetweenTargetAndCamera));
+        //WorldSpaceTargetPosition = Camera.main.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y, 0f));
 
         if (CanvasOrWorld == CanvasSpaceOrWorldSpace.CanvasCursor)
         {

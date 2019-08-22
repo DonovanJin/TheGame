@@ -21,6 +21,10 @@ namespace Jincom.Agent
         [Range(-1f, 1f)]
         private float _momentum;
 
+        //TESTING
+        public int CurrentHealth, MaxHealth, CurrentArmour, MaxArmour /*,CurrentAmmo*/;
+        //public WeaponData CurrentWeapon;
+
         //Facing direction is used to inform graphics and animation
         public enum FacingDirection
         {
@@ -30,6 +34,8 @@ namespace Jincom.Agent
         public FacingDirection Facing;        
         
         public string StateOfThisAgent;
+
+        public Transform ShootAtTarget;
 
 #if TESTING
         public float PlayerJumpHeight;
@@ -69,6 +75,8 @@ namespace Jincom.Agent
 #if TESTING
             UpdateJumpHeight();
 #endif            
+            GetPlayerInfo();
+
             ResetDoubleJump();
             PlayerInput(); 
             
@@ -79,6 +87,16 @@ namespace Jincom.Agent
         }
 
         //  =   =   =   =   =   =   =   =   =   =   =   =
+
+        private void GetPlayerInfo()
+        {
+            CurrentHealth = _playerData.CurrentHealth;
+            MaxHealth = _playerData.MaxHealth;
+            CurrentArmour = _playerData.CurrentArmour;
+            MaxArmour = _playerData.MaxArmour;
+            //CurrentWeapon = _playerData.CurrentWeapon;
+            //CurrentAmmo = _playerData.Ammo[_playerData.CurrentWeapon];
+        }
 
         private void PlayerInput()
         {
@@ -304,6 +322,9 @@ namespace Jincom.Agent
 
                 AgentShoot();
             }
+
+            //Testing
+            Debug.DrawLine(transform.position, ShootAtTarget.transform.position, Color.red);
         }
 
         //  =   =   =   =   =   =   =   =   =   =   =   =
