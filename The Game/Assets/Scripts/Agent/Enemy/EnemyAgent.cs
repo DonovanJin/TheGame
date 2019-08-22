@@ -6,9 +6,13 @@ using Jincom.Core;
 namespace Jincom.Agent
 {
     public class EnemyAgent : AgentBase
-    {     
+    {
+        private Enemy _enemyData;
+
+        public bool PlayerAbsent = false;
+
         public Transform PlayerTransform;
-        public float SpotDistance;
+        public float SpotDistance = 10f;
         public bool SpottedPlayer;
         private RaycastHit RayHit;
 
@@ -22,7 +26,7 @@ namespace Jincom.Agent
         public FacingDirection Facing;
 
         //  =   =   =   =   =   =   =   =   =   =   =   =
-
+        
         public void Update()
         {
             AgentUpdate();
@@ -42,30 +46,36 @@ namespace Jincom.Agent
 
         public virtual void SpotThePlayer()
         {
-            if (PlayerTransform == null)
+            if (!PlayerAbsent)
             {
-                PlayerTransform = GameObject.FindGameObjectWithTag("Player").gameObject.GetComponent<Transform>();
-            }
-
-            if (PlayerTransform)
-            { 
-            _horizontalDifference = transform.position.x - PlayerTransform.position.x;
-
-                if (Physics.Raycast(transform.position, PlayerTransform.position - transform.position, out RayHit))
+                if (PlayerTransform == null)
                 {
-                    if (RayHit.transform == PlayerTransform)
+                    PlayerTransform = GameObject.FindGameObjectWithTag("Player").gameObject.GetComponent<Transform>();
+                }
+
+                else
+                {
+                    _horizontalDifference = transform.position.x - PlayerTransform.position.x;
+
+                    if (Physics.Raycast(transform.position, PlayerTransform.position - transform.position, out RayHit))
                     {
-                        Debug.DrawLine(transform.position, PlayerTransform.position, Color.red);
-                        if (Vector3.Distance(transform.position, PlayerTransform.position) < SpotDistance)
-                        {
-                            //SpottedPlayer = true;
-                            if ((_horizontalDifference > 0) && (Facing == FacingDirection.Left))
+                        if (RayHit.transform == PlayerTransform)
+                        {                            
+                            if (Vector3.Distance(transform.position, PlayerTransform.position) < SpotDistance)
                             {
-                                SpottedPlayer = true;
-                            }
-                            else if ((_horizontalDifference < 0) && (Facing == FacingDirection.Right))
-                            {
-                                SpottedPlayer = true;
+                                //SpottedPlayer = true;
+                                if ((_horizontalDifference > 0) && (Facing == FacingDirection.Left))
+                                {
+                                    SpottedPlayer = true;
+                                }
+                                else if ((_horizontalDifference < 0) && (Facing == FacingDirection.Right))
+                                {
+                                    SpottedPlayer = true;
+                                }
+                                else
+                                {
+                                    SpottedPlayer = false;
+                                }
                             }
                             else
                             {
@@ -77,11 +87,12 @@ namespace Jincom.Agent
                             SpottedPlayer = false;
                         }
                     }
-                    else
-                    {
-                        SpottedPlayer = false;
-                    }
                 }
+            }
+
+            if (SpottedPlayer)
+            {
+                Debug.DrawLine(transform.position, PlayerTransform.position, Color.red);
             }
         }
 
@@ -112,22 +123,11 @@ namespace Jincom.Agent
         {
             if (SpottedPlayer)
             {
-                if (CanShoot)
-                {
-                    AgentShoot();
-                    CanShoot = false;
-                    //StartCoroutine(ResetCanShoot());
-                }
+                //if Enemy hasn't shot within the last x amount of time, allow the enemy to shoot again
+                Debug.Log("Bang, bang, bang!");
             }
         }
 
-        //  =   =   =   =   =   =   =   =   =   =   =   =
-
-        //replace with better reset
-        //IEnumerator ResetCanShoot()
-        //{
-        //    yield return new WaitForSeconds(TimeBetweenEachShotInSeconds);
-        //    CanShoot = true;
-        //}
+        //Pathing
     }
 }

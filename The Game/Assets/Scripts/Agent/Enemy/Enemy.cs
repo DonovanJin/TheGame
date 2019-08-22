@@ -6,7 +6,7 @@ using Jincom.PickUps;
 
 namespace Jincom.Agent
 {
-    public class Worm
+    public class Enemy
     {
         public int CurrentHealth;
         public int MaxHealth = 100;
@@ -18,11 +18,14 @@ namespace Jincom.Agent
 
         public enum AgentState
         {
+            //Generic actions
             Idle,
-            Slithering,            
+            Walking,
             Dead,
             Fall,
             Jump,
+
+            //Worm actions
             Strangling,
             Spitting
         };
@@ -31,10 +34,13 @@ namespace Jincom.Agent
         public enum EnemyBehaviour
         {
             Idle,
-
+            Suspicious,
+            Attacking,
+            Chasing,
+            Performing
         };
 
-        public Worm()
+        public Enemy()
         {
             CurrentHealth = MaxHealth;
             CurrentArmour = MaxArmour;

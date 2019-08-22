@@ -125,14 +125,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   CurrentElement: 0
   MoveSpeed: 0.05
-  CurrentSpeed: 0
-  TimeBetweenEachShotInSeconds: 0.25
-  TimeFalling: 0
-  HitFloor: 0
   CanShoot: 1
-  CaptureTime: 0
-  _currentState: 0
   Facing: 0
+  StateOfThisAgent: 
 --- !u!136 &726383972002163062
 CapsuleCollider:
   m_ObjectHideFlags: 0

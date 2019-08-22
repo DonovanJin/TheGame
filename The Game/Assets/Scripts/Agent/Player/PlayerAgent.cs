@@ -15,6 +15,8 @@ namespace Jincom.Agent
         private RaycastHit _rayHit;
         private float _timeFalling;
         private bool _hitFloor;
+        private float _oldVertPos = 0f;
+        private float _newVertPos = 0f;
 
         [Range(-1f, 1f)]
         private float _momentum;
@@ -25,12 +27,10 @@ namespace Jincom.Agent
             Left,
             Right
         };
-        public FacingDirection Facing;
-
-        private float _oldVertPos = 0f;
-        private float _newVertPos = 0f;
+        public FacingDirection Facing;        
         
         public string StateOfThisAgent;
+
 #if TESTING
         public float PlayerJumpHeight;
 #endif
@@ -47,6 +47,11 @@ namespace Jincom.Agent
         //  =   =   =   =   =   =   =   =   =   =   =   =
 
         private void Start()
+        {
+            InitiatePlayerProperties();
+        }
+
+        private void InitiatePlayerProperties()
         {
             RB = this.GetComponent<Rigidbody>();
 
