@@ -26,26 +26,11 @@ public class PlayerCheatScript : MonoBehaviour
 
     void Update()
     {
-        UpdatePlayerProperties();
         PlayerInput();
     }
 
     private void UpdatePlayerProperties()
     {
-        PlayerHealth = playerAgent.playerData.CurrentHealth.ToString();
-        PlayerArmour = playerAgent.playerData.CurrentArmour.ToString();       
-        JumpHeight = playerAgent.playerData.JumpHeight.ToString();
-        SuitElement = playerAgent.playerData.CurrentElement.ToString();
-        AgentState = playerAgent.playerData._currentStateOfAgent.ToString();
-
-        if (playerAgent.playerData.Ammo.ContainsKey(TestWeapon))
-        {
-            WeaponAmmo = playerAgent.playerData.Ammo[TestWeapon].ToString();
-        }
-        else
-        {
-            WeaponAmmo = "0";
-        }
     }
 
     private void PlayerInput()
