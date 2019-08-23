@@ -159,9 +159,10 @@ MonoBehaviour:
   CanShoot: 1
   PlayerAbsent: 0
   PlayerTransform: {fileID: 0}
-  SpotDistance: 0
+  SpotDistance: 10
   SpottedPlayer: 0
   Facing: 0
+  enemyBehaviour: 0
 --- !u!114 &1666008552648045101
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -175,3 +176,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   enemyAgent: {fileID: 3086370055556881684}
+  StartedWaiting: 0
+  WaitTime: 1
+  TimeStampEndWait: 0

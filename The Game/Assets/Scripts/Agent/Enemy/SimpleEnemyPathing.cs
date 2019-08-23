@@ -25,21 +25,23 @@ namespace Jincom.Agent
 
         private void PathLogic()
         {
-            if (enemyAgent.enemyBehaviour == EnemyAgent.EnemyBehaviour.Patroling)
+            if (!enemyAgent.SpottedPlayer)
             {
-                if (!IsEnemyObstructed())
+                if (enemyAgent.enemyBehaviour == EnemyAgent.EnemyBehaviour.Patroling)
                 {
-                    MovingLeftOrRight();
+                    if (!IsEnemyObstructed())
+                    {
+                        MovingLeftOrRight();
+                    }
+                    else
+                    {
+                        WaitForAMoment();
+                    }
                 }
                 else
                 {
-                    //TurnAround();
-                    WaitForAMoment();
+                    print("Enemy not patrolling");
                 }
-            }
-            else
-            {
-                print("Enemy not patrolling");
             }
         }
 
