@@ -322,9 +322,28 @@ namespace Jincom.Agent
 
                 AgentShoot();
             }
+            //Used to see if player hits an Agent or a Surface
+            DrawDebugShootLine();
+        }
 
-            //Testing
-            Debug.DrawLine(transform.position, ShootAtTarget.transform.position, Color.red);
+        private void DrawDebugShootLine()
+        {
+            Vector3 _v3;
+            CapsuleCollider _capCol;
+
+            _capCol = GetComponent<CapsuleCollider>();
+            _v3 = new Vector3(transform.position.x, transform.position.y + (_capCol.height/2), transform.position.y);
+            
+            //HERMANN - replace 999f with weapon's drop off distance
+            if (Physics.Raycast(_v3, ShootAtTarget.transform.position - _v3, out _rayHit ,999f))
+            {
+                print("I hit somethin!");
+                Debug.DrawRay(_v3, _rayHit.point - _v3, Color.red);
+            }
+            else
+            {
+                Debug.DrawRay(_v3, ShootAtTarget.transform.position - _v3, Color.blue);
+            }
         }
 
         //  =   =   =   =   =   =   =   =   =   =   =   =
