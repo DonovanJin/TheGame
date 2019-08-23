@@ -1095,11 +1095,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 7571552074693129784}
     m_Modifications:
-    - target: {fileID: 7353728043709604358, guid: 8a7a156c68952f848b2722581e05f0ca,
-        type: 3}
-      propertyPath: m_Name
-      value: Enemy
-      objectReference: {fileID: 0}
     - target: {fileID: 7917036327615181384, guid: 8a7a156c68952f848b2722581e05f0ca,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -1113,27 +1108,27 @@ PrefabInstance:
     - target: {fileID: 7917036327615181384, guid: 8a7a156c68952f848b2722581e05f0ca,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: -0.25175095
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7917036327615181384, guid: 8a7a156c68952f848b2722581e05f0ca,
         type: 3}
       propertyPath: m_LocalRotation.x
-      value: -0
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7917036327615181384, guid: 8a7a156c68952f848b2722581e05f0ca,
         type: 3}
       propertyPath: m_LocalRotation.y
-      value: -0
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7917036327615181384, guid: 8a7a156c68952f848b2722581e05f0ca,
         type: 3}
       propertyPath: m_LocalRotation.z
-      value: 0.70693576
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7917036327615181384, guid: 8a7a156c68952f848b2722581e05f0ca,
         type: 3}
       propertyPath: m_LocalRotation.w
-      value: 0.70727783
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7917036327615181384, guid: 8a7a156c68952f848b2722581e05f0ca,
         type: 3}
@@ -1153,7 +1148,7 @@ PrefabInstance:
     - target: {fileID: 7917036327615181384, guid: 8a7a156c68952f848b2722581e05f0ca,
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
-      value: 89.97201
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7917036327615181384, guid: 8a7a156c68952f848b2722581e05f0ca,
         type: 3}
@@ -1164,6 +1159,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalScale.y
       value: 0.43107018
+      objectReference: {fileID: 0}
+    - target: {fileID: 7353728043709604358, guid: 8a7a156c68952f848b2722581e05f0ca,
+        type: 3}
+      propertyPath: m_Name
+      value: Enemy
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8a7a156c68952f848b2722581e05f0ca, type: 3}

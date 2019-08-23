@@ -7,7 +7,7 @@ namespace Jincom.Agent
 {
     public class EnemyAgent : AgentBase
     {
-        private Enemy _enemyData;
+        public Enemy _enemyData;
 
         public bool PlayerAbsent = false;
 
@@ -25,8 +25,20 @@ namespace Jincom.Agent
         };
         public FacingDirection Facing;
 
+        public enum EnemyBehaviour
+        {
+            Patroling,
+            Idle,
+            Suspicious,
+            Attacking,
+            Chasing,
+            Performing
+        };
+
+        public EnemyBehaviour enemyBehaviour;
+
         //  =   =   =   =   =   =   =   =   =   =   =   =
-        
+
         public void Update()
         {
             AgentUpdate();
@@ -38,8 +50,7 @@ namespace Jincom.Agent
 
         public override void AgentUpdate()
         {
-            //Move(Mathf.PingPong(Time.unscaledTime, 4f) - 2f);  
-            //AnimationState();
+            
         }
 
         //  =   =   =   =   =   =   =   =   =   =   =   =

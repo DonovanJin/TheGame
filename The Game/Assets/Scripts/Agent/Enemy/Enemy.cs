@@ -29,16 +29,7 @@ namespace Jincom.Agent
             Strangling,
             Spitting
         };
-        public AgentState _currentStateOfAgent;
-
-        public enum EnemyBehaviour
-        {
-            Idle,
-            Suspicious,
-            Attacking,
-            Chasing,
-            Performing
-        };
+        public AgentState _currentStateOfAgent;        
 
         public Enemy()
         {
