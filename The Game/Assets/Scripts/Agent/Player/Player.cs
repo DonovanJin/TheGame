@@ -82,5 +82,18 @@ namespace Jincom.Agent
         {
             return CurrentWeapon != null;
         }
+
+        public void SwitchToWeapon(WeaponData nextWeapon)
+        {
+            if (Ammo.ContainsKey(nextWeapon))
+            {
+                CurrentWeapon = nextWeapon;
+                Debug.Log("Current weapon is now: " + CurrentWeapon.ToString());
+            }
+            else
+            {
+                Debug.Log("Player does not have that weapon yet");
+            }
+        }
     }
 }

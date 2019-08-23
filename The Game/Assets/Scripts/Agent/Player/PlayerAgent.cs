@@ -10,7 +10,7 @@ namespace Jincom.Agent
 {
     public class PlayerAgent : AgentBase
     {
-        public Player _playerData;
+        public Player playerData;
         private bool _doubleJumped;  
         private RaycastHit _rayHit;
         private float _timeFalling;
@@ -46,7 +46,7 @@ namespace Jincom.Agent
         {
             get
             {
-                return _playerData;
+                return playerData;
             }
         } 
 
@@ -90,17 +90,17 @@ namespace Jincom.Agent
 
         private void GetPlayerInfo()
         {
-            CurrentHealth = _playerData.CurrentHealth;
-            MaxHealth = _playerData.MaxHealth;
-            CurrentArmour = _playerData.CurrentArmour;
-            MaxArmour = _playerData.MaxArmour;
+            CurrentHealth = playerData.CurrentHealth;
+            MaxHealth = playerData.MaxHealth;
+            CurrentArmour = playerData.CurrentArmour;
+            MaxArmour = playerData.MaxArmour;
             //CurrentWeapon = _playerData.CurrentWeapon;
             //CurrentAmmo = _playerData.Ammo[_playerData.CurrentWeapon];
         }
 
         private void PlayerInput()
         {
-            if (_playerData._currentStateOfAgent != Player.AgentState.Dead)
+            if (playerData._currentStateOfAgent != Player.AgentState.Dead)
             {
                 if (Input.anyKey)
                 {
@@ -249,7 +249,7 @@ namespace Jincom.Agent
             //On ground, normal jump
             if (Physics.Raycast(transform.position, -Vector3.up, GetComponent<Collider>().bounds.extents.y + 0.1f))
             {
-                Jump((_playerData.JumpHeight + (150f * (Mathf.Abs(_momentum)))));
+                Jump((playerData.JumpHeight + (150f * (Mathf.Abs(_momentum)))));
             }
             //In air
             else
@@ -262,7 +262,7 @@ namespace Jincom.Agent
                         if (!_doubleJumped)
                         {
                             RB.velocity = new Vector3(RB.velocity.x, 0f, RB.velocity.z);
-                            Jump(_playerData.JumpHeight * 0.75f);
+                            Jump(playerData.JumpHeight * 0.75f);
                             _doubleJumped = true;
                         }
                     }
@@ -274,7 +274,7 @@ namespace Jincom.Agent
 
         internal void Init(Player playerData)
         {
-            _playerData = playerData;
+            this.playerData = playerData;
         }
 
         //  =   =   =   =   =   =   =   =   =   =   =   =
@@ -288,7 +288,7 @@ namespace Jincom.Agent
 
         private bool CanPlayerShoot(WeaponData weaponData)
         {
-            if (_playerData.CurrentGunHasAmmo())
+            if (playerData.CurrentGunHasAmmo())
             {
                 //total time > (time stamp when gun was last shot + time between each shot)
                 if (Time.unscaledTime > (_timeLastShot + weaponData.WaitTimeBetweenShots()))
@@ -316,9 +316,9 @@ namespace Jincom.Agent
 
         private void PlayerShoot()
         {
-            if (CanPlayerShoot(_playerData.CurrentWeapon))
+            if (CanPlayerShoot(playerData.CurrentWeapon))
             {
-                _playerData.FireCurrentWeapon();
+                playerData.FireCurrentWeapon();
 
                 AgentShoot();
             }
@@ -333,16 +333,23 @@ namespace Jincom.Agent
 
             _capCol = GetComponent<CapsuleCollider>();
             _v3 = new Vector3(transform.position.x, transform.position.y + (_capCol.height/2), transform.position.z);
-            
-            if (Physics.Raycast(_v3, ShootAtTarget.transform.position - _v3, out _rayHit ,_playerData.CurrentWeapon.Range))
+
+            if (playerData.CurrentWeapon != null)
             {
-                print("I hit somethin!");
-                Debug.DrawRay(_v3, _rayHit.point - _v3, Color.red);
-                print(_playerData.CurrentWeapon.ToString() +_playerData.Ammo[_playerData.CurrentWeapon].ToString() + " " + _playerData.CurrentWeapon.Range);                
+                if (Physics.Raycast(_v3, ShootAtTarget.transform.position - _v3, out _rayHit, playerData.CurrentWeapon.Range))
+                {
+                    print("I hit somethin!");
+                    Debug.DrawRay(_v3, _rayHit.point - _v3, Color.red);
+                    print(playerData.CurrentWeapon.ToString() + playerData.Ammo[playerData.CurrentWeapon].ToString() + " " + playerData.CurrentWeapon.Range);
+                }
+                else
+                {
+                    Debug.DrawRay(_v3, ShootAtTarget.transform.position - _v3, Color.blue);
+                }
             }
             else
             {
-                Debug.DrawRay(_v3, ShootAtTarget.transform.position - _v3, Color.blue);
+                Debug.Log("No weapon Equipped");
             }
         }
 
@@ -350,19 +357,19 @@ namespace Jincom.Agent
 
         public virtual void AnimationState()
         {
-            if (_playerData.CurrentHealth > 0f)
+            if (playerData.CurrentHealth > 0f)
             {
                 if (Physics.Raycast(transform.position, -Vector3.up, GetComponent<Collider>().bounds.extents.y + 0.1f))
                 {
                     //Idle
                     if (Input.GetAxis("Horizontal") == 0)
                     {
-                        _playerData._currentStateOfAgent = Player.AgentState.Idle;
+                        playerData._currentStateOfAgent = Player.AgentState.Idle;
                     }
                     //Walking/Runninng
                     else
                     {
-                        _playerData._currentStateOfAgent = Player.AgentState.Walk;
+                        playerData._currentStateOfAgent = Player.AgentState.Walk;
                     }
                 }
 
@@ -373,19 +380,19 @@ namespace Jincom.Agent
                         //Falling
                         if (RB.velocity.y < 0f)
                         {
-                            _playerData._currentStateOfAgent = Player.AgentState.Fall;
+                            playerData._currentStateOfAgent = Player.AgentState.Fall;
                         }
                         //Jumping
                         else if (RB.velocity.y > 0f)
                         {
-                            _playerData._currentStateOfAgent = Player.AgentState.Jump;
+                            playerData._currentStateOfAgent = Player.AgentState.Jump;
                         }
                     }
                 }
             }
             else
             {
-                _playerData._currentStateOfAgent = Player.AgentState.Dead;
+                playerData._currentStateOfAgent = Player.AgentState.Dead;
             }
         }
 
@@ -441,7 +448,7 @@ namespace Jincom.Agent
 
         private void WhatStateIsAgentIn()
         {
-            StateOfThisAgent = _playerData._currentStateOfAgent.ToString();
+            StateOfThisAgent = playerData._currentStateOfAgent.ToString();
         }
     }
 }

@@ -179,6 +179,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   TestWeapon: {fileID: 11400000, guid: cc6e4e89a57ca33438c1ce179169d1ff, type: 2}
   playerAgent: {fileID: 6453848375726375614}
+  PlayerHealth: 
+  PlayerArmour: 
+  WeaponAmmo: 
+  JumpHeight: 
+  SuitElement: 
+  AgentState: 
 --- !u!1 &6759557058910447979
 GameObject:
   m_ObjectHideFlags: 0
