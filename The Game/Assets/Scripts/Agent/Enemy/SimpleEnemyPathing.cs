@@ -9,6 +9,10 @@ namespace Jincom.Agent
         public EnemyAgent enemyAgent;
         public RaycastHit raycastHit;
 
+        public bool StartedWaiting = false;
+        public float WaitTime = 1f;
+        public float TimeStampEndWait;
+
         void Start()
         {
 
@@ -23,12 +27,60 @@ namespace Jincom.Agent
         {
             if (enemyAgent.enemyBehaviour == EnemyAgent.EnemyBehaviour.Patroling)
             {
-                MovingLeftOrRight();
+                if (!IsEnemyObstructed())
+                {
+                    MovingLeftOrRight();
+                }
+                else
+                {
+                    //TurnAround();
+                    WaitForAMoment();
+                }
             }
             else
             {
                 print("Enemy not patrolling");
             }
+        }
+
+        private bool IsEnemyObstructed()
+        {
+            bool _answer;
+
+            //GetComponent<Collider>().bounds.extents.x
+            if (enemyAgent.Facing == EnemyAgent.FacingDirection.Left)
+            {
+                if (Physics.Raycast(transform.position, transform.TransformDirection(Vector3.left), out raycastHit, 999f))
+                {
+                    Debug.DrawRay(transform.position, transform.TransformDirection(Vector3.left) * raycastHit.distance, Color.green);
+                }
+                else
+                {
+                    Debug.DrawRay(transform.position, transform.TransformDirection(Vector3.left) * 999f, Color.red);
+                }
+            }
+            else
+            {
+                if (Physics.Raycast(transform.position, transform.TransformDirection(Vector3.right), out raycastHit, 999f))
+                {
+                    Debug.DrawRay(transform.position, transform.TransformDirection(Vector3.right) * raycastHit.distance, Color.green);
+                }
+                else
+                {
+                    Debug.DrawRay(transform.position, transform.TransformDirection(Vector3.right) * 999f, Color.red);
+                }
+            }
+
+            if (raycastHit.distance > GetComponent<Collider>().bounds.extents.x)
+            {
+                _answer = false;
+            }
+            else
+            {
+                _answer = true;
+            }
+
+            return _answer;
         }
 
         private void MovingLeftOrRight()
@@ -40,6 +92,36 @@ namespace Jincom.Agent
             else
             {
                 enemyAgent.Move(1, 0);
+            }
+        }
+
+        private void WaitForAMoment()
+        {
+            if (!StartedWaiting)
+            {
+                TimeStampEndWait = Time.unscaledTime + WaitTime;
+                StartedWaiting = true;
+            }
+
+            else
+            {
+                if (TimeStampEndWait <= Time.unscaledTime)
+                {
+                    TurnAround();
+                    StartedWaiting = false;
+                }
+            }
+        }
+
+        private void TurnAround()
+        {
+            if (enemyAgent.Facing == EnemyAgent.FacingDirection.Left)
+            {
+                enemyAgent.Facing = EnemyAgent.FacingDirection.Right;
+            }
+            else
+            {
+                enemyAgent.Facing = EnemyAgent.FacingDirection.Left;
             }
         }
     }
