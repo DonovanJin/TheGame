@@ -332,7 +332,7 @@ namespace Jincom.Agent
             CapsuleCollider _capCol;
 
             _capCol = GetComponent<CapsuleCollider>();
-            _v3 = new Vector3(transform.position.x, transform.position.y + (_capCol.height/2), transform.position.y);
+            _v3 = new Vector3(transform.position.x, transform.position.y + (_capCol.height/2), transform.position.z);
             
             //HERMANN - replace 999f with weapon's drop off distance
             if (Physics.Raycast(_v3, ShootAtTarget.transform.position - _v3, out _rayHit ,999f))
