@@ -10,7 +10,7 @@ namespace Jincom.Agent
 {
     public class PlayerAgent : AgentBase
     {
-        private Player _playerData;
+        public Player _playerData;
         private bool _doubleJumped;  
         private RaycastHit _rayHit;
         private float _timeFalling;
@@ -334,11 +334,11 @@ namespace Jincom.Agent
             _capCol = GetComponent<CapsuleCollider>();
             _v3 = new Vector3(transform.position.x, transform.position.y + (_capCol.height/2), transform.position.z);
             
-            //HERMANN - replace 999f with weapon's drop off distance
-            if (Physics.Raycast(_v3, ShootAtTarget.transform.position - _v3, out _rayHit ,999f))
+            if (Physics.Raycast(_v3, ShootAtTarget.transform.position - _v3, out _rayHit ,_playerData.CurrentWeapon.Range))
             {
                 print("I hit somethin!");
                 Debug.DrawRay(_v3, _rayHit.point - _v3, Color.red);
+                print(_playerData.CurrentWeapon.ToString() +_playerData.Ammo[_playerData.CurrentWeapon].ToString() + " " + _playerData.CurrentWeapon.Range);                
             }
             else
             {

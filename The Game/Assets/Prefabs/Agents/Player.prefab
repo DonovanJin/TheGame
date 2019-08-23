@@ -89,6 +89,7 @@ GameObject:
   - component: {fileID: 6453848375726375614}
   - component: {fileID: 726383972002163062}
   - component: {fileID: 4860755754995758890}
+  - component: {fileID: 7200526601201699168}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -131,7 +132,6 @@ MonoBehaviour:
   MaxHealth: 0
   CurrentArmour: 0
   MaxArmour: 0
-  CurrentAmmo: 0
   Facing: 0
   StateOfThisAgent: 
   ShootAtTarget: {fileID: 27848639337905514}
@@ -165,6 +165,20 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &7200526601201699168
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6453848375726375615}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0f543823721744840b48b83cad89c575, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  TestWeapon: {fileID: 11400000, guid: cc6e4e89a57ca33438c1ce179169d1ff, type: 2}
+  playerAgent: {fileID: 6453848375726375614}
 --- !u!1 &6759557058910447979
 GameObject:
   m_ObjectHideFlags: 0
