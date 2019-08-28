@@ -10,6 +10,9 @@ namespace Jincom.Agent
 {
     public class PlayerAgent : AgentBase
     {
+        //HERMANN TESTING
+        public GameObject VisibleMesh;
+
         public Player playerData;
         private bool _doubleJumped;  
         private RaycastHit _rayHit;
@@ -85,6 +88,9 @@ namespace Jincom.Agent
             Fall();
 
             WhatStateIsAgentIn();
+
+            //TESTING
+            Meshdirection();
         }
 
         //  =   =   =   =   =   =   =   =   =   =   =   =
@@ -267,7 +273,7 @@ namespace Jincom.Agent
                         if (!_doubleJumped)
                         {
                             RB.velocity = new Vector3(RB.velocity.x, 0f, RB.velocity.z);
-                            Jump(playerData.JumpHeight * 0.75f);
+                            Jump(playerData.JumpHeight);
                             _doubleJumped = true;
                         }
                     }
@@ -455,5 +461,18 @@ namespace Jincom.Agent
         {
             StateOfThisAgent = playerData._currentStateOfAgent.ToString();
         }
-    }
+
+        //TESTING
+        private void Meshdirection()
+        {
+            if(Facing == FacingDirection.Left)
+            {
+                VisibleMesh.transform.eulerAngles = new Vector3(transform.rotation.x, -90, transform.rotation.z);
+            }
+            else
+            {
+                VisibleMesh.transform.eulerAngles = new Vector3(transform.rotation.x, 90, transform.rotation.z);
+            }
+        }
+    }    
 }

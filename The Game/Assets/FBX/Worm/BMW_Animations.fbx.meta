@@ -1,0 +1,176 @@
+fileFormatVersion: 2
+guid: e3bec620181b45c4e9e32230585330bc
+ModelImporter:
+  serializedVersion: 23
+  fileIDToRecycleName:
+    100000: BMW:body_geo
+    100002: BMW:ctrl_grp
+    100004: BMW:frontBody_01_joint
+    100006: BMW:frontBody_02_joint
+    100008: BMW:frontBody_03_joint
+    100010: BMW:frontBody_04_joint
+    100012: BMW:Geo_grp
+    100014: BMW:head_joint
+    100016: BMW:inner_mouth_geo
+    100018: BMW:joint_grp
+    100020: BMW:LB_tusk_01_joint
+    100022: BMW:LB_tusk_02_joint
+    100024: BMW:LB_tusk_end_joint
+    100026: BMW:LU_tusk_01_joint
+    100028: BMW:LU_tusk_02_joint
+    100030: BMW:LU_tusk_end_joint
+    100032: BMW:midBody_joint
+    100034: BMW:mouthWigglies
+    100036: BMW:RB_tusk_01_joint
+    100038: BMW:RB_tusk_02_joint
+    100040: BMW:RB_tusk_end_joint
+    100042: BMW:root_joint
+    100044: BMW:RU_tusk_01_joint
+    100046: BMW:RU_tusk_02_joint
+    100048: BMW:RU_tusk_end_joint
+    100050: BMW:tail_01_joint
+    100052: BMW:tail_02_joint
+    100054: BMW:tail_03_joint
+    100056: BMW:tail_04_joint
+    100058: BMW:tail_05_joint
+    100060: BMW:tail_06_joint
+    100062: BMW:tail_07_joint
+    100064: BMW:tail_08_joint
+    100066: BMW:tail_09_joint
+    100068: BMW:tail_end_joint
+    100070: BMW:tusks_geo
+    100072: //RootNode
+    400000: BMW:body_geo
+    400002: BMW:ctrl_grp
+    400004: BMW:frontBody_01_joint
+    400006: BMW:frontBody_02_joint
+    400008: BMW:frontBody_03_joint
+    400010: BMW:frontBody_04_joint
+    400012: BMW:Geo_grp
+    400014: BMW:head_joint
+    400016: BMW:inner_mouth_geo
+    400018: BMW:joint_grp
+    400020: BMW:LB_tusk_01_joint
+    400022: BMW:LB_tusk_02_joint
+    400024: BMW:LB_tusk_end_joint
+    400026: BMW:LU_tusk_01_joint
+    400028: BMW:LU_tusk_02_joint
+    400030: BMW:LU_tusk_end_joint
+    400032: BMW:midBody_joint
+    400034: BMW:mouthWigglies
+    400036: BMW:RB_tusk_01_joint
+    400038: BMW:RB_tusk_02_joint
+    400040: BMW:RB_tusk_end_joint
+    400042: BMW:root_joint
+    400044: BMW:RU_tusk_01_joint
+    400046: BMW:RU_tusk_02_joint
+    400048: BMW:RU_tusk_end_joint
+    400050: BMW:tail_01_joint
+    400052: BMW:tail_02_joint
+    400054: BMW:tail_03_joint
+    400056: BMW:tail_04_joint
+    400058: BMW:tail_05_joint
+    400060: BMW:tail_06_joint
+    400062: BMW:tail_07_joint
+    400064: BMW:tail_08_joint
+    400066: BMW:tail_09_joint
+    400068: BMW:tail_end_joint
+    400070: BMW:tusks_geo
+    400072: //RootNode
+    2100000: lambert1
+    4300000: BMW:inner_mouth_geo
+    4300002: BMW:body_geo
+    4300004: BMW:tusks_geo
+    4300006: BMW:mouthWigglies
+    7400000: Take 001
+    9500000: //RootNode
+    13700000: BMW:body_geo
+    13700002: BMW:inner_mouth_geo
+    13700004: BMW:mouthWigglies
+    13700006: BMW:tusks_geo
+  externalObjects: {}
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+    materialLocation: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleCurves: 1
+    optimizeGameObjects: 0
+    motionNodeName: 
+    rigImportErrors: 
+    rigImportWarnings: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    importAnimatedCustomProperties: 0
+    importConstraints: 0
+    animationCompression: 1
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    extraUserProperties: []
+    clipAnimations: []
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 0
+    useSRGBMaterialColor: 1
+    importVisibility: 1
+    importBlendShapes: 1
+    importCameras: 1
+    importLights: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    keepQuads: 0
+    weldVertices: 1
+    preserveHierarchy: 0
+    indexFormat: 0
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+    previousCalculatedGlobalScale: 0.01
+    hasPreviousCalculatedGlobalScale: 1
+  tangentSpace:
+    normalSmoothAngle: 60
+    normalImportMode: 0
+    tangentImportMode: 3
+    normalCalculationMode: 4
+    legacyComputeAllNormalsFromSmoothingGroupsWhenMeshHasBlendShapes: 0
+    blendShapeNormalImportMode: 1
+    normalSmoothingSource: 0
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    serializedVersion: 2
+    human: []
+    skeleton: []
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    rootMotionBoneName: 
+    hasTranslationDoF: 0
+    hasExtraRoot: 0
+    skeletonHasParents: 1
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 2
+  humanoidOversampling: 1
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
