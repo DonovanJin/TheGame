@@ -209,7 +209,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cameraMode: 0
   TargetTransform: {fileID: 0}
-  FollowDistance: 10
+  FollowDistance: 7
+  CameraHeightRelativeToPlayer: 1.5
+  AdjustCameraUpDown: 0
+  AdjustCameraLeftRight: 0
 --- !u!114 &1629674313 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 3223302224157319113, guid: c26ee689dd3bc4dbeba5def995c2cc4f,
@@ -374,6 +377,12 @@ PrefabInstance:
       propertyPath: m_Name
       value: LevelSpawner
       objectReference: {fileID: 0}
+    - target: {fileID: 1166760406018548282, guid: b1d61bf966c384a78a12112066571195,
+        type: 3}
+      propertyPath: _gameLevels.Array.data[0].Prefab
+      value: 
+      objectReference: {fileID: 2101935643489172648, guid: 4f1fd6919c61c6a499461cee20900b15,
+        type: 3}
     - target: {fileID: 4568395856615834064, guid: b1d61bf966c384a78a12112066571195,
         type: 3}
       propertyPath: m_LocalPosition.x
