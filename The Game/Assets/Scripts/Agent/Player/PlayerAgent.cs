@@ -166,30 +166,41 @@ namespace Jincom.Agent
         //As soon as 'player' turns from one direction to another, she looses accumilated momentum
         private void CalculateMomentum()
         {
-            if (Input.GetAxis("Horizontal") != 0)
+            //if player is on the ground
+            if (Physics.Raycast(transform.position, -Vector3.up, GetComponent<Collider>().bounds.extents.y + 0.1f))
             {
-                if (!IsPlayerBackpedalling())
+                if (IsPlayerRunning())
                 {
-                    if (Input.GetAxis("Horizontal") < 0)
+                    if (Input.GetAxis("Horizontal") != 0)
                     {
-                        if ((_momentum > -1f) && (_momentum <= 0f))
+                        if (!IsPlayerBackpedalling())
                         {
-                            _momentum -= 0.01f;
+                            if (Input.GetAxis("Horizontal") < 0)
+                            {
+                                if ((_momentum > -1f) && (_momentum <= 0f))
+                                {
+                                    _momentum -= PlayerData.RunAcceleration;
+                                }
+                                else if (_momentum > 0f)
+                                {
+                                    _momentum = -PlayerData.RunAcceleration;
+                                }
+                            }
+                            else
+                            {
+                                if ((_momentum < 1f) && (_momentum >= 0f))
+                                {
+                                    _momentum += PlayerData.RunAcceleration;
+                                }
+                                else if (_momentum < 0f)
+                                {
+                                    _momentum = PlayerData.RunAcceleration;
+                                }
+                            }
                         }
-                        else if (_momentum > 0f)
+                        else
                         {
-                            _momentum = -0.01f;
-                        }
-                    }
-                    else 
-                    {
-                        if ((_momentum < 1f) && (_momentum >= 0f))
-                        {
-                            _momentum += 0.01f;
-                        }
-                        else if (_momentum < 0f)
-                        {
-                            _momentum = 0.01f;
+                            _momentum = 0f;
                         }
                     }
                 }
@@ -198,9 +209,17 @@ namespace Jincom.Agent
                     _momentum = 0f;
                 }
             }
+        }
+
+        private bool IsPlayerRunning()
+        {
+            if (Input.GetKey(KeyCode.LeftShift))
+            {
+                return true;
+            }
             else
             {
-                _momentum = 0f;
+                return false;
             }
         }
 
