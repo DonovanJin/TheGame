@@ -5,16 +5,13 @@ using Jincom.Core;
 
 namespace Jincom.Agent
 {
-    public class EnemyAgent : AgentBase
+    abstract public class EnemyAgent : AgentBase
     {
         private Enemy _enemyData;
-
-        public bool PlayerAbsent = false;
-
         public Transform PlayerTransform;
         public float SpotDistance = 10f;
         public bool SpottedPlayer;
-        private RaycastHit RayHit;
+        private RaycastHit _rayHit;
 
         private float _horizontalDifference;
 
@@ -25,8 +22,36 @@ namespace Jincom.Agent
         };
         public FacingDirection Facing;
 
+        //This is the action the enemy is currently performing and is mostly to inform the animation
+        public enum AgentState
+        {
+            //Generic actions
+            Idle,
+            Walking,
+            Dead,
+            Fall,
+            Jump,
+
+            //Worm actions
+            Strangling,
+            Spitting
+        };
+        public AgentState CurrentStateOfAgent;
+
+        //The state of the enemy's mind. This informs what type of AI to employ.
+        public enum EnemyBehaviour
+        {
+            Idle,
+            Suspicious,
+            Attacking,
+            Chasing,
+            Performing
+        };
+
+        public EnemyBehaviour CurrentEnemyBehaviour;
+
         //  =   =   =   =   =   =   =   =   =   =   =   =
-        
+
         public void Update()
         {
             AgentUpdate();
@@ -46,9 +71,10 @@ namespace Jincom.Agent
 
         public virtual void SpotThePlayer()
         {
-            if (!PlayerAbsent)
+            //Performing means it's probably a cutscene of some sort
+            if(CurrentEnemyBehaviour != EnemyBehaviour.Performing)
             {
-                if (PlayerTransform == null)
+                if (!PlayerTransform)
                 {
                     PlayerTransform = GameObject.FindGameObjectWithTag("Player").gameObject.GetComponent<Transform>();
                 }
@@ -57,10 +83,10 @@ namespace Jincom.Agent
                 {
                     _horizontalDifference = transform.position.x - PlayerTransform.position.x;
 
-                    if (Physics.Raycast(transform.position, PlayerTransform.position - transform.position, out RayHit))
+                    if (Physics.Raycast(transform.position, PlayerTransform.position - transform.position, out _rayHit))
                     {
-                        if (RayHit.transform == PlayerTransform)
-                        {                            
+                        if (_rayHit.transform == PlayerTransform)
+                        {
                             if (Vector3.Distance(transform.position, PlayerTransform.position) < SpotDistance)
                             {
                                 //SpottedPlayer = true;

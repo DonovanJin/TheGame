@@ -1,4 +1,4 @@
-﻿//#define TESTING
+﻿#define TESTING
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -10,10 +10,10 @@ namespace Jincom.Agent
 {
     public class PlayerAgent : AgentBase
     {
-        //HERMANN TESTING
+        //HERMANN just for demo purposes. Rotates the empty parent object that's in control of the visible meshes for the player
         public GameObject VisibleMesh;
 
-        public Player playerData;
+        private Player _playerData;
         private bool _doubleJumped;  
         private RaycastHit _rayHit;
         private float _timeFalling;
@@ -22,9 +22,8 @@ namespace Jincom.Agent
         private float _newVertPos = 0f;
 
         [Range(-1f, 1f)]
-        private float _momentum;
-
-        //TESTING
+        public float _momentum;
+                
         public int CurrentHealth, MaxHealth, CurrentArmour, MaxArmour, CurrentAmmo;
         public float JumpHeight;
         public WeaponData CurrentWeapon;
@@ -39,7 +38,7 @@ namespace Jincom.Agent
         
         public string StateOfThisAgent;
 
-        public Transform ShootAtTarget;
+        public Transform Target;
 
 #if TESTING
         public float PlayerJumpHeight;
@@ -50,7 +49,7 @@ namespace Jincom.Agent
         {
             get
             {
-                return playerData;
+                return _playerData;
             }
         } 
 
@@ -76,54 +75,48 @@ namespace Jincom.Agent
 
         public override void AgentUpdate()
         {
+            //DisplayPlayerInfo is used in development time as substitute for a UI
+            //MeshDirection is a temporary solution for turning the player around
 #if TESTING
-            UpdateJumpHeight();
-#endif            
             DisplayPlayerInfo();
-
+            MeshDirection();
+#endif
+            FacingLeftOrRight();
             ResetDoubleJump();
-            PlayerInput(); 
-            
+            PlayerInput();             
             AnimationState();
             Fall();
-
             WhatStateIsAgentIn();
-
-            //TESTING
-            Meshdirection();
         }
 
         //  =   =   =   =   =   =   =   =   =   =   =   =
 
+#if TESTING
         private void DisplayPlayerInfo()
         {
-            CurrentHealth = playerData.CurrentHealth;
-            MaxHealth = playerData.MaxHealth;
-            CurrentArmour = playerData.CurrentArmour;
-            MaxArmour = playerData.MaxArmour;
-            JumpHeight = playerData.JumpHeight;
+            CurrentHealth = _playerData.CurrentHealth;
+            MaxHealth = _playerData.MaxHealth;
+            CurrentArmour = _playerData.CurrentArmour;
+            MaxArmour = _playerData.MaxArmour;
+            JumpHeight = _playerData.JumpHeight;
             if (PlayerData.CurrentWeapon != null)
             {
                 CurrentWeapon = PlayerData.CurrentWeapon;
                 CurrentAmmo = PlayerData.Ammo[PlayerData.CurrentWeapon];
             }
         }
+#endif
 
         private void PlayerInput()
         {
-            if (playerData._currentStateOfAgent != Player.AgentState.Dead)
+            if (_playerData._currentStateOfAgent != Player.AgentState.Dead)
             {
                 if (Input.anyKey)
                 {
                     if (Input.GetAxis("Horizontal") != 0)
                     {
-                        FacingLeftOrRight();
-
-                        if (CanGoForward())
-                        {
-                            CalculateMomentum();
-                            PlayerMovesForward();
-                        }
+                        CalculateMomentum();
+                        PlayerMovesForward();
                     }
 
                     if (Input.GetButtonDown("Jump"))
@@ -135,6 +128,14 @@ namespace Jincom.Agent
                     {
                         PlayerShoot();
                     }
+
+                    if (Input.GetKeyDown(KeyCode.Alpha1))
+                    {
+                        if (PlayerData.CurrentWeapon)
+                        {
+                            PlayerData.SwitchToWeapon(PlayerData.CurrentWeapon);
+                        }
+                    }
                 }
             }
         }
@@ -143,65 +144,20 @@ namespace Jincom.Agent
 
         private void FacingLeftOrRight()
         {
-            //Facing direction
-            if (Input.GetAxis("Horizontal") < 0f)
+            if (GetComponentInChildren<Cursor_UI_3DSpace>().CanvasCursorPosition.x < (Screen.width * 0.5f))
             {
-                Facing = FacingDirection.Left;
-            }
-            else if (Input.GetAxis("Horizontal") > 0f)
-            {
-                Facing = FacingDirection.Right;
-            }
-        }
-
-        //  =   =   =   =   =   =   =   =   =   =   =   =
-
-        //Measure distance ahead of the player and ask if there is any obstructions
-        private bool CanGoForward()
-        {
-            bool _answer;
-
-            if (Facing == FacingDirection.Left)
-            {
-                if (Physics.Raycast(transform.position, transform.TransformDirection(Vector3.left), out _rayHit, 999f))
+                if (Facing != FacingDirection.Left)
                 {
-                    Debug.DrawRay(transform.position, transform.TransformDirection(Vector3.left) * _rayHit.distance, Color.green);
-                }
-                else
-                {
-                    Debug.DrawRay(transform.position, transform.TransformDirection(Vector3.left) * 999f, Color.red);
+                    Facing = FacingDirection.Left;
                 }
             }
             else
             {
-                if (Physics.Raycast(transform.position, transform.TransformDirection(Vector3.right), out _rayHit, 999f))
+                if (Facing != FacingDirection.Right)
                 {
-                    Debug.DrawRay(transform.position, transform.TransformDirection(Vector3.right) * _rayHit.distance, Color.green);
-                }
-                else
-                {
-                    Debug.DrawRay(transform.position, transform.TransformDirection(Vector3.right) * 999f, Color.red);
+                    Facing = FacingDirection.Right;
                 }
             }
-
-            if (_rayHit.distance < 999f)
-            {
-                if (_rayHit.distance > GetComponent<Collider>().bounds.extents.x)
-                {
-                    _answer = true;
-                }
-                else
-                {
-                    _answer = false;
-                }
-            }
-            else
-            {
-                Debug.LogError("There seems to be a gap in the level");
-                _answer = true;
-            }
-
-            return _answer;
         }
 
         //  =   =   =   =   =   =   =   =   =   =   =   =
@@ -209,31 +165,34 @@ namespace Jincom.Agent
         //As soon as 'player' turns from one direction to another, she looses accumilated momentum
         private void CalculateMomentum()
         {
-            if (Input.GetAxis("Horizontal") < 0)
+            if (!IsPlayerBackpedalling())
             {
-                if ((_momentum > -1f) && (_momentum <= 0f))
+                if (Input.GetAxis("Horizontal") < 0)
                 {
-                    _momentum -= 0.01f;
+                    if ((_momentum > -1f) && (_momentum <= 0f))
+                    {
+                        _momentum -= 0.01f;
+                    }
+                    else if (_momentum > 0f)
+                    {
+                        _momentum = -0.01f;
+                    }
                 }
-                else if (_momentum > 0f)
+                else if (Input.GetAxis("Horizontal") > 0)
                 {
-                    _momentum = -0.01f;
+                    if ((_momentum < 1f) && (_momentum >= 0f))
+                    {
+                        _momentum += 0.01f;
+                    }
+                    else if (_momentum < 0f)
+                    {
+                        _momentum = 0.01f;
+                    }
                 }
-            }
-            else if (Input.GetAxis("Horizontal") > 0)
-            {
-                if ((_momentum < 1f) && (_momentum >= 0f))
+                else
                 {
-                    _momentum += 0.01f;
+                    _momentum = 0f;
                 }
-                else if (_momentum < 0f)
-                {
-                    _momentum = 0.01f;
-                }
-            }
-            else
-            {
-                _momentum = 0f;
             }
         }
 
@@ -241,7 +200,36 @@ namespace Jincom.Agent
 
         private void PlayerMovesForward()
         {
-            Move((Input.GetAxis("Horizontal")) * ((Mathf.Abs(_momentum)) + 1), 0f);
+            float _input;
+
+            if (IsPlayerBackpedalling())
+            {
+                _input = ((Input.GetAxis("Horizontal")) * ((Mathf.Abs(_momentum)) + 1)) * 0.5f;
+            }
+            else
+            {
+                _input = (Input.GetAxis("Horizontal")) * ((Mathf.Abs(_momentum)) + 1);
+            }
+
+            Move(_input, 0f);
+        }
+
+        private bool IsPlayerBackpedalling()
+        {
+            //Player is one direction, yet moving the oppisite
+            if ((Input.GetAxis("Horizontal") < 0f) && (Facing == FacingDirection.Right))
+            {
+                return true;
+            }
+            else if ((Input.GetAxis("Horizontal") > 0f) && ((Facing == FacingDirection.Left)))
+            {
+                return true;
+            }
+            //Player is moving in same direction as he/she is facing
+            else
+            {
+                return false;
+            }
         }
 
         //  =   =   =   =   =   =   =   =   =   =   =   =
@@ -260,7 +248,7 @@ namespace Jincom.Agent
             //On ground, normal jump
             if (Physics.Raycast(transform.position, -Vector3.up, GetComponent<Collider>().bounds.extents.y + 0.1f))
             {
-                Jump((playerData.JumpHeight + (150f * (Mathf.Abs(_momentum)))));
+                Jump((_playerData.JumpHeight + (150f * (Mathf.Abs(_momentum)))));
             }
             //In air
             else
@@ -273,7 +261,7 @@ namespace Jincom.Agent
                         if (!_doubleJumped)
                         {
                             RB.velocity = new Vector3(RB.velocity.x, 0f, RB.velocity.z);
-                            Jump(playerData.JumpHeight);
+                            Jump(_playerData.JumpHeight);
                             _doubleJumped = true;
                         }
                     }
@@ -285,7 +273,7 @@ namespace Jincom.Agent
 
         internal void Init(Player playerData)
         {
-            this.playerData = playerData;
+            this._playerData = playerData;
         }
 
         //  =   =   =   =   =   =   =   =   =   =   =   =
@@ -299,7 +287,7 @@ namespace Jincom.Agent
 
         private bool CanPlayerShoot(WeaponData weaponData)
         {
-            if (playerData.CurrentGunHasAmmo())
+            if (_playerData.CurrentGunHasAmmo())
             {
                 //total time > (time stamp when gun was last shot + time between each shot)
                 if (Time.unscaledTime > (_timeLastShot + weaponData.WaitTimeBetweenShots()))
@@ -327,17 +315,17 @@ namespace Jincom.Agent
 
         private void PlayerShoot()
         {
-            if (CanPlayerShoot(playerData.CurrentWeapon))
+            if (CanPlayerShoot(_playerData.CurrentWeapon))
             {
-                playerData.FireCurrentWeapon();
+                _playerData.FireCurrentWeapon();
 
                 AgentShoot();
             }
             //Used to see if player hits an Agent or a Surface
-            DrawDebugShootLine();
+            ShootAtTheTarget();
         }
 
-        private void DrawDebugShootLine()
+        private void ShootAtTheTarget()
         {
             Vector3 _v3;
             CapsuleCollider _capCol;
@@ -345,17 +333,17 @@ namespace Jincom.Agent
             _capCol = GetComponent<CapsuleCollider>();
             _v3 = new Vector3(transform.position.x, transform.position.y + (_capCol.height/2), transform.position.z);
 
-            if (playerData.CurrentWeapon != null)
+            if (_playerData.CurrentWeapon != null)
             {
-                if (Physics.Raycast(_v3, ShootAtTarget.transform.position - _v3, out _rayHit, playerData.CurrentWeapon.Range))
+                if (Physics.Raycast(_v3, Target.transform.position - _v3, out _rayHit, _playerData.CurrentWeapon.Range))
                 {
                     print("I hit somethin!");
                     Debug.DrawRay(_v3, _rayHit.point - _v3, Color.red);
-                    print(playerData.CurrentWeapon.ToString() + playerData.Ammo[playerData.CurrentWeapon].ToString() + " " + playerData.CurrentWeapon.Range);
+                    print(_playerData.CurrentWeapon.ToString() + _playerData.Ammo[_playerData.CurrentWeapon].ToString() + " " + _playerData.CurrentWeapon.Range);
                 }
                 else
                 {
-                    Debug.DrawRay(_v3, ShootAtTarget.transform.position - _v3, Color.blue);
+                    Debug.DrawRay(_v3, Target.transform.position - _v3, Color.blue);
                 }
             }
             else
@@ -368,19 +356,19 @@ namespace Jincom.Agent
 
         public virtual void AnimationState()
         {
-            if (playerData.CurrentHealth > 0f)
+            if (_playerData.CurrentHealth > 0f)
             {
                 if (Physics.Raycast(transform.position, -Vector3.up, GetComponent<Collider>().bounds.extents.y + 0.1f))
                 {
                     //Idle
                     if (Input.GetAxis("Horizontal") == 0)
                     {
-                        playerData._currentStateOfAgent = Player.AgentState.Idle;
+                        _playerData._currentStateOfAgent = Player.AgentState.Idle;
                     }
                     //Walking/Runninng
                     else
                     {
-                        playerData._currentStateOfAgent = Player.AgentState.Walk;
+                        _playerData._currentStateOfAgent = Player.AgentState.Walk;
                     }
                 }
 
@@ -391,31 +379,23 @@ namespace Jincom.Agent
                         //Falling
                         if (RB.velocity.y < 0f)
                         {
-                            playerData._currentStateOfAgent = Player.AgentState.Fall;
+                            _playerData._currentStateOfAgent = Player.AgentState.Fall;
                         }
                         //Jumping
                         else if (RB.velocity.y > 0f)
                         {
-                            playerData._currentStateOfAgent = Player.AgentState.Jump;
+                            _playerData._currentStateOfAgent = Player.AgentState.Jump;
                         }
                     }
                 }
             }
             else
             {
-                playerData._currentStateOfAgent = Player.AgentState.Dead;
+                _playerData._currentStateOfAgent = Player.AgentState.Dead;
             }
         }
 
         //  =   =   =   =   =   =   =   =   =   =   =   =
-
-#if TESTING
-        //Temp developer function
-        public void UpdateJumpHeight()
-        {
-            _playerData.JumpHeight = PlayerJumpHeight;
-        }
-#endif
 
         public virtual void Fall()
         {
@@ -459,11 +439,11 @@ namespace Jincom.Agent
 
         private void WhatStateIsAgentIn()
         {
-            StateOfThisAgent = playerData._currentStateOfAgent.ToString();
+            StateOfThisAgent = _playerData._currentStateOfAgent.ToString();
         }
-
-        //TESTING
-        private void Meshdirection()
+           
+#if TESTING
+        private void MeshDirection()
         {
             if(Facing == FacingDirection.Left)
             {
@@ -474,5 +454,6 @@ namespace Jincom.Agent
                 VisibleMesh.transform.eulerAngles = new Vector3(transform.rotation.x, 90, transform.rotation.z);
             }
         }
+#endif
     }    
 }

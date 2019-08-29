@@ -7,7 +7,6 @@ namespace Jincom.Agent
 {
     public class EnemyManager : MonoBehaviour
     {
-        //HERMANN - Jeff, I am not sure why the Enemy Manager needs a refernce to the player agent script. Is there a reason?
         public PlayerAgent Player;
 
         //private 

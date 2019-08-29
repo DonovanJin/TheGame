@@ -15,30 +15,7 @@ namespace Jincom.Agent
         public float JumpHeight = 650f;
         public GameConstants.Elements CurrentElement;
         public WeaponData CurrentWeapon;
-
-        public enum AgentState
-        {
-            //Generic actions
-            Idle,
-            Walking,
-            Dead,
-            Fall,
-            Jump,
-
-            //Worm actions
-            Strangling,
-            Spitting
-        };
-        public AgentState _currentStateOfAgent;
-
-        public enum EnemyBehaviour
-        {
-            Idle,
-            Suspicious,
-            Attacking,
-            Chasing,
-            Performing
-        };
+                
 
         public Enemy()
         {

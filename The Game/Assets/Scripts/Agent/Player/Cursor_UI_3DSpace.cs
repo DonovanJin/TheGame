@@ -6,9 +6,9 @@ using Jincom.CameraLogic;
 public class Cursor_UI_3DSpace : MonoBehaviour
 {
     private Vector3 point;
-    private Vector3 CanvasCursorPosition;
-    private Vector3 WorldSpaceTargetPosition;    
-    public CameraManager cameraManager;
+    public Vector3 CanvasCursorPosition;
+    private Vector3 worldSpaceTargetPosition;    
+    public CameraManager MainCameraManager;
 
     //Cursor is the cross hair and is a UI element
     //Target is the point in 3D space that the player actually aims at
@@ -22,10 +22,16 @@ public class Cursor_UI_3DSpace : MonoBehaviour
 
     private void Start()
     {
-        cameraManager = Camera.main.GetComponent<CameraManager>();
+        MainCameraManager = Camera.main.GetComponent<CameraManager>();
     }
 
     void Update()
+    {
+        UpdatePositions();
+        //IsMouseLeftOrRightOfPlayer();
+    }
+
+    private void UpdatePositions()
     {
         if (Camera.main.pixelRect.Contains(Input.mousePosition))
         {
@@ -33,7 +39,7 @@ public class Cursor_UI_3DSpace : MonoBehaviour
         }
 
         CanvasCursorPosition = new Vector3(Screen.width * point.x, Screen.height * point.y, 0f);
-        WorldSpaceTargetPosition = Camera.main.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y, cameraManager.FollowDistance));
+        worldSpaceTargetPosition = Camera.main.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y, MainCameraManager.FollowDistance));
 
         if (CanvasOrWorld == CanvasSpaceOrWorldSpace.CanvasCursor)
         {
@@ -41,8 +47,20 @@ public class Cursor_UI_3DSpace : MonoBehaviour
         }
         else
         {
-            transform.position = WorldSpaceTargetPosition;
+            transform.position = worldSpaceTargetPosition;
         }
     }
+
+    //private void IsMouseLeftOrRightOfPlayer()
+    //{
+    //    if (CanvasCursorPosition.x < (Screen.width * 0.5f))
+    //    {
+    //        print("Mouse is left of player");
+    //    }
+    //    else
+    //    {
+    //        print("Mouse is right of player");
+    //    }
+    //}
 }
 
