@@ -83,6 +83,8 @@ namespace Jincom.Agent
 #endif
             FacingLeftOrRight();
             ResetDoubleJump();
+
+            CalculateMomentum();
             PlayerInput();             
             AnimationState();
             Fall();
@@ -114,8 +116,7 @@ namespace Jincom.Agent
                 if (Input.anyKey)
                 {
                     if (Input.GetAxis("Horizontal") != 0)
-                    {
-                        CalculateMomentum();
+                    {                        
                         PlayerMovesForward();
                     }
 
@@ -165,34 +166,41 @@ namespace Jincom.Agent
         //As soon as 'player' turns from one direction to another, she looses accumilated momentum
         private void CalculateMomentum()
         {
-            if (!IsPlayerBackpedalling())
+            if (Input.GetAxis("Horizontal") != 0)
             {
-                if (Input.GetAxis("Horizontal") < 0)
+                if (!IsPlayerBackpedalling())
                 {
-                    if ((_momentum > -1f) && (_momentum <= 0f))
+                    if (Input.GetAxis("Horizontal") < 0)
                     {
-                        _momentum -= 0.01f;
+                        if ((_momentum > -1f) && (_momentum <= 0f))
+                        {
+                            _momentum -= 0.01f;
+                        }
+                        else if (_momentum > 0f)
+                        {
+                            _momentum = -0.01f;
+                        }
                     }
-                    else if (_momentum > 0f)
+                    else 
                     {
-                        _momentum = -0.01f;
-                    }
-                }
-                else if (Input.GetAxis("Horizontal") > 0)
-                {
-                    if ((_momentum < 1f) && (_momentum >= 0f))
-                    {
-                        _momentum += 0.01f;
-                    }
-                    else if (_momentum < 0f)
-                    {
-                        _momentum = 0.01f;
+                        if ((_momentum < 1f) && (_momentum >= 0f))
+                        {
+                            _momentum += 0.01f;
+                        }
+                        else if (_momentum < 0f)
+                        {
+                            _momentum = 0.01f;
+                        }
                     }
                 }
                 else
                 {
                     _momentum = 0f;
                 }
+            }
+            else
+            {
+                _momentum = 0f;
             }
         }
 
