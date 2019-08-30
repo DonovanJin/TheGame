@@ -14,12 +14,49 @@ namespace Jincom.CameraLogic
             Cinematic
         };
         public CameraMode cameraMode;
+
+        //public enum CameraOffset
+        //{
+        //    Center,
+        //    Left,
+        //    Right
+        //};
+
+        //public CameraOffset Offset;
+
         public Transform TargetTransform;
         public float FollowDistance;
         public float CameraHeightRelativeToPlayer = 1f;
         public float AdjustCameraUpDown, AdjustCameraLeftRight;
 
         //  =   =   =   =   =   =   =   =   =   =   =   =
+
+        private void Start()
+        {
+            StartCoroutine(StartOfLevel());
+        }
+
+        IEnumerator StartOfLevel()
+        {
+            yield return new WaitForSeconds(0.1f);
+            InitialZoomOnPlayer();
+        }
+
+        private void InitialZoomOnPlayer()
+        {
+            if (cameraMode == CameraMode.FollowPlayer)
+            {
+                if ((!TargetTransform) || (TargetTransform.tag != "Player"))
+                {
+                    //I know I should be able to acquire the player's transform through the managers, but I'm not sure how
+                    TargetTransform = GameObject.FindGameObjectWithTag("Player").gameObject.GetComponent<Transform>();
+                    AdjustCameraUpDown = CameraHeightRelativeToPlayer;
+                }
+
+                //transform.position = new Vector3(TargetTransform.position.x + AdjustCameraLeftRight, TargetTransform.position.y + AdjustCameraUpDown, (-FollowDistance));
+                transform.position = new Vector3(TargetTransform.position.x, TargetTransform.position.y + AdjustCameraUpDown, (-FollowDistance));
+            }
+        }
 
         //Have another Manager update Camera Logic
         private void Update()
@@ -62,7 +99,6 @@ namespace Jincom.CameraLogic
         }
 
         //Follow a new target in 'Normal Gameplay Mode'
-        //public void AssignNewTarget(Agent.AgentBase agent)
         public void AssignNewTarget(Transform newTarget)
         {
             //TargetTransform = agent.transform;
@@ -73,10 +109,68 @@ namespace Jincom.CameraLogic
 
         private void FollowTarget()
         {
-            if (TargetTransform != null)
+            AdjustCameraToOffset();
+
+            if (TargetTransform)
             {
-                transform.position = new Vector3(TargetTransform.position.x + AdjustCameraLeftRight, TargetTransform.position.y + AdjustCameraUpDown, (-FollowDistance));
+                //transform.position = new Vector3(TargetTransform.position.x + AdjustCameraLeftRight, TargetTransform.position.y + AdjustCameraUpDown, (-FollowDistance));
+                Vector3 targetVector3 = new Vector3(TargetTransform.position.x + AdjustCameraLeftRight, TargetTransform.position.y + AdjustCameraUpDown, (-FollowDistance));
+
+                transform.position = Vector3.Lerp(this.transform.position, targetVector3, Time.deltaTime * 2);
             }
+        }
+
+        private void AdjustCameraToOffset()
+        {
+            float _newOffset;
+
+            if (TargetTransform.GetComponent<PlayerAgent>().IsPlayerRunning())
+            {
+                _newOffset = 6f;
+            }
+            else
+            {
+                _newOffset = 3f;
+            }
+
+            if (cameraMode == CameraMode.FollowPlayer)
+            {
+                if (!TargetTransform.GetComponent<PlayerAgent>().IsPlayerBackpedalling())
+                {
+                    if (Input.GetAxis("Horizontal") < 0)
+                    {
+                        AdjustCameraLeftRight = -_newOffset;
+                    }
+                    else if (Input.GetAxis("Horizontal") > 0)
+                    {
+                        AdjustCameraLeftRight = _newOffset;
+                    }
+                    else
+                    {
+                        AdjustCameraLeftRight = 0f;
+                    }
+                }
+                else
+                {
+                    AdjustCameraLeftRight = 0f;
+                }
+            }
+
+
+            //switch (Offset)
+            //{
+            //    case CameraOffset.Left:
+            //        AdjustCameraLeftRight = -3f;
+            //        break;
+            //    case CameraOffset.Right:
+            //        AdjustCameraLeftRight = 3f;
+            //        break;
+            //    case CameraOffset.Center:
+            //        AdjustCameraLeftRight = 0f;
+            //        break;
+            //    default:
+            //        break;
+            //}
         }
     }
 }

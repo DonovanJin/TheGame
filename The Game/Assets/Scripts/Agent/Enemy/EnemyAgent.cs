@@ -131,7 +131,10 @@ namespace Jincom.Agent
 
         public virtual void Die()
         {
-            Debug.Log("Agent Dies");
+            Debug.Log("Agent is dead");
+
+            //TEMP
+            Destroy(this.gameObject);
         }
 
         //  =   =   =   =   =   =   =   =   =   =   =   =
@@ -145,6 +148,10 @@ namespace Jincom.Agent
             }
         }
 
-        //Pathing
+        public void ReceiveDamage(int Damage)
+        {
+            _enemyData.CurrentHealth -= Damage;
+
+        }
     }
 }

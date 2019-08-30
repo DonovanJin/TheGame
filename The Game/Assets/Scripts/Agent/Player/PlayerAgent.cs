@@ -11,9 +11,12 @@ namespace Jincom.Agent
 {
     public class PlayerAgent : AgentBase
     {
+        //public string TrevelingLeftOrRight = "Stopped";
+
         //HERMANN just for demo purposes. Rotates the empty parent object that's in control of the visible meshes for the player
         public GameObject VisibleMesh;
 
+        //private float _lastHorizontalPosition;
         private Player _playerData;
         private bool _doubleJumped;  
         private RaycastHit _rayHit;
@@ -72,6 +75,8 @@ namespace Jincom.Agent
 
             _oldVertPos = transform.position.y;
             _newVertPos = transform.position.y;
+
+            //_lastHorizontalPosition = transform.position.x;
         }
 
         public override void AgentUpdate()
@@ -144,14 +149,17 @@ namespace Jincom.Agent
 
         private void FacingLeftOrRight()
         {
-            if (GetComponentInChildren<Cursor_UI_3DSpace>().CanvasCursorPosition.x < (Screen.width * 0.5f))
+            //if (GetComponentInChildren<Cursor_UI_3DSpace>().CanvasCursorPosition.x < (Screen.width * 0.5f))
+
+            //If target that player shoots at is left or right of them
+            if (Target.transform.position.x < this.transform.position.x)
             {
                 if (Facing != FacingDirection.Left)
                 {
                     Facing = FacingDirection.Left;
                 }
             }
-            else
+            else if (Target.transform.position.x > this.transform.position.x)
             {
                 if (Facing != FacingDirection.Right)
                 {
@@ -210,7 +218,7 @@ namespace Jincom.Agent
             }
         }
 
-        private bool IsPlayerRunning()
+        public bool IsPlayerRunning()
         {
             if (Input.GetKey(KeyCode.LeftShift))
             {
@@ -240,7 +248,7 @@ namespace Jincom.Agent
             Move(_input, 0f);
         }
 
-        private bool IsPlayerBackpedalling()
+        public bool IsPlayerBackpedalling()
         {
             //Player is one direction, yet moving the oppisite
             if ((Input.GetAxis("Horizontal") < 0f) && (Facing == FacingDirection.Right))
@@ -486,5 +494,13 @@ namespace Jincom.Agent
             }
         }
 #endif
+
+        //private void IsPlayerTravellingLeftorRight()
+        //{
+        //    if (_lastHorizontalPosition < transform.position.x)
+        //    {
+        //        TrevelingLeftOrRight
+        //    }
+        //}
     }    
 }

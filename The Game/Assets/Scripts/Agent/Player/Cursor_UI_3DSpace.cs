@@ -28,7 +28,6 @@ public class Cursor_UI_3DSpace : MonoBehaviour
     void Update()
     {
         UpdatePositions();
-        //IsMouseLeftOrRightOfPlayer();
     }
 
     private void UpdatePositions()
@@ -50,17 +49,5 @@ public class Cursor_UI_3DSpace : MonoBehaviour
             transform.position = worldSpaceTargetPosition;
         }
     }
-
-    //private void IsMouseLeftOrRightOfPlayer()
-    //{
-    //    if (CanvasCursorPosition.x < (Screen.width * 0.5f))
-    //    {
-    //        print("Mouse is left of player");
-    //    }
-    //    else
-    //    {
-    //        print("Mouse is right of player");
-    //    }
-    //}
 }
 
