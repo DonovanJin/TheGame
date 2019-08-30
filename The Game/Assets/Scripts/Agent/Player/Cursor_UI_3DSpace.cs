@@ -38,7 +38,7 @@ public class Cursor_UI_3DSpace : MonoBehaviour
         }
 
         CanvasCursorPosition = new Vector3(Screen.width * point.x, Screen.height * point.y, 0f);
-        worldSpaceTargetPosition = Camera.main.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y, MainCameraManager.FollowDistance));
+        worldSpaceTargetPosition = Camera.main.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y, MainCameraManager.CurrentFollowDistance));
 
         if (CanvasOrWorld == CanvasSpaceOrWorldSpace.CanvasCursor)
         {

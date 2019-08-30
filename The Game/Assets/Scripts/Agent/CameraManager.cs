@@ -25,7 +25,7 @@ namespace Jincom.CameraLogic
         //public CameraOffset Offset;
 
         public Transform TargetTransform;
-        public float FollowDistance;
+        public float DefaultFollowDistance ,CurrentFollowDistance;
         public float CameraHeightRelativeToPlayer = 1f;
         public float AdjustCameraUpDown, AdjustCameraLeftRight;
 
@@ -34,6 +34,7 @@ namespace Jincom.CameraLogic
         private void Start()
         {
             StartCoroutine(StartOfLevel());
+            DefaultFollowDistance = CurrentFollowDistance;
         }
 
         IEnumerator StartOfLevel()
@@ -54,7 +55,7 @@ namespace Jincom.CameraLogic
                 }
 
                 //transform.position = new Vector3(TargetTransform.position.x + AdjustCameraLeftRight, TargetTransform.position.y + AdjustCameraUpDown, (-FollowDistance));
-                transform.position = new Vector3(TargetTransform.position.x, TargetTransform.position.y + AdjustCameraUpDown, (-FollowDistance));
+                transform.position = new Vector3(TargetTransform.position.x, TargetTransform.position.y + AdjustCameraUpDown, (-CurrentFollowDistance));
             }
         }
 
@@ -114,7 +115,7 @@ namespace Jincom.CameraLogic
             if (TargetTransform)
             {
                 //transform.position = new Vector3(TargetTransform.position.x + AdjustCameraLeftRight, TargetTransform.position.y + AdjustCameraUpDown, (-FollowDistance));
-                Vector3 targetVector3 = new Vector3(TargetTransform.position.x + AdjustCameraLeftRight, TargetTransform.position.y + AdjustCameraUpDown, (-FollowDistance));
+                Vector3 targetVector3 = new Vector3(TargetTransform.position.x + AdjustCameraLeftRight, TargetTransform.position.y + AdjustCameraUpDown, (-CurrentFollowDistance));
 
                 transform.position = Vector3.Lerp(this.transform.position, targetVector3, Time.deltaTime * 2);
             }

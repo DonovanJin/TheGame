@@ -13,9 +13,9 @@ MonoBehaviour:
   m_Name: FireGun
   m_EditorClassIdentifier: 
   WeaponName: 
-  Range: 200
-  Damage: 50
+  Range: 100
+  Damage: 25
   Element: 1
-  CurrentCapacity: 90
   MaxiumumCapacity: 100
+  FireRateInSeconds: 1
   Icon: {fileID: 0}

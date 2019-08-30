@@ -209,7 +209,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cameraMode: 0
   TargetTransform: {fileID: 0}
-  FollowDistance: 7
+  DefaultFollowDistance: 7
+  CurrentFollowDistance: 7
   CameraHeightRelativeToPlayer: 1.5
   AdjustCameraUpDown: 0
   AdjustCameraLeftRight: 0

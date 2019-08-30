@@ -128,6 +128,7 @@ MonoBehaviour:
   CurrentElement: 0
   MoveSpeed: 0.05
   CanShoot: 1
+  DistanceToCursorTarget: 0
   VisibleMesh: {fileID: 8533162718305330226}
   _momentum: 0
   CurrentHealth: 0
@@ -139,7 +140,7 @@ MonoBehaviour:
   CurrentWeapon: {fileID: 0}
   Facing: 1
   StateOfThisAgent: 
-  Target: {fileID: 27848639337905514}
+  CursorTarget: {fileID: 27848639337905514}
   PlayerJumpHeight: 0
 --- !u!136 &726383972002163062
 CapsuleCollider:

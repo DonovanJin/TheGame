@@ -13,7 +13,7 @@ namespace Jincom.Agent
     {
         //public string TrevelingLeftOrRight = "Stopped";
 
-        //HERMANN just for demo purposes. Rotates the empty parent object that's in control of the visible meshes for the player
+        public float DistanceToCursorTarget;
         public GameObject VisibleMesh;
 
         //private float _lastHorizontalPosition;
@@ -42,7 +42,7 @@ namespace Jincom.Agent
         
         public string StateOfThisAgent;
 
-        public Transform Target;
+        public Transform CursorTarget;
 
 #if TESTING
         public float PlayerJumpHeight;
@@ -95,6 +95,7 @@ namespace Jincom.Agent
             AnimationState();
             Fall();
             WhatStateIsAgentIn();
+            CalculateDistanceToCursorTarget();
         }
 
         //  =   =   =   =   =   =   =   =   =   =   =   =
@@ -152,14 +153,14 @@ namespace Jincom.Agent
             //if (GetComponentInChildren<Cursor_UI_3DSpace>().CanvasCursorPosition.x < (Screen.width * 0.5f))
 
             //If target that player shoots at is left or right of them
-            if (Target.transform.position.x < this.transform.position.x)
+            if (CursorTarget.transform.position.x < this.transform.position.x)
             {
                 if (Facing != FacingDirection.Left)
                 {
                     Facing = FacingDirection.Left;
                 }
             }
-            else if (Target.transform.position.x > this.transform.position.x)
+            else if (CursorTarget.transform.position.x > this.transform.position.x)
             {
                 if (Facing != FacingDirection.Right)
                 {
@@ -365,7 +366,7 @@ namespace Jincom.Agent
             if (CanPlayerShoot(_playerData.CurrentWeapon))
             {
                 //Player shot something (A surface or an agent)
-                if (Physics.Raycast(Origin, Target.transform.position - Origin, out _rayHit, _playerData.CurrentWeapon.Range))
+                if (Physics.Raycast(Origin, CursorTarget.transform.position - Origin, out _rayHit, _playerData.CurrentWeapon.Range))
                 {
                     Debug.DrawRay(Origin, _rayHit.point - Origin, Color.red);
                     //print(_playerData.CurrentWeapon.ToString() + _playerData.Ammo[_playerData.CurrentWeapon].ToString() + " " + _playerData.CurrentWeapon.Range);
@@ -374,7 +375,7 @@ namespace Jincom.Agent
                 //Player shot into the void.
                 else
                 {
-                    Debug.DrawRay(Origin, Target.transform.position - Origin, Color.blue);
+                    Debug.DrawRay(Origin, CursorTarget.transform.position - Origin, Color.blue);
                 }
             }
         }
@@ -502,5 +503,22 @@ namespace Jincom.Agent
         //        TrevelingLeftOrRight
         //    }
         //}
+
+        private void CalculateDistanceToCursorTarget()
+        {
+            //DistanceToCursorTarget = Vector3.Distance(transform.position, CursorTarget.position);
+            DistanceToCursorTarget = Mathf.Abs(transform.position.x - CursorTarget.position.x);
+
+            //target difference 10
+            //cam difference 7            
+
+            if ((DistanceToCursorTarget > 5) && (DistanceToCursorTarget < 13))
+            {
+                float _oldFollowDistance = Camera.main.GetComponent<CameraManager>().DefaultFollowDistance; ;
+                float _newFollowDistance = _oldFollowDistance + (_oldFollowDistance * ((DistanceToCursorTarget - 5) / 10));
+
+                Camera.main.GetComponent<CameraManager>().CurrentFollowDistance = _newFollowDistance;
+            }
+        }
     }    
 }
