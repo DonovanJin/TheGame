@@ -28,6 +28,8 @@ namespace Jincom.CameraLogic
         public float DefaultFollowDistance ,CurrentFollowDistance;
         public float CameraHeightRelativeToPlayer = 1f;
         public float AdjustCameraUpDown, AdjustCameraLeftRight;
+        public float CameraFollowSpeed;
+        public float HorizontalDifference;
 
         //  =   =   =   =   =   =   =   =   =   =   =   =
 
@@ -110,6 +112,24 @@ namespace Jincom.CameraLogic
 
         private void FollowTarget()
         {
+            HorizontalDifference = Mathf.Abs(this.transform.position.y - TargetTransform.position.y) - AdjustCameraUpDown;
+
+            if (HorizontalDifference < 3.5f)
+            {
+                if (Input.GetAxis("Horizontal") == 0)
+                {
+                    CameraFollowSpeed = 1f;
+                }
+                else
+                {
+                    CameraFollowSpeed = 2f;
+                }
+            }
+            else
+            {
+                CameraFollowSpeed = 6f;
+            }
+
             AdjustCameraToOffset();
 
             if (TargetTransform)
@@ -117,7 +137,7 @@ namespace Jincom.CameraLogic
                 //transform.position = new Vector3(TargetTransform.position.x + AdjustCameraLeftRight, TargetTransform.position.y + AdjustCameraUpDown, (-FollowDistance));
                 Vector3 targetVector3 = new Vector3(TargetTransform.position.x + AdjustCameraLeftRight, TargetTransform.position.y + AdjustCameraUpDown, (-CurrentFollowDistance));
 
-                transform.position = Vector3.Lerp(this.transform.position, targetVector3, Time.deltaTime * 2);
+                transform.position = Vector3.Lerp(this.transform.position, targetVector3, Time.deltaTime * CameraFollowSpeed);
             }
         }
 
