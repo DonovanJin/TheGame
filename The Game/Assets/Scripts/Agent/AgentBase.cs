@@ -69,9 +69,25 @@ namespace Jincom.Agent
 
         //  =   =   =   =   =   =   =   =   =   =   =   =
         
-        public virtual void AgentShoot()
+        public virtual void AgentShoot(RaycastHit Target, int DamageFromWeapon)
         {
-            Debug.Log(name + " is shooting. Pew pew!");
+            //Debug.Log(name + " is shooting at " + Target.collider.name);            
+
+            //Destructable Environment
+            if (Target.collider.GetComponent<BreakableTerrain>())
+            {
+                print("Shooting at breakable terrain");
+                Target.collider.GetComponent<BreakableTerrain>().SustainDamage(DamageFromWeapon);
+            }
+            else if (Target.collider.GetComponent<EnemyAgent>())
+            {
+                print("Shooting at an enemy agent");
+                //Target.collider.GetComponent<EnemyAgent>().
+            }
+            else
+            {
+                print("Shooting at the environment.");
+            }
         }
     }
 }

@@ -52,19 +52,10 @@ namespace Jincom.Agent
 
         //  =   =   =   =   =   =   =   =   =   =   =   =
 
-        public void Update()
-        {
-            AgentUpdate();
-            SpotThePlayer();
-            EnemyShoot();
-        }
-
-        //  =   =   =   =   =   =   =   =   =   =   =   =
-
         public override void AgentUpdate()
         {
-            //Move(Mathf.PingPong(Time.unscaledTime, 4f) - 2f);  
-            //AnimationState();
+            SpotThePlayer();
+            EnemyShoot();
         }
 
         //  =   =   =   =   =   =   =   =   =   =   =   =

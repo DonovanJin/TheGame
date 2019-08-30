@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using Jincom.PickUps;
 using UnityEngine;
 using Jincom.CameraLogic;
+using System.Linq;
 
 namespace Jincom.Agent
 {
@@ -129,14 +130,12 @@ namespace Jincom.Agent
                     {
                         PlayerShoot();
                     }
-
+#if TESTING
                     if (Input.GetKeyDown(KeyCode.Alpha1))
-                    {
-                        if (PlayerData.CurrentWeapon)
-                        {
-                            PlayerData.SwitchToWeapon(PlayerData.CurrentWeapon);
-                        }
+                    {                      
+                        PlayerData.SwitchToWeapon(GetComponentInChildren<ListOfWeapons>().WeaponList[0]);                        
                     }
+#endif
                 }
             }
         }
@@ -342,42 +341,47 @@ namespace Jincom.Agent
 
         private void PlayerShoot()
         {
-            if (CanPlayerShoot(_playerData.CurrentWeapon))
+            if (_playerData.CurrentWeapon)
             {
+                ShootAtTheTarget();
                 _playerData.FireCurrentWeapon();
-
-                AgentShoot();
-            }
-            //Used to see if player hits an Agent or a Surface
-            ShootAtTheTarget();
+            }            
         }
 
         private void ShootAtTheTarget()
         {
-            Vector3 _v3;
-            CapsuleCollider _capCol;
+            Vector3 Origin;
 
-            _capCol = GetComponent<CapsuleCollider>();
-            _v3 = new Vector3(transform.position.x, transform.position.y + (_capCol.height/2), transform.position.z);
+            Origin = new Vector3(transform.position.x, transform.position.y + (GetComponent<CapsuleCollider>().height/2), transform.position.z);
 
-            if (_playerData.CurrentWeapon != null)
+            if (CanPlayerShoot(_playerData.CurrentWeapon))
             {
-                if (Physics.Raycast(_v3, Target.transform.position - _v3, out _rayHit, _playerData.CurrentWeapon.Range))
+                //Player shot something (A surface or an agent)
+                if (Physics.Raycast(Origin, Target.transform.position - Origin, out _rayHit, _playerData.CurrentWeapon.Range))
                 {
-                    print("I hit somethin!");
-                    Debug.DrawRay(_v3, _rayHit.point - _v3, Color.red);
-                    print(_playerData.CurrentWeapon.ToString() + _playerData.Ammo[_playerData.CurrentWeapon].ToString() + " " + _playerData.CurrentWeapon.Range);
+                    Debug.DrawRay(Origin, _rayHit.point - Origin, Color.red);
+                    //print(_playerData.CurrentWeapon.ToString() + _playerData.Ammo[_playerData.CurrentWeapon].ToString() + " " + _playerData.CurrentWeapon.Range);
+                    AgentShoot(_rayHit, PlayerData.CurrentWeapon.Damage);
                 }
+                //Player shot into the void.
                 else
                 {
-                    Debug.DrawRay(_v3, Target.transform.position - _v3, Color.blue);
+                    Debug.DrawRay(Origin, Target.transform.position - Origin, Color.blue);
                 }
             }
-            else
-            {
-                Debug.Log("No weapon Equipped");
-            }
         }
+
+        //private void WhatDidIHit(RaycastHit _rayHit)
+        //{
+        //    if (_rayHit.collider.GetComponent<BreakableTerrain>())
+        //    {
+        //        _rayHit.collider.GetComponent<BreakableTerrain>().SustainDamage(25);
+        //    }
+        //    else
+        //    {
+                
+        //    }
+        //}
 
         //  =   =   =   =   =   =   =   =   =   =   =   =
 
