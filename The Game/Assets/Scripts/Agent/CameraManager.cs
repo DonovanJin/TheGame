@@ -114,7 +114,7 @@ namespace Jincom.CameraLogic
         {
             HorizontalDifference = Mathf.Abs(this.transform.position.y - TargetTransform.position.y) - AdjustCameraUpDown;
 
-            if (HorizontalDifference < 3.5f)
+            if (HorizontalDifference < 2.5f)
             {
                 if (Input.GetAxis("Horizontal") == 0)
                 {
@@ -124,21 +124,32 @@ namespace Jincom.CameraLogic
                 {
                     CameraFollowSpeed = 2f;
                 }
+
+                AdjustCameraToOffset();
+
+                if (TargetTransform)
+                {
+                    //transform.position = new Vector3(TargetTransform.position.x + AdjustCameraLeftRight, TargetTransform.position.y + AdjustCameraUpDown, (-FollowDistance));
+                    Vector3 targetVector3 = new Vector3(TargetTransform.position.x + AdjustCameraLeftRight, TargetTransform.position.y + AdjustCameraUpDown, (-CurrentFollowDistance));
+
+                    transform.position = Vector3.Lerp(this.transform.position, targetVector3, Time.deltaTime * CameraFollowSpeed);
+                }
             }
             else
             {
-                CameraFollowSpeed = 6f;
+                //CameraFollowSpeed = 10f;
+                transform.position = new Vector3(this.transform.position.x, TargetTransform.position.y + 4f, -CurrentFollowDistance);
             }
 
-            AdjustCameraToOffset();
+            //AdjustCameraToOffset();
 
-            if (TargetTransform)
-            {
-                //transform.position = new Vector3(TargetTransform.position.x + AdjustCameraLeftRight, TargetTransform.position.y + AdjustCameraUpDown, (-FollowDistance));
-                Vector3 targetVector3 = new Vector3(TargetTransform.position.x + AdjustCameraLeftRight, TargetTransform.position.y + AdjustCameraUpDown, (-CurrentFollowDistance));
+            //if (TargetTransform)
+            //{
+            //    //transform.position = new Vector3(TargetTransform.position.x + AdjustCameraLeftRight, TargetTransform.position.y + AdjustCameraUpDown, (-FollowDistance));
+            //    Vector3 targetVector3 = new Vector3(TargetTransform.position.x + AdjustCameraLeftRight, TargetTransform.position.y + AdjustCameraUpDown, (-CurrentFollowDistance));
 
-                transform.position = Vector3.Lerp(this.transform.position, targetVector3, Time.deltaTime * CameraFollowSpeed);
-            }
+            //    transform.position = Vector3.Lerp(this.transform.position, targetVector3, Time.deltaTime * CameraFollowSpeed);
+            //}
         }
 
         private void AdjustCameraToOffset()

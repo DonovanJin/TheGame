@@ -367,6 +367,7 @@ namespace Jincom.Agent
             }            
         }
 
+        //Player aims in the direction of the cursor in 3D space
         private void ShootAtTheTarget()
         {
             Vector3 Origin;
