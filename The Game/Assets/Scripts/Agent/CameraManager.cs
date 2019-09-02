@@ -61,7 +61,7 @@ namespace Jincom.CameraLogic
             }
         }
 
-        //Have another Manager update Camera Logic
+        //HERMANN - Have another Manager update Camera Logic
         private void Update()
         {
             UpdateCameraLogic();
@@ -140,16 +140,6 @@ namespace Jincom.CameraLogic
                 //CameraFollowSpeed = 10f;
                 transform.position = new Vector3(this.transform.position.x, TargetTransform.position.y + 4f, -CurrentFollowDistance);
             }
-
-            //AdjustCameraToOffset();
-
-            //if (TargetTransform)
-            //{
-            //    //transform.position = new Vector3(TargetTransform.position.x + AdjustCameraLeftRight, TargetTransform.position.y + AdjustCameraUpDown, (-FollowDistance));
-            //    Vector3 targetVector3 = new Vector3(TargetTransform.position.x + AdjustCameraLeftRight, TargetTransform.position.y + AdjustCameraUpDown, (-CurrentFollowDistance));
-
-            //    transform.position = Vector3.Lerp(this.transform.position, targetVector3, Time.deltaTime * CameraFollowSpeed);
-            //}
         }
 
         private void AdjustCameraToOffset()
@@ -186,23 +176,12 @@ namespace Jincom.CameraLogic
                 {
                     AdjustCameraLeftRight = 0f;
                 }
-            }
+            }   
+        }
 
-
-            //switch (Offset)
-            //{
-            //    case CameraOffset.Left:
-            //        AdjustCameraLeftRight = -3f;
-            //        break;
-            //    case CameraOffset.Right:
-            //        AdjustCameraLeftRight = 3f;
-            //        break;
-            //    case CameraOffset.Center:
-            //        AdjustCameraLeftRight = 0f;
-            //        break;
-            //    default:
-            //        break;
-            //}
+        public void AdjustZoom(float NewCameraDistance)
+        {
+            CurrentFollowDistance = NewCameraDistance;
         }
     }
 }

@@ -105,7 +105,6 @@ namespace Jincom.Agent
             AnimationState();
             Fall();
             WhatStateIsAgentIn();
-            CalculateDistanceToCursorTarget();
         }
 
         //  =   =   =   =   =   =   =   =   =   =   =   =
@@ -130,29 +129,36 @@ namespace Jincom.Agent
         {
             if (_currentStateOfAgent != AgentState.Dead)
             {
-                if (Input.anyKey)
+                if (Input.GetAxis("Horizontal") != 0)
                 {
-                    if (Input.GetAxis("Horizontal") != 0)
-                    {                        
-                        PlayerMovesForward();
-                    }
-
-                    if (Input.GetButtonDown("Jump"))
-                    {
-                        PlayerJumps();
-                    }
-
-                    if (Input.GetButton("Fire1"))
-                    {
-                        PlayerShoot();
-                    }
-#if TESTING
-                    if (Input.GetKeyDown(KeyCode.Alpha1))
-                    {                      
-                        PlayerData.SwitchToWeapon(GetComponentInChildren<ListOfWeapons>().WeaponList[0]);                        
-                    }
-#endif
+                    PlayerMovesForward();
                 }
+
+                if (Input.GetButtonDown("Jump"))
+                {
+                    PlayerJumps();
+                }
+
+                if (Input.GetButton("Fire1"))
+                {
+                    PlayerShoot();
+                }
+
+                if (Input.GetButton("Fire2"))
+                {
+                    ZoomOutGun(1.5f);
+                }
+
+                if (Input.GetButtonUp("Fire2"))
+                {
+                    ZoomOutGun(1f);
+                }
+#if TESTING
+                if (Input.GetKeyDown(KeyCode.Alpha1))
+                {
+                    PlayerData.SwitchToWeapon(GetComponentInChildren<ListOfWeapons>().WeaponList[0]);
+                }
+#endif
             }
         }
 
@@ -391,18 +397,6 @@ namespace Jincom.Agent
             }
         }
 
-        //private void WhatDidIHit(RaycastHit _rayHit)
-        //{
-        //    if (_rayHit.collider.GetComponent<BreakableTerrain>())
-        //    {
-        //        _rayHit.collider.GetComponent<BreakableTerrain>().SustainDamage(25);
-        //    }
-        //    else
-        //    {
-                
-        //    }
-        //}
-
         //  =   =   =   =   =   =   =   =   =   =   =   =
 
         public virtual void AnimationState()
@@ -506,30 +500,11 @@ namespace Jincom.Agent
             }
         }
 #endif
-
-        //private void IsPlayerTravellingLeftorRight()
-        //{
-        //    if (_lastHorizontalPosition < transform.position.x)
-        //    {
-        //        TrevelingLeftOrRight
-        //    }
-        //}
-
-        private void CalculateDistanceToCursorTarget()
+        
+        private void ZoomOutGun(float ZoomValue)
         {
-            //DistanceToCursorTarget = Vector3.Distance(transform.position, CursorTarget.position);
-            DistanceToCursorTarget = Mathf.Abs(transform.position.x - CursorTarget.position.x);
-
-            //target difference 10
-            //cam difference 7            
-
-            if ((DistanceToCursorTarget > 5) && (DistanceToCursorTarget < 13))
-            {
-                float _oldFollowDistance = Camera.main.GetComponent<CameraManager>().DefaultFollowDistance; ;
-                float _newFollowDistance = _oldFollowDistance + (_oldFollowDistance * ((DistanceToCursorTarget - 5) / 10));
-
-                Camera.main.GetComponent<CameraManager>().CurrentFollowDistance = _newFollowDistance;
-            }
+            //In future, we might want to implement a new property for guns: a zoom value that can amplify the camera's current follow distance
+            Camera.main.GetComponent<CameraManager>().AdjustZoom(Camera.main.GetComponent<CameraManager>().DefaultFollowDistance * ZoomValue);
         }
     }    
 }
