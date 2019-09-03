@@ -1,0 +1,1484 @@
+fileFormatVersion: 2
+guid: 0c0dd3f9df787a94688695ea2ef6daca
+ModelImporter:
+  serializedVersion: 23
+  fileIDToRecycleName:
+    100000: ankle_l_def_joint
+    100002: ankle_l_def_joint 1
+    100004: ankle_l_fk_joint
+    100006: ankle_l_fk_joint 1
+    100008: ankle_l_ik_joint
+    100010: ankle_l_ik_joint 1
+    100012: ankle_l_ik_joint 2
+    100014: ankle_l_ik_joint 3
+    100016: ankle_r_def_joint
+    100018: ankle_r_def_joint 1
+    100020: ankle_r_fk_joint
+    100022: ankle_r_fk_joint 1
+    100024: ankle_r_ik_joint
+    100026: ankle_r_ik_joint 1
+    100028: ankle_r_ik_joint 2
+    100030: ankle_r_ik_joint 3
+    100032: B_Gum_geo1
+    100034: B_teeth_geo1
+    100036: back
+    100038: ball_l_def_joint
+    100040: ball_l_def_joint 1
+    100042: ball_l_fk_joint
+    100044: ball_l_fk_joint 1
+    100046: ball_l_ik_joint
+    100048: ball_l_ik_joint 1
+    100050: ball_r_def_joint
+    100052: ball_r_def_joint 1
+    100054: ball_r_fk_joint
+    100056: ball_r_fk_joint 1
+    100058: ball_r_ik_joint
+    100060: ball_r_ik_joint 1
+    100062: body_ctrl
+    100064: body_ctrl 1
+    100066: Body_geo
+    100068: Body_geo1
+    100070: Body_geo2
+    100072: Body_geo_high
+    100074: Body_geo_low
+    100076: body_joint
+    100078: body_joint 1
+    100080: body_ntrl
+    100082: body_ntrl 1
+    100084: bottom
+    100086: chest_ctrl
+    100088: chest_ctrl 1
+    100090: chest_joint
+    100092: chest_joint 1
+    100094: chest_ntrl
+    100096: chest_ntrl 1
+    100098: chestBit_high
+    100100: chestBit_low
+    100102: clavicel_l_def_joint
+    100104: clavicel_l_def_joint 1
+    100106: clavicel_l_FK_joint
+    100108: clavicel_l_FK_joint 1
+    100110: clavicel_l_IK_joint
+    100112: clavicel_l_IK_joint 1
+    100114: clavicer_r_def_joint
+    100116: clavicer_r_def_joint 1
+    100118: clavicer_r_FK_joint
+    100120: clavicer_r_FK_joint 1
+    100122: clavicer_r_IK_joint
+    100124: clavicer_r_IK_joint 1
+    100126: clavicle_fk_l_ctrl
+    100128: clavicle_fk_l_ctrl 1
+    100130: clavicle_fk_l_ntrl
+    100132: clavicle_fk_l_ntrl 1
+    100134: clavicle_fk_r_ctrl
+    100136: clavicle_fk_r_ctrl 1
+    100138: clavicle_fk_r_ntrl
+    100140: clavicle_fk_r_ntrl 1
+    100142: clavicle_IK_l_ctrl
+    100144: clavicle_IK_l_ctrl 1
+    100146: clavicle_IK_l_ntrl
+    100148: clavicle_IK_l_ntrl 1
+    100150: clavicle_IK_r_ctrl
+    100152: clavicle_IK_r_ctrl 1
+    100154: clavicle_IK_r_ntrl
+    100156: clavicle_IK_r_ntrl 1
+    100158: ctrl_grp
+    100160: ctrl_grp 1
+    100162: curve1
+    100164: Dog_Tag_01
+    100166: Dog_Tag_02
+    100168: elbow_l_ctrl
+    100170: elbow_l_ctrl 1
+    100172: elbow_l_def_joint
+    100174: elbow_l_def_joint 1
+    100176: elbow_l_fk_ctrl
+    100178: elbow_l_fk_ctrl 1
+    100180: elbow_l_FK_joint
+    100182: elbow_l_FK_joint 1
+    100184: elbow_l_fk_ntrl
+    100186: elbow_l_fk_ntrl 1
+    100188: elbow_l_IK_joint
+    100190: elbow_l_IK_joint 1
+    100192: elbow_l_ntrl
+    100194: elbow_l_ntrl 1
+    100196: elbow_r_ctrl
+    100198: elbow_r_ctrl 1
+    100200: elbow_r_def_joint
+    100202: elbow_r_def_joint 1
+    100204: elbow_r_fk_ctrl
+    100206: elbow_r_fk_ctrl 1
+    100208: elbow_r_FK_joint
+    100210: elbow_r_FK_joint 1
+    100212: elbow_r_fk_ntrl
+    100214: elbow_r_fk_ntrl 1
+    100216: elbow_r_IK_joint
+    100218: elbow_r_IK_joint 1
+    100220: elbow_r_ntrl
+    100222: elbow_r_ntrl 1
+    100224: Extras
+    100226: Extras_DNT
+    100228: Extras_DNT 1
+    100230: geo_grp
+    100232: geo_grp 1
+    100234: globle_crtl
+    100236: globle_crtl 1
+    100238: group1
+    100240: hair_v01_geo
+    100242: hair_v02_geo
+    100244: hair_v03_geo1
+    100246: hand_l_joint
+    100248: hand_l_joint 1
+    100250: hand_r_joint
+    100252: hand_r_joint 1
+    100254: head_ctrl
+    100256: head_ctrl 1
+    100258: head_geo1
+    100260: Head_grp
+    100262: head_grp
+    100264: head_joint
+    100266: head_joint 1
+    100268: head_ntrl
+    100270: head_ntrl 1
+    100272: heel_l_def_joint
+    100274: heel_l_def_joint 1
+    100276: heel_r_def_joint
+    100278: heel_r_def_joint 1
+    100280: Helm_geo1
+    100282: Helm_geo_high
+    100284: Helm_geo_low
+    100286: hip_joint
+    100288: hip_joint 1
+    100290: hips_ntrl
+    100292: hips_ntrl 1
+    100294: hips_ntrl 2
+    100296: hips_ntrl 3
+    100298: IK_FK_Arms
+    100300: IK_FK_Arms 1
+    100302: IK_FK_Legs
+    100304: IK_FK_Legs 1
+    100306: ikHandle_L_Arm
+    100308: ikHandle_L_Arm 1
+    100310: ikHandle_L_Ball
+    100312: ikHandle_L_Ball 1
+    100314: ikHandle_L_Toe
+    100316: ikHandle_L_Toe 1
+    100318: ikHandle_Leg_L
+    100320: ikHandle_Leg_L 1
+    100322: ikHandle_Leg_R
+    100324: ikHandle_Leg_R 1
+    100326: ikHandle_R_Arm
+    100328: ikHandle_R_Arm 1
+    100330: ikHandle_R_ball
+    100332: ikHandle_R_ball 1
+    100334: ikHandle_R_toe
+    100336: ikHandle_R_toe 1
+    100338: index_l_01_joint
+    100340: index_l_01_joint 1
+    100342: index_l_02_joint
+    100344: index_l_02_joint 1
+    100346: index_l_03_joint
+    100348: index_l_03_joint 1
+    100350: index_r_01_joint
+    100352: index_r_01_joint 1
+    100354: index_r_02_joint
+    100356: index_r_02_joint 1
+    100358: index_r_03_joint
+    100360: index_r_03_joint 1
+    100362: joint_grp
+    100364: joint_grp 1
+    100366: knee_l_ctrl
+    100368: knee_l_ctrl 1
+    100370: knee_l_ntrl
+    100372: knee_l_ntrl 1
+    100374: knee_r_ctrl
+    100376: knee_r_ctrl 1
+    100378: knee_r_ntrl
+    100380: knee_r_ntrl 1
+    100382: L_ankle_fk_ntrl
+    100384: L_ankle_fk_ntrl 1
+    100386: L_ankle_fk_ntrl 2
+    100388: L_ankle_fk_ntrl 3
+    100390: l_ankle_geo_high
+    100392: l_ankle_geo_low
+    100394: L_ankle_ik_ctrl
+    100396: L_ankle_ik_ctrl 1
+    100398: L_ankle_ik_ntrl
+    100400: L_ankle_ik_ntrl 1
+    100402: l_arm_ik_ctrl
+    100404: l_arm_ik_ctrl 1
+    100406: L_arm_IK_FK_switch_ctrl
+    100408: L_arm_IK_FK_switch_ctrl 1
+    100410: L_arm_IK_FK_switch_ntrl
+    100412: L_arm_IK_FK_switch_ntrl 1
+    100414: l_arm_ik_ntrl
+    100416: l_arm_ik_ntrl 1
+    100418: l_attach_ctrl
+    100420: l_attach_ctrl 1
+    100422: l_attach_joint
+    100424: l_attach_joint 1
+    100426: l_attach_ntrl
+    100428: l_attach_ntrl 1
+    100430: L_ball_ctrl
+    100432: L_ball_ctrl 1
+    100434: L_ball_ntrl
+    100436: L_ball_ntrl 1
+    100438: l_carf_geo_high
+    100440: l_carf_geo_low
+    100442: l_elbow_bit_geo_high
+    100444: l_elbow_bit_geo_low
+    100446: l_eye_geo1
+    100448: L_eyeGloss_geo1
+    100450: L_fk_ball_roll_ctrl
+    100452: L_fk_ball_roll_ctrl 1
+    100454: L_fk_ball_roll_ctrl 2
+    100456: L_fk_ball_roll_ctrl 3
+    100458: L_fk_ball_roll_ntrl
+    100460: L_fk_ball_roll_ntrl 1
+    100462: L_fk_ball_roll_ntrl1
+    100464: L_fk_ball_roll_ntrl1 1
+    100466: L_foot_ctrl
+    100468: L_foot_ctrl 1
+    100470: L_foot_ntrl
+    100472: L_foot_ntrl 1
+    100474: l_hand_cover_geo_high
+    100476: l_hand_cover_geo_low
+    100478: L_IK_FK_Leg_Switch_ctrl
+    100480: L_IK_FK_Leg_Switch_ctrl 1
+    100482: L_IK_FK_Leg_Switch_ntrl
+    100484: L_IK_FK_Leg_Switch_ntrl 1
+    100486: L_ik_footRoll_ankle_joint
+    100488: L_ik_footRoll_ankle_joint 1
+    100490: L_ik_footRoll_ball_joint
+    100492: L_ik_footRoll_ball_joint 1
+    100494: L_ik_footRoll_heel_joint
+    100496: L_ik_footRoll_heel_joint 1
+    100498: L_ik_footRoll_toe_joint
+    100500: L_ik_footRoll_toe_joint 1
+    100502: l_index_01_ctrl
+    100504: l_index_01_ctrl 1
+    100506: l_index_01_ntrl
+    100508: l_index_01_ntrl 1
+    100510: l_index_02_ctrl
+    100512: l_index_02_ctrl 1
+    100514: l_index_02_ntrl
+    100516: l_index_02_ntrl 1
+    100518: l_index_03_ctrl
+    100520: l_index_03_ctrl 1
+    100522: l_index_03_ntrl
+    100524: l_index_03_ntrl 1
+    100526: L_lowLeg_fk_ctrl
+    100528: L_lowLeg_fk_ctrl 1
+    100530: L_lowLeg_fk_ntrl
+    100532: L_lowLeg_fk_ntrl 1
+    100534: l_middle_01_ctrl
+    100536: l_middle_01_ctrl 1
+    100538: l_middle_01_ntrl
+    100540: l_middle_01_ntrl 1
+    100542: l_middle_02_ctrl
+    100544: l_middle_02_ctrl 1
+    100546: l_middle_02_ntrl
+    100548: l_middle_02_ntrl 1
+    100550: l_middle_03_ctrl
+    100552: l_middle_03_ctrl 1
+    100554: l_middle_03_ntrl
+    100556: l_middle_03_ntrl 1
+    100558: l_pinky_01_ctrl
+    100560: l_pinky_01_ctrl 1
+    100562: l_pinky_01_ntrl
+    100564: l_pinky_01_ntrl 1
+    100566: l_pinky_02_ctrl
+    100568: l_pinky_02_ctrl 1
+    100570: l_pinky_02_ntrl
+    100572: l_pinky_02_ntrl 1
+    100574: l_pinky_03_ctrl
+    100576: l_pinky_03_ctrl 1
+    100578: l_pinky_03_ntrl
+    100580: l_pinky_03_ntrl 1
+    100582: l_ring_01_ctrl
+    100584: l_ring_01_ctrl 1
+    100586: l_ring_01_ntrl
+    100588: l_ring_01_ntrl 1
+    100590: l_ring_02_ctrl
+    100592: l_ring_02_ctrl 1
+    100594: l_ring_02_ntrl
+    100596: l_ring_02_ntrl 1
+    100598: l_ring_03_ctrl
+    100600: l_ring_03_ctrl 1
+    100602: l_ring_03_ntrl1
+    100604: l_ring_03_ntrl1 1
+    100606: l_shld_pad_high
+    100608: l_shld_pad_low
+    100610: l_thighCover_v01_geo_high
+    100612: l_thighCover_v01_geo_low
+    100614: l_thighCover_v02_geo_high
+    100616: l_thighCover_v02_geo_low
+    100618: l_thumb_01_ctrl
+    100620: l_thumb_01_ctrl 1
+    100622: l_thumb_01_ntrl
+    100624: l_thumb_01_ntrl 1
+    100626: l_thumb_02_ctrl
+    100628: l_thumb_02_ctrl 1
+    100630: l_thumb_02_ntrl
+    100632: l_thumb_02_ntrl 1
+    100634: l_thumb_03_ctrl
+    100636: l_thumb_03_ctrl 1
+    100638: l_thumb_03_ntrl
+    100640: l_thumb_03_ntrl 1
+    100642: L_toes_ctrl
+    100644: L_toes_ctrl 1
+    100646: L_toes_ntrl
+    100648: L_toes_ntrl 1
+    100650: L_upLeg_fk_ctrl
+    100652: L_upLeg_fk_ctrl 1
+    100654: L_upLeg_fk_ntrl
+    100656: L_upLeg_fk_ntrl 1
+    100658: Link
+    100660: lowLeg_l_def_joint
+    100662: lowLeg_l_def_joint 1
+    100664: lowLeg_l_fk_joint
+    100666: lowLeg_l_fk_joint 1
+    100668: lowLeg_l_ik_joint
+    100670: lowLeg_l_ik_joint 1
+    100672: lowLeg_r_def_joint
+    100674: lowLeg_r_def_joint 1
+    100676: lowLeg_r_fk_joint
+    100678: lowLeg_r_fk_joint 1
+    100680: lowLeg_r_ik_joint
+    100682: lowLeg_r_ik_joint 1
+    100684: middle_l_01_joint
+    100686: middle_l_01_joint 1
+    100688: middle_l_02_joint
+    100690: middle_l_02_joint 1
+    100692: middle_l_03_joint
+    100694: middle_l_03_joint 1
+    100696: middle_r_01_joint
+    100698: middle_r_01_joint 1
+    100700: middle_r_02_joint
+    100702: middle_r_02_joint 1
+    100704: middle_r_03_joint
+    100706: middle_r_03_joint 1
+    100708: //RootNode
+    100710: neck_crtl
+    100712: neck_crtl 1
+    100714: neck_joint
+    100716: neck_joint 1
+    100718: neck_ntrl
+    100720: neck_ntrl 1
+    100722: pinky_l_01_joint
+    100724: pinky_l_01_joint 1
+    100726: pinky_l_02_joint
+    100728: pinky_l_02_joint 1
+    100730: pinky_l_03_joint
+    100732: pinky_l_03_joint 1
+    100734: pinky_r_01_joint
+    100736: pinky_r_01_joint 1
+    100738: pinky_r_02_joint
+    100740: pinky_r_02_joint 1
+    100742: pinky_r_03_joint
+    100744: pinky_r_03_joint 1
+    100746: poleVec_gep
+    100748: poleVec_gep 1
+    100750: R_ankle_fk_ntrl
+    100752: R_ankle_fk_ntrl 1
+    100754: R_ankle_fk_ntrl 2
+    100756: R_ankle_fk_ntrl 3
+    100758: r_ankle_geo_high
+    100760: r_ankle_geo_low
+    100762: R_ankle_ik_ctrl
+    100764: R_ankle_ik_ctrl 1
+    100766: R_ankle_ik_ntrl
+    100768: R_ankle_ik_ntrl 1
+    100770: r_arm_ik_ctrl
+    100772: r_arm_ik_ctrl 1
+    100774: R_arm_IK_FK_switch_ctrl
+    100776: R_arm_IK_FK_switch_ctrl 1
+    100778: R_arm_IK_FK_switch_ntrl
+    100780: R_arm_IK_FK_switch_ntrl 1
+    100782: r_arm_ik_ntrl
+    100784: r_arm_ik_ntrl 1
+    100786: r_attach_ctrl
+    100788: r_attach_ctrl 1
+    100790: r_attach_joint
+    100792: r_attach_joint 1
+    100794: r_attach_ntrl
+    100796: r_attach_ntrl 1
+    100798: R_ball_ctrl
+    100800: R_ball_ctrl 1
+    100802: R_ball_ntrl
+    100804: R_ball_ntrl 1
+    100806: r_carf_geo_high
+    100808: r_carf_geo_low
+    100810: r_elbow_bit_geo_high
+    100812: r_elbow_bit_geo_low
+    100814: r_eye_geo1
+    100816: R_eyeGloss_geo1
+    100818: R_foot_ctrl
+    100820: R_foot_ctrl 1
+    100822: R_foot_ntrl
+    100824: R_foot_ntrl 1
+    100826: r_hand_cover_geo_high
+    100828: r_hand_cover_geo_low
+    100830: R_IK_FK_Leg_Switch_ctrl
+    100832: R_IK_FK_Leg_Switch_ctrl 1
+    100834: R_IK_FK_Leg_Switch_ntrl
+    100836: R_IK_FK_Leg_Switch_ntrl 1
+    100838: R_ik_footRoll_ankle_joint
+    100840: R_ik_footRoll_ankle_joint 1
+    100842: R_ik_footRoll_ball_joint
+    100844: R_ik_footRoll_ball_joint 1
+    100846: R_ik_footRoll_heel_joint
+    100848: R_ik_footRoll_heel_joint 1
+    100850: R_ik_footRoll_toe_joint
+    100852: R_ik_footRoll_toe_joint 1
+    100854: r_index_01_ctrl
+    100856: r_index_01_ctrl 1
+    100858: r_index_01_ntrl
+    100860: r_index_01_ntrl 1
+    100862: r_index_02_ctrl
+    100864: r_index_02_ctrl 1
+    100866: r_index_02_ntrl
+    100868: r_index_02_ntrl 1
+    100870: r_index_03_ctrl
+    100872: r_index_03_ctrl 1
+    100874: r_index_03_ntrl
+    100876: r_index_03_ntrl 1
+    100878: R_lowLeg_fk_ctrl
+    100880: R_lowLeg_fk_ctrl 1
+    100882: R_lowLeg_fk_ntrl
+    100884: R_lowLeg_fk_ntrl 1
+    100886: r_middle_01_ctrl
+    100888: r_middle_01_ctrl 1
+    100890: r_middle_01_ntrl
+    100892: r_middle_01_ntrl 1
+    100894: r_middle_02_ctrl
+    100896: r_middle_02_ctrl 1
+    100898: r_middle_02_ntrl
+    100900: r_middle_02_ntrl 1
+    100902: r_middle_03_ctrl
+    100904: r_middle_03_ctrl 1
+    100906: r_middle_03_ntrl
+    100908: r_middle_03_ntrl 1
+    100910: r_pinky_01_ctrl
+    100912: r_pinky_01_ctrl 1
+    100914: r_pinky_01_ntrl
+    100916: r_pinky_01_ntrl 1
+    100918: r_pinky_02_ctrl
+    100920: r_pinky_02_ctrl 1
+    100922: r_pinky_02_ntrl
+    100924: r_pinky_02_ntrl 1
+    100926: r_pinky_03_ctrl
+    100928: r_pinky_03_ctrl 1
+    100930: r_pinky_03_ntrl
+    100932: r_pinky_03_ntrl 1
+    100934: r_ring_01_ctrl
+    100936: r_ring_01_ctrl 1
+    100938: r_ring_01_ntrl
+    100940: r_ring_01_ntrl 1
+    100942: r_ring_02_ctrl
+    100944: r_ring_02_ctrl 1
+    100946: r_ring_02_ntrl
+    100948: r_ring_02_ntrl 1
+    100950: r_ring_03_ctrl
+    100952: r_ring_03_ctrl 1
+    100954: r_ring_03_ntrl1
+    100956: r_ring_03_ntrl1 1
+    100958: r_shld_pad_high
+    100960: r_shld_pad_low
+    100962: r_thighCover_v01_geo_high
+    100964: r_thighCover_v01_geo_low
+    100966: r_thighCover_v02_geo_high
+    100968: r_thighCover_v02_geo_low
+    100970: r_thumb_01_ctrl
+    100972: r_thumb_01_ctrl 1
+    100974: r_thumb_01_ntrl
+    100976: r_thumb_01_ntrl 1
+    100978: r_thumb_02_ctrl
+    100980: r_thumb_02_ctrl 1
+    100982: r_thumb_02_ntrl
+    100984: r_thumb_02_ntrl 1
+    100986: r_thumb_03_ctrl
+    100988: r_thumb_03_ctrl 1
+    100990: r_thumb_03_ntrl
+    100992: r_thumb_03_ntrl 1
+    100994: R_toes_ctrl
+    100996: R_toes_ctrl 1
+    100998: R_toes_ntrl
+    101000: R_toes_ntrl 1
+    101002: R_upLeg_fk_ctrl
+    101004: R_upLeg_fk_ctrl 1
+    101006: R_upLeg_fk_ntrl
+    101008: R_upLeg_fk_ntrl 1
+    101010: Rig_Character_high
+    101012: Rig_Character_low
+    101014: ring_l_01_joint
+    101016: ring_l_01_joint 1
+    101018: ring_l_02_joint
+    101020: ring_l_02_joint 1
+    101022: ring_l_03_joint
+    101024: ring_l_03_joint 1
+    101026: ring_r_01_joint
+    101028: ring_r_01_joint 1
+    101030: ring_r_02_joint
+    101032: ring_r_02_joint 1
+    101034: ring_r_03_joint
+    101036: ring_r_03_joint 1
+    101038: root_joint
+    101040: root_joint 1
+    101042: shoulder_l_def_joint
+    101044: shoulder_l_def_joint 1
+    101046: shoulder_l_fk_ctrl
+    101048: shoulder_l_fk_ctrl 1
+    101050: shoulder_l_FK_joint
+    101052: shoulder_l_FK_joint 1
+    101054: shoulder_l_fk_ntrl
+    101056: shoulder_l_fk_ntrl 1
+    101058: shoulder_l_IK_joint
+    101060: shoulder_l_IK_joint 1
+    101062: shoulder_r_def_joint
+    101064: shoulder_r_def_joint 1
+    101066: shoulder_r_fk_ctrl
+    101068: shoulder_r_fk_ctrl 1
+    101070: shoulder_r_FK_joint
+    101072: shoulder_r_FK_joint 1
+    101074: shoulder_r_fk_ntrl
+    101076: shoulder_r_fk_ntrl 1
+    101078: shoulder_r_IK_joint
+    101080: shoulder_r_IK_joint 1
+    101082: spin_crtl
+    101084: spin_crtl 1
+    101086: spin_nrtl
+    101088: spin_nrtl 1
+    101090: Switches
+    101092: Switches 1
+    101094: T_Gum_geo1
+    101096: T_teeth_geo1
+    101098: thumb_l_01_joint
+    101100: thumb_l_01_joint 1
+    101102: thumb_l_02_joint
+    101104: thumb_l_02_joint 1
+    101106: thumb_l_03_joint
+    101108: thumb_l_03_joint 1
+    101110: thumb_r_01_joint
+    101112: thumb_r_01_joint 1
+    101114: thumb_r_02_joint
+    101116: thumb_r_02_joint 1
+    101118: thumb_r_03_joint
+    101120: thumb_r_03_joint 1
+    101122: toe_l_def_joint
+    101124: toe_l_def_joint 1
+    101126: toe_l_fk_joint
+    101128: toe_l_fk_joint 1
+    101130: toe_l_ik_joint
+    101132: toe_l_ik_joint 1
+    101134: toe_r_def_joint
+    101136: toe_r_def_joint 1
+    101138: toe_r_fk_joint
+    101140: toe_r_fk_joint 1
+    101142: toe_r_ik_joint
+    101144: toe_r_ik_joint 1
+    101146: tongue_geo1
+    101148: upLeg_l_def_joint
+    101150: upLeg_l_def_joint 1
+    101152: upLeg_l_fk_joint
+    101154: upLeg_l_fk_joint 1
+    101156: upLeg_l_ik_joint
+    101158: upLeg_l_ik_joint 1
+    101160: upLeg_r_def_joint
+    101162: upLeg_r_def_joint 1
+    101164: upLeg_r_fk_joint
+    101166: upLeg_r_fk_joint 1
+    101168: upLeg_r_ik_joint
+    101170: upLeg_r_ik_joint 1
+    101172: ver_01_ctrl
+    101174: ver_01_ctrl 1
+    101176: ver_01_ntrl
+    101178: ver_01_ntrl 1
+    101180: vert_01_joint
+    101182: vert_01_joint 1
+    101184: vert_02_ctrl
+    101186: vert_02_ctrl 1
+    101188: vert_02_joint
+    101190: vert_02_joint 1
+    101192: vert_02_ntrl
+    101194: vert_02_ntrl 1
+    101196: wrist_l_def_joint
+    101198: wrist_l_def_joint 1
+    101200: wrist_l_fk_ctrl
+    101202: wrist_l_fk_ctrl 1
+    101204: wrist_l_FK_joint
+    101206: wrist_l_FK_joint 1
+    101208: wrist_l_fk_ntrl
+    101210: wrist_l_fk_ntrl 1
+    101212: wrist_l_IK_joint
+    101214: wrist_l_IK_joint 1
+    101216: wrist_r_def_joint
+    101218: wrist_r_def_joint 1
+    101220: wrist_r_fk_ctrl
+    101222: wrist_r_fk_ctrl 1
+    101224: wrist_r_FK_joint
+    101226: wrist_r_FK_joint 1
+    101228: wrist_r_fk_ntrl
+    101230: wrist_r_fk_ntrl 1
+    101232: wrist_r_IK_joint
+    101234: wrist_r_IK_joint 1
+    400000: ankle_l_def_joint
+    400002: ankle_l_def_joint 1
+    400004: ankle_l_fk_joint
+    400006: ankle_l_fk_joint 1
+    400008: ankle_l_ik_joint
+    400010: ankle_l_ik_joint 1
+    400012: ankle_l_ik_joint 2
+    400014: ankle_l_ik_joint 3
+    400016: ankle_r_def_joint
+    400018: ankle_r_def_joint 1
+    400020: ankle_r_fk_joint
+    400022: ankle_r_fk_joint 1
+    400024: ankle_r_ik_joint
+    400026: ankle_r_ik_joint 1
+    400028: ankle_r_ik_joint 2
+    400030: ankle_r_ik_joint 3
+    400032: B_Gum_geo1
+    400034: B_teeth_geo1
+    400036: back
+    400038: ball_l_def_joint
+    400040: ball_l_def_joint 1
+    400042: ball_l_fk_joint
+    400044: ball_l_fk_joint 1
+    400046: ball_l_ik_joint
+    400048: ball_l_ik_joint 1
+    400050: ball_r_def_joint
+    400052: ball_r_def_joint 1
+    400054: ball_r_fk_joint
+    400056: ball_r_fk_joint 1
+    400058: ball_r_ik_joint
+    400060: ball_r_ik_joint 1
+    400062: body_ctrl
+    400064: body_ctrl 1
+    400066: Body_geo
+    400068: Body_geo1
+    400070: Body_geo2
+    400072: Body_geo_high
+    400074: Body_geo_low
+    400076: body_joint
+    400078: body_joint 1
+    400080: body_ntrl
+    400082: body_ntrl 1
+    400084: bottom
+    400086: chest_ctrl
+    400088: chest_ctrl 1
+    400090: chest_joint
+    400092: chest_joint 1
+    400094: chest_ntrl
+    400096: chest_ntrl 1
+    400098: chestBit_high
+    400100: chestBit_low
+    400102: clavicel_l_def_joint
+    400104: clavicel_l_def_joint 1
+    400106: clavicel_l_FK_joint
+    400108: clavicel_l_FK_joint 1
+    400110: clavicel_l_IK_joint
+    400112: clavicel_l_IK_joint 1
+    400114: clavicer_r_def_joint
+    400116: clavicer_r_def_joint 1
+    400118: clavicer_r_FK_joint
+    400120: clavicer_r_FK_joint 1
+    400122: clavicer_r_IK_joint
+    400124: clavicer_r_IK_joint 1
+    400126: clavicle_fk_l_ctrl
+    400128: clavicle_fk_l_ctrl 1
+    400130: clavicle_fk_l_ntrl
+    400132: clavicle_fk_l_ntrl 1
+    400134: clavicle_fk_r_ctrl
+    400136: clavicle_fk_r_ctrl 1
+    400138: clavicle_fk_r_ntrl
+    400140: clavicle_fk_r_ntrl 1
+    400142: clavicle_IK_l_ctrl
+    400144: clavicle_IK_l_ctrl 1
+    400146: clavicle_IK_l_ntrl
+    400148: clavicle_IK_l_ntrl 1
+    400150: clavicle_IK_r_ctrl
+    400152: clavicle_IK_r_ctrl 1
+    400154: clavicle_IK_r_ntrl
+    400156: clavicle_IK_r_ntrl 1
+    400158: ctrl_grp
+    400160: ctrl_grp 1
+    400162: curve1
+    400164: Dog_Tag_01
+    400166: Dog_Tag_02
+    400168: elbow_l_ctrl
+    400170: elbow_l_ctrl 1
+    400172: elbow_l_def_joint
+    400174: elbow_l_def_joint 1
+    400176: elbow_l_fk_ctrl
+    400178: elbow_l_fk_ctrl 1
+    400180: elbow_l_FK_joint
+    400182: elbow_l_FK_joint 1
+    400184: elbow_l_fk_ntrl
+    400186: elbow_l_fk_ntrl 1
+    400188: elbow_l_IK_joint
+    400190: elbow_l_IK_joint 1
+    400192: elbow_l_ntrl
+    400194: elbow_l_ntrl 1
+    400196: elbow_r_ctrl
+    400198: elbow_r_ctrl 1
+    400200: elbow_r_def_joint
+    400202: elbow_r_def_joint 1
+    400204: elbow_r_fk_ctrl
+    400206: elbow_r_fk_ctrl 1
+    400208: elbow_r_FK_joint
+    400210: elbow_r_FK_joint 1
+    400212: elbow_r_fk_ntrl
+    400214: elbow_r_fk_ntrl 1
+    400216: elbow_r_IK_joint
+    400218: elbow_r_IK_joint 1
+    400220: elbow_r_ntrl
+    400222: elbow_r_ntrl 1
+    400224: Extras
+    400226: Extras_DNT
+    400228: Extras_DNT 1
+    400230: geo_grp
+    400232: geo_grp 1
+    400234: globle_crtl
+    400236: globle_crtl 1
+    400238: group1
+    400240: hair_v01_geo
+    400242: hair_v02_geo
+    400244: hair_v03_geo1
+    400246: hand_l_joint
+    400248: hand_l_joint 1
+    400250: hand_r_joint
+    400252: hand_r_joint 1
+    400254: head_ctrl
+    400256: head_ctrl 1
+    400258: head_geo1
+    400260: Head_grp
+    400262: head_grp
+    400264: head_joint
+    400266: head_joint 1
+    400268: head_ntrl
+    400270: head_ntrl 1
+    400272: heel_l_def_joint
+    400274: heel_l_def_joint 1
+    400276: heel_r_def_joint
+    400278: heel_r_def_joint 1
+    400280: Helm_geo1
+    400282: Helm_geo_high
+    400284: Helm_geo_low
+    400286: hip_joint
+    400288: hip_joint 1
+    400290: hips_ntrl
+    400292: hips_ntrl 1
+    400294: hips_ntrl 2
+    400296: hips_ntrl 3
+    400298: IK_FK_Arms
+    400300: IK_FK_Arms 1
+    400302: IK_FK_Legs
+    400304: IK_FK_Legs 1
+    400306: ikHandle_L_Arm
+    400308: ikHandle_L_Arm 1
+    400310: ikHandle_L_Ball
+    400312: ikHandle_L_Ball 1
+    400314: ikHandle_L_Toe
+    400316: ikHandle_L_Toe 1
+    400318: ikHandle_Leg_L
+    400320: ikHandle_Leg_L 1
+    400322: ikHandle_Leg_R
+    400324: ikHandle_Leg_R 1
+    400326: ikHandle_R_Arm
+    400328: ikHandle_R_Arm 1
+    400330: ikHandle_R_ball
+    400332: ikHandle_R_ball 1
+    400334: ikHandle_R_toe
+    400336: ikHandle_R_toe 1
+    400338: index_l_01_joint
+    400340: index_l_01_joint 1
+    400342: index_l_02_joint
+    400344: index_l_02_joint 1
+    400346: index_l_03_joint
+    400348: index_l_03_joint 1
+    400350: index_r_01_joint
+    400352: index_r_01_joint 1
+    400354: index_r_02_joint
+    400356: index_r_02_joint 1
+    400358: index_r_03_joint
+    400360: index_r_03_joint 1
+    400362: joint_grp
+    400364: joint_grp 1
+    400366: knee_l_ctrl
+    400368: knee_l_ctrl 1
+    400370: knee_l_ntrl
+    400372: knee_l_ntrl 1
+    400374: knee_r_ctrl
+    400376: knee_r_ctrl 1
+    400378: knee_r_ntrl
+    400380: knee_r_ntrl 1
+    400382: L_ankle_fk_ntrl
+    400384: L_ankle_fk_ntrl 1
+    400386: L_ankle_fk_ntrl 2
+    400388: L_ankle_fk_ntrl 3
+    400390: l_ankle_geo_high
+    400392: l_ankle_geo_low
+    400394: L_ankle_ik_ctrl
+    400396: L_ankle_ik_ctrl 1
+    400398: L_ankle_ik_ntrl
+    400400: L_ankle_ik_ntrl 1
+    400402: l_arm_ik_ctrl
+    400404: l_arm_ik_ctrl 1
+    400406: L_arm_IK_FK_switch_ctrl
+    400408: L_arm_IK_FK_switch_ctrl 1
+    400410: L_arm_IK_FK_switch_ntrl
+    400412: L_arm_IK_FK_switch_ntrl 1
+    400414: l_arm_ik_ntrl
+    400416: l_arm_ik_ntrl 1
+    400418: l_attach_ctrl
+    400420: l_attach_ctrl 1
+    400422: l_attach_joint
+    400424: l_attach_joint 1
+    400426: l_attach_ntrl
+    400428: l_attach_ntrl 1
+    400430: L_ball_ctrl
+    400432: L_ball_ctrl 1
+    400434: L_ball_ntrl
+    400436: L_ball_ntrl 1
+    400438: l_carf_geo_high
+    400440: l_carf_geo_low
+    400442: l_elbow_bit_geo_high
+    400444: l_elbow_bit_geo_low
+    400446: l_eye_geo1
+    400448: L_eyeGloss_geo1
+    400450: L_fk_ball_roll_ctrl
+    400452: L_fk_ball_roll_ctrl 1
+    400454: L_fk_ball_roll_ctrl 2
+    400456: L_fk_ball_roll_ctrl 3
+    400458: L_fk_ball_roll_ntrl
+    400460: L_fk_ball_roll_ntrl 1
+    400462: L_fk_ball_roll_ntrl1
+    400464: L_fk_ball_roll_ntrl1 1
+    400466: L_foot_ctrl
+    400468: L_foot_ctrl 1
+    400470: L_foot_ntrl
+    400472: L_foot_ntrl 1
+    400474: l_hand_cover_geo_high
+    400476: l_hand_cover_geo_low
+    400478: L_IK_FK_Leg_Switch_ctrl
+    400480: L_IK_FK_Leg_Switch_ctrl 1
+    400482: L_IK_FK_Leg_Switch_ntrl
+    400484: L_IK_FK_Leg_Switch_ntrl 1
+    400486: L_ik_footRoll_ankle_joint
+    400488: L_ik_footRoll_ankle_joint 1
+    400490: L_ik_footRoll_ball_joint
+    400492: L_ik_footRoll_ball_joint 1
+    400494: L_ik_footRoll_heel_joint
+    400496: L_ik_footRoll_heel_joint 1
+    400498: L_ik_footRoll_toe_joint
+    400500: L_ik_footRoll_toe_joint 1
+    400502: l_index_01_ctrl
+    400504: l_index_01_ctrl 1
+    400506: l_index_01_ntrl
+    400508: l_index_01_ntrl 1
+    400510: l_index_02_ctrl
+    400512: l_index_02_ctrl 1
+    400514: l_index_02_ntrl
+    400516: l_index_02_ntrl 1
+    400518: l_index_03_ctrl
+    400520: l_index_03_ctrl 1
+    400522: l_index_03_ntrl
+    400524: l_index_03_ntrl 1
+    400526: L_lowLeg_fk_ctrl
+    400528: L_lowLeg_fk_ctrl 1
+    400530: L_lowLeg_fk_ntrl
+    400532: L_lowLeg_fk_ntrl 1
+    400534: l_middle_01_ctrl
+    400536: l_middle_01_ctrl 1
+    400538: l_middle_01_ntrl
+    400540: l_middle_01_ntrl 1
+    400542: l_middle_02_ctrl
+    400544: l_middle_02_ctrl 1
+    400546: l_middle_02_ntrl
+    400548: l_middle_02_ntrl 1
+    400550: l_middle_03_ctrl
+    400552: l_middle_03_ctrl 1
+    400554: l_middle_03_ntrl
+    400556: l_middle_03_ntrl 1
+    400558: l_pinky_01_ctrl
+    400560: l_pinky_01_ctrl 1
+    400562: l_pinky_01_ntrl
+    400564: l_pinky_01_ntrl 1
+    400566: l_pinky_02_ctrl
+    400568: l_pinky_02_ctrl 1
+    400570: l_pinky_02_ntrl
+    400572: l_pinky_02_ntrl 1
+    400574: l_pinky_03_ctrl
+    400576: l_pinky_03_ctrl 1
+    400578: l_pinky_03_ntrl
+    400580: l_pinky_03_ntrl 1
+    400582: l_ring_01_ctrl
+    400584: l_ring_01_ctrl 1
+    400586: l_ring_01_ntrl
+    400588: l_ring_01_ntrl 1
+    400590: l_ring_02_ctrl
+    400592: l_ring_02_ctrl 1
+    400594: l_ring_02_ntrl
+    400596: l_ring_02_ntrl 1
+    400598: l_ring_03_ctrl
+    400600: l_ring_03_ctrl 1
+    400602: l_ring_03_ntrl1
+    400604: l_ring_03_ntrl1 1
+    400606: l_shld_pad_high
+    400608: l_shld_pad_low
+    400610: l_thighCover_v01_geo_high
+    400612: l_thighCover_v01_geo_low
+    400614: l_thighCover_v02_geo_high
+    400616: l_thighCover_v02_geo_low
+    400618: l_thumb_01_ctrl
+    400620: l_thumb_01_ctrl 1
+    400622: l_thumb_01_ntrl
+    400624: l_thumb_01_ntrl 1
+    400626: l_thumb_02_ctrl
+    400628: l_thumb_02_ctrl 1
+    400630: l_thumb_02_ntrl
+    400632: l_thumb_02_ntrl 1
+    400634: l_thumb_03_ctrl
+    400636: l_thumb_03_ctrl 1
+    400638: l_thumb_03_ntrl
+    400640: l_thumb_03_ntrl 1
+    400642: L_toes_ctrl
+    400644: L_toes_ctrl 1
+    400646: L_toes_ntrl
+    400648: L_toes_ntrl 1
+    400650: L_upLeg_fk_ctrl
+    400652: L_upLeg_fk_ctrl 1
+    400654: L_upLeg_fk_ntrl
+    400656: L_upLeg_fk_ntrl 1
+    400658: Link
+    400660: lowLeg_l_def_joint
+    400662: lowLeg_l_def_joint 1
+    400664: lowLeg_l_fk_joint
+    400666: lowLeg_l_fk_joint 1
+    400668: lowLeg_l_ik_joint
+    400670: lowLeg_l_ik_joint 1
+    400672: lowLeg_r_def_joint
+    400674: lowLeg_r_def_joint 1
+    400676: lowLeg_r_fk_joint
+    400678: lowLeg_r_fk_joint 1
+    400680: lowLeg_r_ik_joint
+    400682: lowLeg_r_ik_joint 1
+    400684: middle_l_01_joint
+    400686: middle_l_01_joint 1
+    400688: middle_l_02_joint
+    400690: middle_l_02_joint 1
+    400692: middle_l_03_joint
+    400694: middle_l_03_joint 1
+    400696: middle_r_01_joint
+    400698: middle_r_01_joint 1
+    400700: middle_r_02_joint
+    400702: middle_r_02_joint 1
+    400704: middle_r_03_joint
+    400706: middle_r_03_joint 1
+    400708: //RootNode
+    400710: neck_crtl
+    400712: neck_crtl 1
+    400714: neck_joint
+    400716: neck_joint 1
+    400718: neck_ntrl
+    400720: neck_ntrl 1
+    400722: pinky_l_01_joint
+    400724: pinky_l_01_joint 1
+    400726: pinky_l_02_joint
+    400728: pinky_l_02_joint 1
+    400730: pinky_l_03_joint
+    400732: pinky_l_03_joint 1
+    400734: pinky_r_01_joint
+    400736: pinky_r_01_joint 1
+    400738: pinky_r_02_joint
+    400740: pinky_r_02_joint 1
+    400742: pinky_r_03_joint
+    400744: pinky_r_03_joint 1
+    400746: poleVec_gep
+    400748: poleVec_gep 1
+    400750: R_ankle_fk_ntrl
+    400752: R_ankle_fk_ntrl 1
+    400754: R_ankle_fk_ntrl 2
+    400756: R_ankle_fk_ntrl 3
+    400758: r_ankle_geo_high
+    400760: r_ankle_geo_low
+    400762: R_ankle_ik_ctrl
+    400764: R_ankle_ik_ctrl 1
+    400766: R_ankle_ik_ntrl
+    400768: R_ankle_ik_ntrl 1
+    400770: r_arm_ik_ctrl
+    400772: r_arm_ik_ctrl 1
+    400774: R_arm_IK_FK_switch_ctrl
+    400776: R_arm_IK_FK_switch_ctrl 1
+    400778: R_arm_IK_FK_switch_ntrl
+    400780: R_arm_IK_FK_switch_ntrl 1
+    400782: r_arm_ik_ntrl
+    400784: r_arm_ik_ntrl 1
+    400786: r_attach_ctrl
+    400788: r_attach_ctrl 1
+    400790: r_attach_joint
+    400792: r_attach_joint 1
+    400794: r_attach_ntrl
+    400796: r_attach_ntrl 1
+    400798: R_ball_ctrl
+    400800: R_ball_ctrl 1
+    400802: R_ball_ntrl
+    400804: R_ball_ntrl 1
+    400806: r_carf_geo_high
+    400808: r_carf_geo_low
+    400810: r_elbow_bit_geo_high
+    400812: r_elbow_bit_geo_low
+    400814: r_eye_geo1
+    400816: R_eyeGloss_geo1
+    400818: R_foot_ctrl
+    400820: R_foot_ctrl 1
+    400822: R_foot_ntrl
+    400824: R_foot_ntrl 1
+    400826: r_hand_cover_geo_high
+    400828: r_hand_cover_geo_low
+    400830: R_IK_FK_Leg_Switch_ctrl
+    400832: R_IK_FK_Leg_Switch_ctrl 1
+    400834: R_IK_FK_Leg_Switch_ntrl
+    400836: R_IK_FK_Leg_Switch_ntrl 1
+    400838: R_ik_footRoll_ankle_joint
+    400840: R_ik_footRoll_ankle_joint 1
+    400842: R_ik_footRoll_ball_joint
+    400844: R_ik_footRoll_ball_joint 1
+    400846: R_ik_footRoll_heel_joint
+    400848: R_ik_footRoll_heel_joint 1
+    400850: R_ik_footRoll_toe_joint
+    400852: R_ik_footRoll_toe_joint 1
+    400854: r_index_01_ctrl
+    400856: r_index_01_ctrl 1
+    400858: r_index_01_ntrl
+    400860: r_index_01_ntrl 1
+    400862: r_index_02_ctrl
+    400864: r_index_02_ctrl 1
+    400866: r_index_02_ntrl
+    400868: r_index_02_ntrl 1
+    400870: r_index_03_ctrl
+    400872: r_index_03_ctrl 1
+    400874: r_index_03_ntrl
+    400876: r_index_03_ntrl 1
+    400878: R_lowLeg_fk_ctrl
+    400880: R_lowLeg_fk_ctrl 1
+    400882: R_lowLeg_fk_ntrl
+    400884: R_lowLeg_fk_ntrl 1
+    400886: r_middle_01_ctrl
+    400888: r_middle_01_ctrl 1
+    400890: r_middle_01_ntrl
+    400892: r_middle_01_ntrl 1
+    400894: r_middle_02_ctrl
+    400896: r_middle_02_ctrl 1
+    400898: r_middle_02_ntrl
+    400900: r_middle_02_ntrl 1
+    400902: r_middle_03_ctrl
+    400904: r_middle_03_ctrl 1
+    400906: r_middle_03_ntrl
+    400908: r_middle_03_ntrl 1
+    400910: r_pinky_01_ctrl
+    400912: r_pinky_01_ctrl 1
+    400914: r_pinky_01_ntrl
+    400916: r_pinky_01_ntrl 1
+    400918: r_pinky_02_ctrl
+    400920: r_pinky_02_ctrl 1
+    400922: r_pinky_02_ntrl
+    400924: r_pinky_02_ntrl 1
+    400926: r_pinky_03_ctrl
+    400928: r_pinky_03_ctrl 1
+    400930: r_pinky_03_ntrl
+    400932: r_pinky_03_ntrl 1
+    400934: r_ring_01_ctrl
+    400936: r_ring_01_ctrl 1
+    400938: r_ring_01_ntrl
+    400940: r_ring_01_ntrl 1
+    400942: r_ring_02_ctrl
+    400944: r_ring_02_ctrl 1
+    400946: r_ring_02_ntrl
+    400948: r_ring_02_ntrl 1
+    400950: r_ring_03_ctrl
+    400952: r_ring_03_ctrl 1
+    400954: r_ring_03_ntrl1
+    400956: r_ring_03_ntrl1 1
+    400958: r_shld_pad_high
+    400960: r_shld_pad_low
+    400962: r_thighCover_v01_geo_high
+    400964: r_thighCover_v01_geo_low
+    400966: r_thighCover_v02_geo_high
+    400968: r_thighCover_v02_geo_low
+    400970: r_thumb_01_ctrl
+    400972: r_thumb_01_ctrl 1
+    400974: r_thumb_01_ntrl
+    400976: r_thumb_01_ntrl 1
+    400978: r_thumb_02_ctrl
+    400980: r_thumb_02_ctrl 1
+    400982: r_thumb_02_ntrl
+    400984: r_thumb_02_ntrl 1
+    400986: r_thumb_03_ctrl
+    400988: r_thumb_03_ctrl 1
+    400990: r_thumb_03_ntrl
+    400992: r_thumb_03_ntrl 1
+    400994: R_toes_ctrl
+    400996: R_toes_ctrl 1
+    400998: R_toes_ntrl
+    401000: R_toes_ntrl 1
+    401002: R_upLeg_fk_ctrl
+    401004: R_upLeg_fk_ctrl 1
+    401006: R_upLeg_fk_ntrl
+    401008: R_upLeg_fk_ntrl 1
+    401010: Rig_Character_high
+    401012: Rig_Character_low
+    401014: ring_l_01_joint
+    401016: ring_l_01_joint 1
+    401018: ring_l_02_joint
+    401020: ring_l_02_joint 1
+    401022: ring_l_03_joint
+    401024: ring_l_03_joint 1
+    401026: ring_r_01_joint
+    401028: ring_r_01_joint 1
+    401030: ring_r_02_joint
+    401032: ring_r_02_joint 1
+    401034: ring_r_03_joint
+    401036: ring_r_03_joint 1
+    401038: root_joint
+    401040: root_joint 1
+    401042: shoulder_l_def_joint
+    401044: shoulder_l_def_joint 1
+    401046: shoulder_l_fk_ctrl
+    401048: shoulder_l_fk_ctrl 1
+    401050: shoulder_l_FK_joint
+    401052: shoulder_l_FK_joint 1
+    401054: shoulder_l_fk_ntrl
+    401056: shoulder_l_fk_ntrl 1
+    401058: shoulder_l_IK_joint
+    401060: shoulder_l_IK_joint 1
+    401062: shoulder_r_def_joint
+    401064: shoulder_r_def_joint 1
+    401066: shoulder_r_fk_ctrl
+    401068: shoulder_r_fk_ctrl 1
+    401070: shoulder_r_FK_joint
+    401072: shoulder_r_FK_joint 1
+    401074: shoulder_r_fk_ntrl
+    401076: shoulder_r_fk_ntrl 1
+    401078: shoulder_r_IK_joint
+    401080: shoulder_r_IK_joint 1
+    401082: spin_crtl
+    401084: spin_crtl 1
+    401086: spin_nrtl
+    401088: spin_nrtl 1
+    401090: Switches
+    401092: Switches 1
+    401094: T_Gum_geo1
+    401096: T_teeth_geo1
+    401098: thumb_l_01_joint
+    401100: thumb_l_01_joint 1
+    401102: thumb_l_02_joint
+    401104: thumb_l_02_joint 1
+    401106: thumb_l_03_joint
+    401108: thumb_l_03_joint 1
+    401110: thumb_r_01_joint
+    401112: thumb_r_01_joint 1
+    401114: thumb_r_02_joint
+    401116: thumb_r_02_joint 1
+    401118: thumb_r_03_joint
+    401120: thumb_r_03_joint 1
+    401122: toe_l_def_joint
+    401124: toe_l_def_joint 1
+    401126: toe_l_fk_joint
+    401128: toe_l_fk_joint 1
+    401130: toe_l_ik_joint
+    401132: toe_l_ik_joint 1
+    401134: toe_r_def_joint
+    401136: toe_r_def_joint 1
+    401138: toe_r_fk_joint
+    401140: toe_r_fk_joint 1
+    401142: toe_r_ik_joint
+    401144: toe_r_ik_joint 1
+    401146: tongue_geo1
+    401148: upLeg_l_def_joint
+    401150: upLeg_l_def_joint 1
+    401152: upLeg_l_fk_joint
+    401154: upLeg_l_fk_joint 1
+    401156: upLeg_l_ik_joint
+    401158: upLeg_l_ik_joint 1
+    401160: upLeg_r_def_joint
+    401162: upLeg_r_def_joint 1
+    401164: upLeg_r_fk_joint
+    401166: upLeg_r_fk_joint 1
+    401168: upLeg_r_ik_joint
+    401170: upLeg_r_ik_joint 1
+    401172: ver_01_ctrl
+    401174: ver_01_ctrl 1
+    401176: ver_01_ntrl
+    401178: ver_01_ntrl 1
+    401180: vert_01_joint
+    401182: vert_01_joint 1
+    401184: vert_02_ctrl
+    401186: vert_02_ctrl 1
+    401188: vert_02_joint
+    401190: vert_02_joint 1
+    401192: vert_02_ntrl
+    401194: vert_02_ntrl 1
+    401196: wrist_l_def_joint
+    401198: wrist_l_def_joint 1
+    401200: wrist_l_fk_ctrl
+    401202: wrist_l_fk_ctrl 1
+    401204: wrist_l_FK_joint
+    401206: wrist_l_FK_joint 1
+    401208: wrist_l_fk_ntrl
+    401210: wrist_l_fk_ntrl 1
+    401212: wrist_l_IK_joint
+    401214: wrist_l_IK_joint 1
+    401216: wrist_r_def_joint
+    401218: wrist_r_def_joint 1
+    401220: wrist_r_fk_ctrl
+    401222: wrist_r_fk_ctrl 1
+    401224: wrist_r_FK_joint
+    401226: wrist_r_FK_joint 1
+    401228: wrist_r_fk_ntrl
+    401230: wrist_r_fk_ntrl 1
+    401232: wrist_r_IK_joint
+    401234: wrist_r_IK_joint 1
+    2000000: back
+    2000002: bottom
+    2100000: NA25_AegisSuit_Rig_Hair_tex
+    2100002: NA25_AegisSuit_Rig_AS_shd
+    2100004: NA25_AegisSuit_Rig_Trim_shd
+    2100006: lambert1
+    2100008: NA25_AegisSuit_Rig_Head_tex
+    2100010: NA_Body_mtl
+    2100012: NA_Visor_mtl
+    2100014: NA25_AegisSuit_Rig_Glass_shd
+    2300000: B_Gum_geo1
+    2300002: B_teeth_geo1
+    2300004: Body_geo
+    2300006: Body_geo1
+    2300008: Body_geo2
+    2300010: Body_geo_high
+    2300012: chestBit_high
+    2300014: Dog_Tag_01
+    2300016: Dog_Tag_02
+    2300018: hair_v01_geo
+    2300020: hair_v02_geo
+    2300022: hair_v03_geo1
+    2300024: head_geo1
+    2300026: Helm_geo1
+    2300028: Helm_geo_high
+    2300030: l_ankle_geo_high
+    2300032: l_carf_geo_high
+    2300034: l_elbow_bit_geo_high
+    2300036: l_eye_geo1
+    2300038: L_eyeGloss_geo1
+    2300040: l_hand_cover_geo_high
+    2300042: l_shld_pad_high
+    2300044: l_thighCover_v01_geo_high
+    2300046: l_thighCover_v02_geo_high
+    2300048: Link
+    2300050: r_ankle_geo_high
+    2300052: r_carf_geo_high
+    2300054: r_elbow_bit_geo_high
+    2300056: r_eye_geo1
+    2300058: R_eyeGloss_geo1
+    2300060: r_hand_cover_geo_high
+    2300062: r_shld_pad_high
+    2300064: r_thighCover_v01_geo_high
+    2300066: r_thighCover_v02_geo_high
+    2300068: T_Gum_geo1
+    2300070: T_teeth_geo1
+    2300072: tongue_geo1
+    3300000: B_Gum_geo1
+    3300002: B_teeth_geo1
+    3300004: Body_geo
+    3300006: Body_geo1
+    3300008: Body_geo2
+    3300010: Body_geo_high
+    3300012: chestBit_high
+    3300014: Dog_Tag_01
+    3300016: Dog_Tag_02
+    3300018: hair_v01_geo
+    3300020: hair_v02_geo
+    3300022: hair_v03_geo1
+    3300024: head_geo1
+    3300026: Helm_geo1
+    3300028: Helm_geo_high
+    3300030: l_ankle_geo_high
+    3300032: l_carf_geo_high
+    3300034: l_elbow_bit_geo_high
+    3300036: l_eye_geo1
+    3300038: L_eyeGloss_geo1
+    3300040: l_hand_cover_geo_high
+    3300042: l_shld_pad_high
+    3300044: l_thighCover_v01_geo_high
+    3300046: l_thighCover_v02_geo_high
+    3300048: Link
+    3300050: r_ankle_geo_high
+    3300052: r_carf_geo_high
+    3300054: r_elbow_bit_geo_high
+    3300056: r_eye_geo1
+    3300058: R_eyeGloss_geo1
+    3300060: r_hand_cover_geo_high
+    3300062: r_shld_pad_high
+    3300064: r_thighCover_v01_geo_high
+    3300066: r_thighCover_v02_geo_high
+    3300068: T_Gum_geo1
+    3300070: T_teeth_geo1
+    3300072: tongue_geo1
+    4300000: hair_v02_geo
+    4300002: hair_v01_geo
+    4300004: Body_geo1
+    4300006: Helm_geo1
+    4300008: Body_geo
+    4300010: Body_geo2
+    4300012: Dog_Tag_01
+    4300014: Dog_Tag_02
+    4300016: Link
+    4300018: r_ankle_geo_low
+    4300020: l_ankle_geo_low
+    4300022: l_carf_geo_low
+    4300024: r_carf_geo_low
+    4300026: l_thighCover_v02_geo_low
+    4300028: l_thighCover_v01_geo_low
+    4300030: r_thighCover_v02_geo_low
+    4300032: l_hand_cover_geo_low
+    4300034: r_hand_cover_geo_low
+    4300036: r_thighCover_v01_geo_low
+    4300038: r_elbow_bit_geo_low
+    4300040: chestBit_low
+    4300042: l_elbow_bit_geo_low
+    4300044: r_shld_pad_low
+    4300046: l_shld_pad_low
+    4300048: Body_geo_low
+    4300050: Helm_geo_low
+    4300052: T_Gum_geo1
+    4300054: T_teeth_geo1
+    4300056: R_eyeGloss_geo1
+    4300058: L_eyeGloss_geo1
+    4300060: l_eye_geo1
+    4300062: r_eye_geo1
+    4300064: hair_v03_geo1
+    4300066: head_geo1
+    4300068: B_teeth_geo1
+    4300070: B_Gum_geo1
+    4300072: tongue_geo1
+    4300074: r_ankle_geo_high
+    4300076: l_ankle_geo_high
+    4300078: l_carf_geo_high
+    4300080: r_carf_geo_high
+    4300082: l_thighCover_v02_geo_high
+    4300084: l_thighCover_v01_geo_high
+    4300086: r_thighCover_v02_geo_high
+    4300088: l_hand_cover_geo_high
+    4300090: r_hand_cover_geo_high
+    4300092: r_thighCover_v01_geo_high
+    4300094: r_elbow_bit_geo_high
+    4300096: chestBit_high
+    4300098: l_elbow_bit_geo_high
+    4300100: r_shld_pad_high
+    4300102: l_shld_pad_high
+    4300104: Body_geo_high
+    4300106: Helm_geo_high
+    9500000: //RootNode
+    13700000: Body_geo_low
+    13700002: chestBit_low
+    13700004: Helm_geo_low
+    13700006: l_ankle_geo_low
+    13700008: l_carf_geo_low
+    13700010: l_elbow_bit_geo_low
+    13700012: l_hand_cover_geo_low
+    13700014: l_shld_pad_low
+    13700016: l_thighCover_v01_geo_low
+    13700018: l_thighCover_v02_geo_low
+    13700020: r_ankle_geo_low
+    13700022: r_carf_geo_low
+    13700024: r_elbow_bit_geo_low
+    13700026: r_hand_cover_geo_low
+    13700028: r_shld_pad_low
+    13700030: r_thighCover_v01_geo_low
+    13700032: r_thighCover_v02_geo_low
+    2186277476908879412: ImportLogs
+  externalObjects: {}
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+    materialLocation: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleCurves: 1
+    optimizeGameObjects: 0
+    motionNodeName: 
+    rigImportErrors: 
+    rigImportWarnings: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    importAnimatedCustomProperties: 0
+    importConstraints: 0
+    animationCompression: 3
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    extraUserProperties: []
+    clipAnimations: []
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 0
+    useSRGBMaterialColor: 1
+    importVisibility: 1
+    importBlendShapes: 1
+    importCameras: 1
+    importLights: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    keepQuads: 0
+    weldVertices: 1
+    preserveHierarchy: 0
+    indexFormat: 0
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+    previousCalculatedGlobalScale: 0.01
+    hasPreviousCalculatedGlobalScale: 1
+  tangentSpace:
+    normalSmoothAngle: 60
+    normalImportMode: 0
+    tangentImportMode: 3
+    normalCalculationMode: 4
+    legacyComputeAllNormalsFromSmoothingGroupsWhenMeshHasBlendShapes: 0
+    blendShapeNormalImportMode: 1
+    normalSmoothingSource: 0
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    serializedVersion: 2
+    human: []
+    skeleton: []
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    rootMotionBoneName: 
+    hasTranslationDoF: 0
+    hasExtraRoot: 1
+    skeletonHasParents: 1
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 3
+  humanoidOversampling: 1
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

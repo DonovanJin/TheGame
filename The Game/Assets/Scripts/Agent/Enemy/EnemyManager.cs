@@ -11,6 +11,10 @@ namespace Jincom.Agent
         public PlayerAgent Player;
         public List<EnemyAgent> Enemies = new List<EnemyAgent>();
 
+        //private 
+        public EnemyAgent CurrentEenemy;
+        public GameObject[] EnemyPrefabs;
+
         internal void Init(PlayerAgent currentPlayerAgent)
         {
             Player = currentPlayerAgent;
@@ -27,6 +31,11 @@ namespace Jincom.Agent
                 }
             }
         }
+
+        //internal void Init(EnemyAgent )
+        //{
+            
+        //}
 
         internal void UpdateManager()
         {

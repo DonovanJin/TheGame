@@ -5,12 +5,13 @@ using Jincom.Core;
 
 namespace Jincom.Agent
 {
-    public class EnemyAgent : AgentBase
-    {     
+    abstract public class EnemyAgent : AgentBase
+    {
+        private Enemy _enemyData;
         public Transform PlayerTransform;
-        public float SpotDistance;
+        public float SpotDistance = 10f;
         public bool SpottedPlayer;
-        private RaycastHit RayHit;
+        private RaycastHit _rayHit;
 
         private float _horizontalDifference;
 
@@ -20,6 +21,34 @@ namespace Jincom.Agent
             Right
         };
         public FacingDirection Facing;
+
+        //This is the action the enemy is currently performing and is mostly to inform the animation
+        public enum AgentState
+        {
+            //Generic actions
+            Idle,
+            Walking,
+            Dead,
+            Fall,
+            Jump,
+
+            //Worm actions
+            Strangling,
+            Spitting
+        };
+        public AgentState CurrentStateOfAgent;
+
+        //The state of the enemy's mind. This informs what type of AI to employ.
+        public enum EnemyBehaviour
+        {
+            Idle,
+            Suspicious,
+            Attacking,
+            Chasing,
+            Performing
+        };
+
+        public EnemyBehaviour CurrentEnemyBehaviour;
 
         //  =   =   =   =   =   =   =   =   =   =   =   =
 
@@ -42,30 +71,37 @@ namespace Jincom.Agent
 
         public virtual void SpotThePlayer()
         {
-            if (PlayerTransform == null)
+            //Performing means it's probably a cutscene of some sort
+            if(CurrentEnemyBehaviour != EnemyBehaviour.Performing)
             {
-                PlayerTransform = GameObject.FindGameObjectWithTag("Player").gameObject.GetComponent<Transform>();
-            }
-
-            if (PlayerTransform)
-            { 
-            _horizontalDifference = transform.position.x - PlayerTransform.position.x;
-
-                if (Physics.Raycast(transform.position, PlayerTransform.position - transform.position, out RayHit))
+                if (!PlayerTransform)
                 {
-                    if (RayHit.transform == PlayerTransform)
+                    PlayerTransform = GameObject.FindGameObjectWithTag("Player").gameObject.GetComponent<Transform>();
+                }
+
+                else
+                {
+                    _horizontalDifference = transform.position.x - PlayerTransform.position.x;
+
+                    if (Physics.Raycast(transform.position, PlayerTransform.position - transform.position, out _rayHit))
                     {
-                        Debug.DrawLine(transform.position, PlayerTransform.position, Color.red);
-                        if (Vector3.Distance(transform.position, PlayerTransform.position) < SpotDistance)
+                        if (_rayHit.transform == PlayerTransform)
                         {
-                            //SpottedPlayer = true;
-                            if ((_horizontalDifference > 0) && (Facing == FacingDirection.Left))
+                            if (Vector3.Distance(transform.position, PlayerTransform.position) < SpotDistance)
                             {
-                                SpottedPlayer = true;
-                            }
-                            else if ((_horizontalDifference < 0) && (Facing == FacingDirection.Right))
-                            {
-                                SpottedPlayer = true;
+                                //SpottedPlayer = true;
+                                if ((_horizontalDifference > 0) && (Facing == FacingDirection.Left))
+                                {
+                                    SpottedPlayer = true;
+                                }
+                                else if ((_horizontalDifference < 0) && (Facing == FacingDirection.Right))
+                                {
+                                    SpottedPlayer = true;
+                                }
+                                else
+                                {
+                                    SpottedPlayer = false;
+                                }
                             }
                             else
                             {
@@ -77,11 +113,12 @@ namespace Jincom.Agent
                             SpottedPlayer = false;
                         }
                     }
-                    else
-                    {
-                        SpottedPlayer = false;
-                    }
                 }
+            }
+
+            if (SpottedPlayer)
+            {
+                Debug.DrawLine(transform.position, PlayerTransform.position, Color.red);
             }
         }
 
@@ -112,22 +149,11 @@ namespace Jincom.Agent
         {
             if (SpottedPlayer)
             {
-                if (CanShoot)
-                {
-                    AgentShoot();
-                    CanShoot = false;
-                    //StartCoroutine(ResetCanShoot());
-                }
+                //if Enemy hasn't shot within the last x amount of time, allow the enemy to shoot again
+                Debug.Log("Bang, bang, bang!");
             }
         }
 
-        //  =   =   =   =   =   =   =   =   =   =   =   =
-
-        //replace with better reset
-        //IEnumerator ResetCanShoot()
-        //{
-        //    yield return new WaitForSeconds(TimeBetweenEachShotInSeconds);
-        //    CanShoot = true;
-        //}
+        //Pathing
     }
 }
