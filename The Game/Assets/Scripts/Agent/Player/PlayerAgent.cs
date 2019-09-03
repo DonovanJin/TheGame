@@ -23,10 +23,16 @@ namespace Jincom.Agent
 
         [Range(-1f, 1f)]
         public float _momentum;
-                
-        public int CurrentHealth, MaxHealth, CurrentArmour, MaxArmour, CurrentAmmo;
-        public float JumpHeight;
-        public WeaponData CurrentWeapon;
+
+        public enum AgentState
+        {
+            Walk,
+            Idle,
+            Dead,
+            Fall,
+            Jump
+        };
+        public AgentState _currentStateOfAgent;
 
         //Facing direction is used to inform graphics and animation
         public enum FacingDirection
@@ -36,8 +42,6 @@ namespace Jincom.Agent
         };
         public FacingDirection Facing;        
         
-        public string StateOfThisAgent;
-
         public Transform Target;
 
 #if TESTING
@@ -60,6 +64,12 @@ namespace Jincom.Agent
             InitiatePlayerProperties();
         }
 
+        public void OnDrawGizmos()
+        {
+            Gizmos.color = Color.red;
+            Gizmos.DrawSphere(CameraHelper.GetWorldPosition(7),0.1f);
+        }
+
         private void InitiatePlayerProperties()
         {
             RB = this.GetComponent<Rigidbody>();
@@ -78,7 +88,6 @@ namespace Jincom.Agent
             //DisplayPlayerInfo is used in development time as substitute for a UI
             //MeshDirection is a temporary solution for turning the player around
 #if TESTING
-            DisplayPlayerInfo();
             MeshDirection();
 #endif
             FacingLeftOrRight();
@@ -88,30 +97,13 @@ namespace Jincom.Agent
             PlayerInput();             
             AnimationState();
             Fall();
-            WhatStateIsAgentIn();
         }
 
         //  =   =   =   =   =   =   =   =   =   =   =   =
 
-#if TESTING
-        private void DisplayPlayerInfo()
-        {
-            CurrentHealth = _playerData.CurrentHealth;
-            MaxHealth = _playerData.MaxHealth;
-            CurrentArmour = _playerData.CurrentArmour;
-            MaxArmour = _playerData.MaxArmour;
-            JumpHeight = _playerData.JumpHeight;
-            if (PlayerData.CurrentWeapon != null)
-            {
-                CurrentWeapon = PlayerData.CurrentWeapon;
-                CurrentAmmo = PlayerData.Ammo[PlayerData.CurrentWeapon];
-            }
-        }
-#endif
-
         private void PlayerInput()
         {
-            if (_playerData._currentStateOfAgent != Player.AgentState.Dead)
+            if (_currentStateOfAgent != AgentState.Dead)
             {
                 if (Input.anyKey)
                 {
@@ -145,7 +137,7 @@ namespace Jincom.Agent
 
         private void FacingLeftOrRight()
         {
-            if (GetComponentInChildren<Cursor_UI_3DSpace>().CanvasCursorPosition.x < (Screen.width * 0.5f))
+            if (CameraHelper.IsLeftOfScreen())
             {
                 if (Facing != FacingDirection.Left)
                 {
@@ -390,12 +382,12 @@ namespace Jincom.Agent
                     //Idle
                     if (Input.GetAxis("Horizontal") == 0)
                     {
-                        _playerData._currentStateOfAgent = Player.AgentState.Idle;
+                        _currentStateOfAgent =AgentState.Idle;
                     }
                     //Walking/Runninng
                     else
                     {
-                        _playerData._currentStateOfAgent = Player.AgentState.Walk;
+                        _currentStateOfAgent = AgentState.Walk;
                     }
                 }
 
@@ -406,19 +398,19 @@ namespace Jincom.Agent
                         //Falling
                         if (RB.velocity.y < 0f)
                         {
-                            _playerData._currentStateOfAgent = Player.AgentState.Fall;
+                            _currentStateOfAgent = AgentState.Fall;
                         }
                         //Jumping
                         else if (RB.velocity.y > 0f)
                         {
-                            _playerData._currentStateOfAgent = Player.AgentState.Jump;
+                           _currentStateOfAgent = AgentState.Jump;
                         }
                     }
                 }
             }
             else
             {
-                _playerData._currentStateOfAgent = Player.AgentState.Dead;
+                _currentStateOfAgent = AgentState.Dead;
             }
         }
 
@@ -462,11 +454,6 @@ namespace Jincom.Agent
                 }
             }
             _oldVertPos = _newVertPos;
-        }
-
-        private void WhatStateIsAgentIn()
-        {
-            StateOfThisAgent = _playerData._currentStateOfAgent.ToString();
         }
            
 #if TESTING

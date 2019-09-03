@@ -32,11 +32,6 @@ namespace Jincom.Agent
             }
         }
 
-        //internal void Init(EnemyAgent )
-        //{
-            
-        //}
-
         internal void UpdateManager()
         {
             if (Enemies.Count > 0)

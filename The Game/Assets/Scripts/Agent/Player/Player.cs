@@ -19,16 +19,6 @@ namespace Jincom.Agent
         public Dictionary<WeaponData, int> Ammo = new Dictionary<WeaponData, int>();
         public List<GameConstants.Elements> Suits = new List<GameConstants.Elements>();
 
-        public enum AgentState
-        {
-            Walk,
-            Idle,
-            Dead,
-            Fall,
-            Jump
-        };
-        public AgentState _currentStateOfAgent;
-
         public Player()
         {
             CurrentHealth = MaxHealth;

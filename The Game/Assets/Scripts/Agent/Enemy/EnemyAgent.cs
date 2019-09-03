@@ -2,18 +2,32 @@
 using System.Collections.Generic;
 using UnityEngine;
 using Jincom.Core;
+using Jincom.PickUps;
 
 namespace Jincom.Agent
 {
     abstract public class EnemyAgent : AgentBase
     {
-        private Enemy _enemyData;
+        public int CurrentHealth;
+        public int MaxHealth = 100;
+        public int CurrentArmour;
+        public int MaxArmour = 100;
+        public float JumpHeight = 650f;
+        public GameConstants.Elements ArmourElement;
+        public WeaponData Weapon;
+
         public Transform PlayerTransform;
         public float SpotDistance = 10f;
         public bool SpottedPlayer;
         private RaycastHit _rayHit;
 
         private float _horizontalDifference;
+
+        public EnemyAgent()
+        {
+            CurrentHealth = MaxHealth;
+            CurrentArmour = MaxArmour;
+        }
 
         public enum FacingDirection
         {
@@ -52,19 +66,11 @@ namespace Jincom.Agent
 
         //  =   =   =   =   =   =   =   =   =   =   =   =
 
-        public void Update()
+        public override void AgentUpdate()
         {
             AgentUpdate();
             SpotThePlayer();
             EnemyShoot();
-        }
-
-        //  =   =   =   =   =   =   =   =   =   =   =   =
-
-        public override void AgentUpdate()
-        {
-            //Move(Mathf.PingPong(Time.unscaledTime, 4f) - 2f);  
-            //AnimationState();
         }
 
         //  =   =   =   =   =   =   =   =   =   =   =   =
