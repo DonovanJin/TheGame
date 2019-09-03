@@ -7,7 +7,9 @@ namespace Jincom.Agent
 {
     public class EnemyManager : MonoBehaviour
     {
+        public EnemySpawner[] Spawners;
         public PlayerAgent Player;
+        public List<EnemyAgent> Enemies = new List<EnemyAgent>();
 
         //private 
         public EnemyAgent CurrentEenemy;
@@ -16,6 +18,18 @@ namespace Jincom.Agent
         internal void Init(PlayerAgent currentPlayerAgent)
         {
             Player = currentPlayerAgent;
+
+            for (int i = 0; i < Spawners.Length; i++)
+            {
+                EnemyAgent enemy = Spawners[i].Init();
+                enemy.transform.parent = this.transform;
+
+
+                if (enemy != null)
+                {
+                    Enemies.Add(enemy);
+                }
+            }
         }
 
         //internal void Init(EnemyAgent )
@@ -25,7 +39,13 @@ namespace Jincom.Agent
 
         internal void UpdateManager()
         {
-           
+            if (Enemies.Count > 0)
+            {
+                for (int i = 0; i < Enemies.Count; i++)
+                {
+                    Enemies[i].AgentUpdate();
+                }
+            }
         }
     }
 }
