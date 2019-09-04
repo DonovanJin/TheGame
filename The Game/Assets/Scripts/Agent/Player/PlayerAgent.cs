@@ -12,6 +12,7 @@ namespace Jincom.Agent
     {
         //HERMANN just for demo purposes. Rotates the empty parent object that's in control of the visible meshes for the player
         public GameObject VisibleMesh;
+        public CameraManager cameraManager;
 
         private Player _playerData;
         private bool _doubleJumped;  
@@ -40,9 +41,7 @@ namespace Jincom.Agent
             Left,
             Right
         };
-        public FacingDirection Facing;        
-        
-        public Transform Target;
+        public FacingDirection Facing;
 
 #if TESTING
         public float PlayerJumpHeight;
@@ -67,7 +66,7 @@ namespace Jincom.Agent
         public void OnDrawGizmos()
         {
             Gizmos.color = Color.red;
-            Gizmos.DrawSphere(CameraHelper.GetWorldPosition(7),0.1f);
+            Gizmos.DrawSphere(CameraHelper.GetWorldPosition(cameraManager.FollowDistance),0.1f);
         }
 
         private void InitiatePlayerProperties()
@@ -81,6 +80,8 @@ namespace Jincom.Agent
 
             _oldVertPos = transform.position.y;
             _newVertPos = transform.position.y;
+
+            cameraManager = Camera.main.GetComponent<CameraManager>();
         }
 
         public override void AgentUpdate()
@@ -321,7 +322,6 @@ namespace Jincom.Agent
             }
             else
             {
-                Debug.Log("Out of ammunition.");
                 return false;
             }
         }
@@ -346,28 +346,33 @@ namespace Jincom.Agent
 
         private void ShootAtTheTarget()
         {
-            Vector3 _v3;
+            Vector3 playerPosition;
+            Vector3 whereToShootAt;
             CapsuleCollider _capCol;
 
             _capCol = GetComponent<CapsuleCollider>();
-            _v3 = new Vector3(transform.position.x, transform.position.y + (_capCol.height/2), transform.position.z);
+            playerPosition = new Vector3(transform.position.x, transform.position.y + (_capCol.height/2), transform.position.z);
+            whereToShootAt = CameraHelper.GetWorldPosition(cameraManager.FollowDistance);
 
-            if (_playerData.CurrentWeapon != null)
+            if (_playerData.CurrentWeapon)
             {
-                if (Physics.Raycast(_v3, Target.transform.position - _v3, out _rayHit, _playerData.CurrentWeapon.Range))
+                if (Physics.Raycast(playerPosition, whereToShootAt - playerPosition, out _rayHit, _playerData.CurrentWeapon.Range))
                 {
-                    print("I hit somethin!");
-                    Debug.DrawRay(_v3, _rayHit.point - _v3, Color.red);
-                    print(_playerData.CurrentWeapon.ToString() + _playerData.Ammo[_playerData.CurrentWeapon].ToString() + " " + _playerData.CurrentWeapon.Range);
+                    Debug.Log("I hit somethin!");
+                    Debug.DrawRay(playerPosition, _rayHit.point - playerPosition, Color.green);
+                    Debug.Log(_playerData.CurrentWeapon.ToString() + _playerData.Ammo[_playerData.CurrentWeapon].ToString() + " " + _playerData.CurrentWeapon.Range);
                 }
                 else
                 {
-                    Debug.DrawRay(_v3, Target.transform.position - _v3, Color.blue);
+                    Debug.DrawRay(playerPosition, whereToShootAt - playerPosition, Color.red);
                 }
             }
             else
             {
-                Debug.Log("No weapon Equipped");
+                if (Physics.Raycast(playerPosition, whereToShootAt - playerPosition, out _rayHit, Mathf.Infinity))
+                {
+                    Debug.DrawRay(playerPosition, _rayHit.point - playerPosition, Color.red);
+                }
             }
         }
 
