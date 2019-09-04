@@ -203,7 +203,7 @@ namespace Jincom.Agent
             }
         }
 
-        private bool IsPlayerRunning()
+        public bool IsPlayerRunning()
         {
             if (Input.GetKey(KeyCode.LeftShift))
             {
@@ -233,7 +233,7 @@ namespace Jincom.Agent
             Move(_input, 0f);
         }
 
-        private bool IsPlayerBackpedalling()
+        public bool IsPlayerBackpedalling()
         {
             //Player is one direction, yet moving the oppisite
             if ((Input.GetAxis("Horizontal") < 0f) && (Facing == FacingDirection.Right))
