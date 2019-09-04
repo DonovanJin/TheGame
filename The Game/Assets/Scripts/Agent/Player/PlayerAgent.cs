@@ -15,7 +15,7 @@ namespace Jincom.Agent
 
         private Player _playerData;
         private bool _doubleJumped;  
-        private RaycastHit _rayHit;
+        public RaycastHit RayHit;
         private float _timeFalling;
         private bool _hitFloor;
         private float _oldVertPos = 0f;
@@ -85,8 +85,7 @@ namespace Jincom.Agent
 
         public override void AgentUpdate()
         {
-            //DisplayPlayerInfo is used in development time as substitute for a UI
-            //MeshDirection is a temporary solution for turning the player around
+            //HERMANN - find better way to turn mesh around
 #if TESTING
             MeshDirection();
 #endif
@@ -97,6 +96,7 @@ namespace Jincom.Agent
             PlayerInput();             
             AnimationState();
             Fall();
+            WhatIsInFrontOfPlayer();
         }
 
         //  =   =   =   =   =   =   =   =   =   =   =   =
@@ -203,7 +203,7 @@ namespace Jincom.Agent
             }
         }
 
-        private bool IsPlayerRunning()
+        public bool IsPlayerRunning()
         {
             if (Input.GetKey(KeyCode.LeftShift))
             {
@@ -233,7 +233,7 @@ namespace Jincom.Agent
             Move(_input, 0f);
         }
 
-        private bool IsPlayerBackpedalling()
+        public bool IsPlayerBackpedalling()
         {
             //Player is one direction, yet moving the oppisite
             if ((Input.GetAxis("Horizontal") < 0f) && (Facing == FacingDirection.Right))
@@ -354,10 +354,10 @@ namespace Jincom.Agent
 
             if (_playerData.CurrentWeapon != null)
             {
-                if (Physics.Raycast(_v3, Target.transform.position - _v3, out _rayHit, _playerData.CurrentWeapon.Range))
+                if (Physics.Raycast(_v3, Target.transform.position - _v3, out RayHit, _playerData.CurrentWeapon.Range))
                 {
                     print("I hit somethin!");
-                    Debug.DrawRay(_v3, _rayHit.point - _v3, Color.red);
+                    Debug.DrawRay(_v3, RayHit.point - _v3, Color.red);
                     print(_playerData.CurrentWeapon.ToString() + _playerData.Ammo[_playerData.CurrentWeapon].ToString() + " " + _playerData.CurrentWeapon.Range);
                 }
                 else
@@ -469,5 +469,25 @@ namespace Jincom.Agent
             }
         }
 #endif
+
+        //NEW
+        private void WhatIsInFrontOfPlayer()
+        {
+            Vector3 playerPosition = new Vector3(transform.position.x, transform.position.y + (GetComponent<CapsuleCollider>().height / 2), transform.position.z);
+            if (Facing == FacingDirection.Right)
+            {
+                if (Physics.Raycast(playerPosition, Vector3.right, out RayHit, Mathf.Infinity))
+                {
+                    Debug.DrawRay(playerPosition,  Vector3.right * RayHit.distance, Color.blue);
+                }                
+            }
+            else
+            {
+                if (Physics.Raycast(playerPosition, Vector3.left, out RayHit, Mathf.Infinity))
+                {
+                    Debug.DrawRay(playerPosition, Vector3.left * RayHit.distance, Color.blue);
+                }
+            }
+        }
     }    
 }
