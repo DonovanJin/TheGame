@@ -59,6 +59,7 @@ namespace Jincom.Agent
         public enum EnemyBehaviour
         {
             Idle,
+            Patrolling,
             Suspicious,
             Attacking,
             Chasing,
@@ -209,6 +210,18 @@ namespace Jincom.Agent
                     return false;
                 }
             } 
+        }
+
+        public void TurnAround()
+        {
+            if(Facing == FacingDirection.Left)
+            {
+                Facing = FacingDirection.Right;
+            }
+            else
+            {
+                Facing = FacingDirection.Left;
+            }
         }
     }
 }

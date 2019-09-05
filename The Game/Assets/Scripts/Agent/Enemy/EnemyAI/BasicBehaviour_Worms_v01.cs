@@ -17,9 +17,37 @@ namespace Jincom.Agent
 
         public override void EnemyAI()
         {
-            if (EnemyObstructed())
+            switch (CurrentEnemyBehaviour)
             {
-                Debug.Log("Enemy is obstructed");
+                case EnemyBehaviour.Patrolling:
+                    Patrolling();
+                    break;
+                default:
+                    break;
+            }            
+        }
+
+        private void Patrolling()
+        {            
+            //if (EnemyObstructed())
+            //{
+            //    TurnAround();
+            //}
+
+            if (!EnemyObstructed())
+            {
+                if (Facing == FacingDirection.Left)
+                {
+                    Move(-MoveSpeed, 0);
+                }
+                else
+                {
+                    Move(MoveSpeed, 0);
+                }
+            }
+            else
+            {
+                TurnAround();
             }
         }
     }
