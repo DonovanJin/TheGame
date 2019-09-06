@@ -11,7 +11,6 @@ namespace Jincom.Agent
 
         //public float TEMPcolliderWidth;
         //public float TEMPdistanceToSurface;
-
         public int CurrentHealth;
         public int MaxHealth = 100;
         public int CurrentArmour;
@@ -222,6 +221,6 @@ namespace Jincom.Agent
             {
                 Facing = FacingDirection.Left;
             }
-        }
+        }        
     }
 }

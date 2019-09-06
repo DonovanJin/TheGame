@@ -150,7 +150,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   CurrentElement: 0
-  MoveSpeed: 0
+  MoveSpeed: 0.1
   CanShoot: 1
   CurrentHealth: 100
   MaxHealth: 100
@@ -163,7 +163,12 @@ MonoBehaviour:
   SpotDistance: 10
   Facing: 0
   CurrentStateOfAgent: 0
-  CurrentEnemyBehaviour: 0
+  CurrentEnemyBehaviour: 1
+  OldTimeStamp: 0
+  NewTimeStamp: 0
+  CurrentTimeStamp: 0
+  Stopped: 0
+  TimeBeforeTurnAround: 5
 --- !u!1 &1615350904824057060
 GameObject:
   m_ObjectHideFlags: 0
@@ -337,6 +342,7 @@ MonoBehaviour:
   Spawners: []
   Player: {fileID: 0}
   Enemies: []
+  CurrentEenemy: {fileID: 0}
   EnemyPrefabs: []
 --- !u!1 &2646965301919250555
 GameObject:

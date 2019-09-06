@@ -7,20 +7,36 @@ namespace Jincom.Agent
 {   
     public class BasicBehaviour_Worms_v01 : EnemyAgent
     {
+        public float OldTimeStamp, NewTimeStamp, CurrentTimeStamp;
+        public bool Stopped = false;
+        public float TimeBeforeTurnAround;
+
         //Placeholder, this script will get updated by the enemy manager
+
+        private void Start()
+        {
+            CurrentEnemyBehaviour = EnemyBehaviour.Patrolling;
+        }
+
 #if TESTING
         private void Update()
         {
             AgentUpdate();
         }
 #endif
+        public void DecideWhichbehaviour()
+        {
+
+        }
 
         public override void EnemyAI()
         {
+
+
             switch (CurrentEnemyBehaviour)
             {
                 case EnemyBehaviour.Patrolling:
-                    Patrolling();
+                    Patrolling();                    
                     break;
                 default:
                     break;
@@ -28,12 +44,7 @@ namespace Jincom.Agent
         }
 
         private void Patrolling()
-        {            
-            //if (EnemyObstructed())
-            //{
-            //    TurnAround();
-            //}
-
+        {   
             if (!EnemyObstructed())
             {
                 if (Facing == FacingDirection.Left)
@@ -47,7 +58,31 @@ namespace Jincom.Agent
             }
             else
             {
-                TurnAround();
+                //TurnAround();
+                StopEnemy(TimeBeforeTurnAround);
+            }
+        }
+
+        public void StopEnemy(float SecondsToPause)
+        {
+            if (!Stopped)
+            {
+                Stopped = true;
+                OldTimeStamp = Time.unscaledTime;
+                NewTimeStamp = Time.unscaledTime + SecondsToPause;
+            }
+            else
+            {
+                //CurrentTimeStamp = Time.unscaledTime;
+                if (Time.unscaledTime < NewTimeStamp)
+                {
+                    CurrentTimeStamp = Time.unscaledTime;
+                }
+                else
+                {
+                    TurnAround();
+                    Stopped = false;
+                }
             }
         }
     }
