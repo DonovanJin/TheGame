@@ -9,7 +9,7 @@ namespace Jincom.Agent
     {
         public float OldTimeStamp, NewTimeStamp, CurrentTimeStamp;
         public bool Stopped = false;
-        public float TimeBeforeTurnAround;
+        public float TimeToWait;
 
         //Placeholder, this script will get updated by the enemy manager
 
@@ -31,12 +31,22 @@ namespace Jincom.Agent
 
         public override void EnemyAI()
         {
-
+            if (PlayerSpotted())
+            {
+                CurrentEnemyBehaviour = EnemyBehaviour.Chasing;
+            }
+            else
+            {
+                CurrentEnemyBehaviour = EnemyBehaviour.Patrolling;
+            }
 
             switch (CurrentEnemyBehaviour)
             {
                 case EnemyBehaviour.Patrolling:
                     Patrolling();                    
+                    break;
+                case EnemyBehaviour.Chasing:
+                    MoveTowardsPlayer();
                     break;
                 default:
                     break;
@@ -59,17 +69,17 @@ namespace Jincom.Agent
             else
             {
                 //TurnAround();
-                StopEnemy(TimeBeforeTurnAround);
+                StopEnemy();
             }
         }
 
-        public void StopEnemy(float SecondsToPause)
+        private void StopEnemy()
         {
             if (!Stopped)
             {
                 Stopped = true;
                 OldTimeStamp = Time.unscaledTime;
-                NewTimeStamp = Time.unscaledTime + SecondsToPause;
+                NewTimeStamp = Time.unscaledTime + TimeToWait;
             }
             else
             {

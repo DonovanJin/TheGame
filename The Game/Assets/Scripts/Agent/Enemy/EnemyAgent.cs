@@ -221,6 +221,28 @@ namespace Jincom.Agent
             {
                 Facing = FacingDirection.Left;
             }
-        }        
+        }  
+        
+        public void MoveTowardsPlayer()
+        {
+            Debug.Log("MoveTowardsPlayer");
+            if (Weapon.Range < Vector3.Distance(transform.position, PlayerTransform.position))
+            {
+                Debug.Log("Weapon outside range");
+                //Player is left of enemy
+                if (PlayerTransform.position.x < transform.position.x)
+                {
+                    Move(-MoveSpeed, 0);
+                }
+                else
+                {
+                    Move(MoveSpeed, 0);
+                }
+            }
+            else
+            {
+                Debug.Log("Weapon inside range");
+            }
+        }
     }
 }

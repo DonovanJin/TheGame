@@ -72,7 +72,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 146483721782498278}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -2.75, y: 1.29, z: 0}
+  m_LocalPosition: {x: 7.52, y: 1.29, z: 0}
   m_LocalScale: {x: 0.75936, y: 0.75936, z: 0.75936}
   m_Children: []
   m_Father: {fileID: 7571552074693129784}
@@ -158,7 +158,7 @@ MonoBehaviour:
   MaxArmour: 100
   JumpHeight: 650
   ArmourElement: 0
-  Weapon: {fileID: 0}
+  Weapon: {fileID: 11400000, guid: cc6e4e89a57ca33438c1ce179169d1ff, type: 2}
   PlayerTransform: {fileID: 0}
   SpotDistance: 10
   Facing: 0
@@ -168,7 +168,7 @@ MonoBehaviour:
   NewTimeStamp: 0
   CurrentTimeStamp: 0
   Stopped: 0
-  TimeBeforeTurnAround: 5
+  TimeToWait: 0
 --- !u!1 &1615350904824057060
 GameObject:
   m_ObjectHideFlags: 0
