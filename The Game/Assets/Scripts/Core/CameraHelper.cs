@@ -32,5 +32,10 @@ namespace Jincom.CameraLogic
         {
             return GetCanvasPosition().x < (Screen.width * 0.5f);
         }
+
+        public static float DistanceToCamera(Transform transform)
+        {
+            return Mathf.Abs(transform.position.z - Camera.main.transform.position.z);
+        }
     }
 }
