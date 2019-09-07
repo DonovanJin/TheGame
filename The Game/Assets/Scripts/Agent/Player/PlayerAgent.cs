@@ -12,7 +12,6 @@ namespace Jincom.Agent
     {
         //HERMANN just for demo purposes. Rotates the empty parent object that's in control of the visible meshes for the player
         public GameObject VisibleMesh;
-        public CameraManager cameraManager;
 
         private Player _playerData;
         private bool _doubleJumped;  
@@ -66,7 +65,7 @@ namespace Jincom.Agent
         public void OnDrawGizmos()
         {
             Gizmos.color = Color.red;
-            Gizmos.DrawSphere(CameraHelper.GetWorldPosition(cameraManager.FollowDistance),0.1f);
+            Gizmos.DrawSphere(CameraHelper.GetWorldPosition(CameraHelper.DistanceToCamera(this.transform)),0.1f);
         }
 
         private void InitiatePlayerProperties()
@@ -80,8 +79,6 @@ namespace Jincom.Agent
 
             _oldVertPos = transform.position.y;
             _newVertPos = transform.position.y;
-
-            cameraManager = Camera.main.GetComponent<CameraManager>();
         }
 
         public override void AgentUpdate()
@@ -352,7 +349,7 @@ namespace Jincom.Agent
 
             _capCol = GetComponent<CapsuleCollider>();
             playerPosition = new Vector3(transform.position.x, transform.position.y + (_capCol.height/2), transform.position.z);
-            whereToShootAt = CameraHelper.GetWorldPosition(cameraManager.FollowDistance);
+            whereToShootAt = CameraHelper.GetWorldPosition(CameraHelper.DistanceToCamera(this.transform));
 
             if (_playerData.CurrentWeapon)
             {
