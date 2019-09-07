@@ -21,7 +21,7 @@ namespace Jincom.Agent
             }
             else
             {
-                Debug.LogError("You dumb ass, No prefab linked");
+                Debug.LogError("No prefab linked");
                 return null;
             }
         }

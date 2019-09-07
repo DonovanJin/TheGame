@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   WeaponName: 
   Range: 200
-  Damage: 50
+  Damage: 5
   Element: 1
   MaxiumumCapacity: 100
   FireRateInSeconds: 1
