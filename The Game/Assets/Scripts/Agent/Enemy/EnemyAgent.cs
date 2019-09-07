@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using Jincom.Core;
 using Jincom.PickUps;
+using System;
 
 namespace Jincom.Agent
 {
@@ -11,6 +12,11 @@ namespace Jincom.Agent
 
         //public float TEMPcolliderWidth;
         //public float TEMPdistanceToSurface;
+        [SerializeField]
+        private float endWaitTime = 0f;
+        [SerializeField]
+        private float TimeToWait = 2f;
+
         public int CurrentHealth;
         public int MaxHealth = 100;
         public int CurrentArmour;
@@ -24,6 +30,11 @@ namespace Jincom.Agent
         private RaycastHit _rayHit;
 
         private float _horizontalDifference;
+
+        internal void Init()
+        {
+            CurrentEnemyBehaviour = EnemyBehaviour.Patrolling;
+        }
 
         public EnemyAgent()
         {
@@ -225,7 +236,6 @@ namespace Jincom.Agent
         
         public void MoveTowardsPlayer()
         {
-            Debug.Log("MoveTowardsPlayer");
             if (Weapon.Range < Vector3.Distance(transform.position, PlayerTransform.position))
             {
                 Debug.Log("Weapon outside range");
@@ -239,10 +249,66 @@ namespace Jincom.Agent
                     Move(MoveSpeed, 0);
                 }
             }
+        }
+
+        protected void LostPlayer()
+        {
+            Debug.Log("lost Player");
+            StartPatrolling();
+        }
+
+        protected void PlayerFound()
+        {
+            Debug.Log("found Player");
+
+            CurrentEnemyBehaviour = EnemyBehaviour.Chasing;
+        }
+
+        protected void Waiting()
+        {
+            if (FinishedWaiting())
+            {
+                TurnAround();
+                StartPatrolling();
+
+            }
+        }
+
+        protected void StartPatrolling()
+        {
+            Debug.Log("Start Patrolling");
+            CurrentEnemyBehaviour = EnemyBehaviour.Patrolling;
+        }
+
+        protected void Patrolling()
+        {
+            if (!EnemyObstructed())
+            {
+                if (Facing == FacingDirection.Left)
+                {
+                    Move(-MoveSpeed, 0);
+                }
+                else
+                {
+                    Move(MoveSpeed, 0);
+                }
+            }
             else
             {
-                Debug.Log("Weapon inside range");
+                StopPatrolling();
             }
+        }
+
+        protected void StopPatrolling()
+        {
+            Debug.Log("Stop Patrolling");
+            CurrentEnemyBehaviour = EnemyBehaviour.Idle;
+            endWaitTime = Time.unscaledTime + TimeToWait;
+        }
+
+        protected bool FinishedWaiting()
+        {
+            return Time.unscaledTime > endWaitTime;
         }
     }
 }

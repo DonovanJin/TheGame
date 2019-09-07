@@ -23,7 +23,7 @@ namespace Jincom.Agent
             {
                 EnemyAgent enemy = Spawners[i].Init();
                 enemy.transform.parent = this.transform;
-
+                enemy.Init();
 
                 if (enemy != null)
                 {
